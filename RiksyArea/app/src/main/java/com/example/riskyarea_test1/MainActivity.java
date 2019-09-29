@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.riskyarea_test1.data.APIConfig;
+import com.example.riskyarea_test1.data.BaseController;
 import com.example.riskyarea_test1.model.User;
 
 import org.w3c.dom.Text;
@@ -30,11 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TextView textView = (TextView) findViewById(R.id.tvTest);
 
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://192.168.1.213:8087/").
-                addConverterFactory(GsonConverterFactory.create());
-
-
-        Retrofit retrofit=builder.build();
+        BaseController baseController=new BaseController();
+        Retrofit retrofit=baseController.builder.build();
 
         APIConfig apiConfig = retrofit.create(APIConfig.class);
 
@@ -43,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                Log.e("__TAG__",response.body().get(0).getName());
-                textView.setText("Name : "+response.body().get(0).getName()+"\nAge  : "+response.body().get(0).getAge());
+                int size = response.body().size();
+                Log.e("__TAG__",response.body().get(size-1).getName());
+                textView.setText("Name : "+response.body().get(size-1).getName()+"\nAge  : "+response.body().get(size-1).getAge());
 
 
             }
