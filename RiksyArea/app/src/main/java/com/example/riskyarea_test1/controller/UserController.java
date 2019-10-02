@@ -73,12 +73,15 @@ public class UserController extends BaseController {
         callSignUp.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                userSignUpInterface.success();
+                if (response.code()==200||response.code()==202)
+                    userSignUpInterface.success();
+                else
+                    userSignUpInterface.failed();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                userSignUpInterface.faield();
+                userSignUpInterface.failed();
             }
         });
 
@@ -92,12 +95,15 @@ public class UserController extends BaseController {
         callLogIn.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                userLogInInterface.success();
+                if (response.code()==200||response.code()==202)
+                    userLogInInterface.success();
+                else
+                    userLogInInterface.failed();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                userLogInInterface.faield();
+                userLogInInterface.failed();
             }
         });
     }

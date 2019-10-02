@@ -52,7 +52,7 @@ public class UserSignUpActivity extends AppCompatActivity implements UserSignUpI
     }
 
     @Override
-    public void faield() {
+    public void failed() {
         Toast.makeText(UserSignUpActivity.this,"Fail",Toast.LENGTH_SHORT).show();
     }
 }

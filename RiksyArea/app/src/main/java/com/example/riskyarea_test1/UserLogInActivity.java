@@ -47,7 +47,7 @@ public class UserLogInActivity extends AppCompatActivity implements UserLogInInt
     }
 
     @Override
-    public void faield() {
+    public void failed() {
         Toast.makeText(UserLogInActivity.this,"Pass Don't Match",Toast.LENGTH_SHORT).show();
     }
 }
