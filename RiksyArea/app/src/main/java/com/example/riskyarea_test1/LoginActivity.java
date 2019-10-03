@@ -1,27 +1,29 @@
 package com.example.riskyarea_test1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.controller.UserController;
 import com.example.riskyarea_test1.model.UserLogIn;
 
-public class UserLogInActivity extends AppCompatActivity implements UserLogInInterface {
+public class LoginActivity extends AppCompatActivity implements UserLogInInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_log_in);
+        setContentView(R.layout.activity_login);
 
         final EditText txtEmail = (EditText) findViewById(R.id.txtEmailLogIn);
         final EditText txtPass = (EditText) findViewById(R.id.txtPasswordLogIn);
-
+        TextView signUp_text = findViewById(R.id.signUp_text);
         Button btnLogIn = (Button) findViewById(R.id.btnLogIn);
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
@@ -33,21 +35,28 @@ public class UserLogInActivity extends AppCompatActivity implements UserLogInInt
                 userLogIn.setPassword(txtPass.getText().toString());
 
                 UserController userController=new UserController();
-                userController.setUserLogInInterface(UserLogInActivity.this);
+                userController.setUserLogInInterface(LoginActivity.this);
                 userController.LogIn(userLogIn);
             }
         });
 
 
+        signUp_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+                finish();
+            }
+        });
     }
 
     @Override
     public void success() {
-        Toast.makeText(UserLogInActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void failed() {
-        Toast.makeText(UserLogInActivity.this,"Pass Don't Match",Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this,"Pass Don't Match",Toast.LENGTH_SHORT).show();
     }
 }

@@ -34,14 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSignUpActivity()
     {
-        Intent intent = new Intent(this, UserSignUpActivity.class);
+        Intent intent = new Intent(this, RegistrationActivity.class);
         startActivity(intent);
 
     }
 
     public void openLogInActivity()
     {
-        Intent intent=new Intent(this,UserLogInActivity.class);
+        Intent intent=new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
 }
