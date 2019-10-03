@@ -21,10 +21,10 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText txtEmail = (EditText) findViewById(R.id.txtEmailLogIn);
-        final EditText txtPass = (EditText) findViewById(R.id.txtPasswordLogIn);
+        final EditText txtEmail = findViewById(R.id.txtEmailLogIn);
+        final EditText txtPass = findViewById(R.id.txtPasswordLogIn);
         TextView signUp_text = findViewById(R.id.signUp_text);
-        Button btnLogIn = (Button) findViewById(R.id.btnLogIn);
+        Button btnLogIn = findViewById(R.id.btnLogIn);
 
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override

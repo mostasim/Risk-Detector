@@ -2,10 +2,10 @@ package com.example.riskyarea_test1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,24 +18,31 @@ import com.example.riskyarea_test1.model.UserSignUp;
 
 
 public class RegistrationActivity extends AppCompatActivity implements UserSignUpInterface {
-
     String gender = "Male";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
 
-        final EditText txtEmail = (EditText) findViewById(R.id.txtEmailSignUp);
-        final EditText txtName = (EditText) findViewById(R.id.txtUserName);
-        final EditText txtPhone = (EditText) findViewById(R.id.txtPhone);
-        final EditText txtPassword = (EditText) findViewById(R.id.txtPasswordSignUp);
-        final EditText txtAge = (EditText) findViewById(R.id.txtAge);
-        final RadioGroup txtGender = (RadioGroup) findViewById(R.id.radioSex);
+        final EditText txtEmail = findViewById(R.id.txtEmailSignUp);
+        final EditText txtName = findViewById(R.id.txtUserName);
+        final EditText txtPhone = findViewById(R.id.txtPhone);
+        final EditText txtPassword = findViewById(R.id.txtPasswordSignUp);
+        final EditText txtAge = findViewById(R.id.txtAge);
+        final RadioGroup txtGender = findViewById(R.id.radioSex);
 
-        Button btnSignUp = (Button) findViewById(R.id.btnSignUp);
-
+        Button btnSignUp = findViewById(R.id.btnSignUp);
+        txtGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.e("__DEBUG__","ID: "+checkedId);
+                if (checkedId == R.id.radioFemale) {
+                    gender = "Female";
+                } else
+                    gender = "Male";
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,16 +53,6 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
                 user.setPhoneNumber(txtPhone.getText().toString());
                 user.setPassword(txtPassword.getText().toString());
                 user.setAge(Integer.parseInt(txtAge.getText().toString()));
-                txtGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        if (checkedId == R.id.radioFemale) {
-                            gender = "Female";
-                        } else
-                            gender = "Male";
-                    }
-                });
-
                 user.setGender(gender);
                 UserController userController = new UserController();
                 userController.setUserSignUpInterface(RegistrationActivity.this);
