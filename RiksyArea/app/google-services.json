@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "500393945155",
+    "firebase_url": "https://riskyareageofire.firebaseio.com",
+    "project_id": "riskyareageofire",
+    "storage_bucket": "riskyareageofire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500393945155:android:01259b3ddba5218dabccf6",
+        "android_client_info": {
+          "package_name": "com.example.riskyarea_test1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500393945155-i1mvpapql646e8ljm3mu4r7ou2vjiea1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riskyarea_test1",
+            "certificate_hash": "25e4e502657fd962ed1749c130e94540975df024"
+          }
+        },
+        {
+          "client_id": "500393945155-5lpuul4u9pugbvr26kv7g9osojm7c2g2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgjaTZB16pZICMbWMTqGPCrkw9aeTavRE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500393945155-5lpuul4u9pugbvr26kv7g9osojm7c2g2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

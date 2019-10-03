@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Login Registration</string>
 
+    <string name="radio_male">Male</string>
+    <string name="radio_female">Female</string>
+    <string name="title_activity_maps">Map</string>
     <string-array name="country_arrays">
         <item>Choose Country</item>
         <item>Bangladesh</item>
@@ -12,6 +15,4 @@
         <item>New Zealand</item>
         <item>India</item>
     </string-array>
-    <string name="radio_male">Male</string>
-    <string name="radio_female">Female</string>
 </resources>
