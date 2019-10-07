@@ -7,6 +7,7 @@ import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
 import com.example.riskyarea_test1.data.APIConfig;
 import com.example.riskyarea_test1.data.BaseController;
+import com.example.riskyarea_test1.model.UserList;
 import com.example.riskyarea_test1.model.UserLogIn;
 import com.example.riskyarea_test1.model.UserSignUp;
 
@@ -47,20 +48,17 @@ public class UserController extends BaseController {
 
 
     public void showUserList() {
-        Call<List<UserSignUp>> callShowUserList = (Call<List<UserSignUp>>) apiConfig.getAllUser();
-        callShowUserList.enqueue(new Callback<List<UserSignUp>>() {
+        final Call<List<UserList>> callShowUserList = (Call<List<UserList>>) apiConfig.getAllUser();
+        callShowUserList.enqueue(new Callback<List<UserList>>() {
             @Override
-            public void onResponse(Call<List<UserSignUp>> call, Response<List<UserSignUp>> response) {
-
-               if (response!=null && response.body()!=null){
-                    userListInterface.success(response.body());}
-
+            public void onResponse(Call<List<UserList>> call, Response<List<UserList>> response) {
+                userListInterface.success(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<UserSignUp>> call, Throwable t) {
-                userListInterface.failed(t.getMessage());
-                Log.e("__TAG__", t.getMessage());
+            public void onFailure(Call<List<UserList>> call, Throwable t) {
+                userListInterface.failed("No Data");
+
             }
         });
     }

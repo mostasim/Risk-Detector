@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
     @Override
     public void success() {
         Toast.makeText(LoginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+        startActivity(new Intent(LoginActivity.this, BottomNavActivity.class));
     }
 
     @Override

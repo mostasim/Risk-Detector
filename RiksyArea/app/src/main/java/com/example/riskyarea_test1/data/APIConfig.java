@@ -1,5 +1,6 @@
 package com.example.riskyarea_test1.data;
 
+import com.example.riskyarea_test1.model.UserList;
 import com.example.riskyarea_test1.model.UserLogIn;
 import com.example.riskyarea_test1.model.UserSignUp;
 
@@ -14,7 +15,7 @@ import retrofit2.http.POST;
 public interface APIConfig {
 
     @GET("rest/user/getAll")
-    public Call<List<UserSignUp>> getAllUser();
+    public Call<List<UserList>> getAllUser();
 
     @POST("rest/user/signUp")
     public Call<ResponseBody> signUp(@Body UserSignUp user);
