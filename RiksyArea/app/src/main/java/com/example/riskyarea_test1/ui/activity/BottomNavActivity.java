@@ -9,16 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.riskyarea_test1.R;
-import com.example.riskyarea_test1.ui.fragment.DashboardFragment;
-import com.example.riskyarea_test1.ui.fragment.NotificationsFragment;
+import com.example.riskyarea_test1.ui.fragment.CrimeMapsFragment;
+import com.example.riskyarea_test1.ui.fragment.MapsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavActivity extends AppCompatActivity {
 
 
-    final Fragment fragment1 = new NotificationsFragment();
-    final Fragment fragment2 = new DashboardFragment();
-    final Fragment fragment3 = new NotificationsFragment();
+    final Fragment fragment1 = new MapsFragment();
+    final Fragment fragment2 = new CrimeMapsFragment();
+    final Fragment fragment3 = new MapsFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
 
