@@ -1,8 +1,8 @@
-package com.example.riskyarea_test1.model;
-
-
+package com.example.riskyarea_test1.data.model;
 import com.google.gson.annotations.SerializedName;
-public class UserList {
+
+
+public class UserSignUp {
 
 	@SerializedName("password")
 	private String password;
@@ -10,23 +10,17 @@ public class UserList {
 	@SerializedName("phoneNumber")
 	private String phoneNumber;
 
-	@SerializedName("address")
-	private Object address;
-
 	@SerializedName("gender")
-	private Object gender;
+	private String gender;
 
 	@SerializedName("name")
 	private String name;
 
-	@SerializedName("id")
-	private int id;
-
-	@SerializedName("age")
-	private String age;
-
 	@SerializedName("email")
 	private String email;
+
+	@SerializedName("age")
+	private int age;
 
 	public void setPassword(String password){
 		this.password = password;
@@ -44,19 +38,11 @@ public class UserList {
 		return phoneNumber;
 	}
 
-	public void setAddress(Object address){
-		this.address = address;
-	}
-
-	public Object getAddress(){
-		return address;
-	}
-
-	public void setGender(Object gender){
+	public void setGender(String gender){
 		this.gender = gender;
 	}
 
-	public Object getGender(){
+	public String getGender(){
 		return gender;
 	}
 
@@ -68,27 +54,19 @@ public class UserList {
 		return name;
 	}
 
-	public void setId(int id){
-		this.id = id;
-	}
-
-	public int getId(){
-		return id;
-	}
-
-	public void setAge(String age){
-		this.age = age;
-	}
-
-	public String getAge(){
-		return age;
-	}
-
 	public void setEmail(String email){
 		this.email = email;
 	}
 
 	public String getEmail(){
 		return email;
+	}
+
+	public void setAge(int age){
+		this.age = age;
+	}
+
+	public int getAge(){
+		return age;
 	}
 }

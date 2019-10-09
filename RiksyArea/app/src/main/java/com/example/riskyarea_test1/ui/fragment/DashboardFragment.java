@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.fragment;
+package com.example.riskyarea_test1.ui.fragment;
 
 
 import android.os.Bundle;

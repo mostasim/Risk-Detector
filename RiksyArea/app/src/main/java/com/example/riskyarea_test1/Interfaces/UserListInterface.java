@@ -1,6 +1,6 @@
 package com.example.riskyarea_test1.Interfaces;
 
-import com.example.riskyarea_test1.model.UserList;
+import com.example.riskyarea_test1.data.model.UserList;
 
 import java.util.List;
 

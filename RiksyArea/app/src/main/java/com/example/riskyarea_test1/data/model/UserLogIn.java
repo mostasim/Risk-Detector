@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.model;
+package com.example.riskyarea_test1.data.model;
 
 import com.google.gson.annotations.SerializedName;
 

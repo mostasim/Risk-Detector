@@ -1,9 +1,8 @@
-package com.example.riskyarea_test1.activity;
+package com.example.riskyarea_test1.ui.activity;
 
 import android.content.Intent;
 
 import com.daimajia.androidanimations.library.Techniques;
-import com.example.riskyarea_test1.MainActivity;
 import com.example.riskyarea_test1.R;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;

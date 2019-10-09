@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.activity;
+package com.example.riskyarea_test1.ui.activity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

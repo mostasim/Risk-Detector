@@ -1,11 +1,11 @@
-package com.example.riskyarea_test1;
+package com.example.riskyarea_test1.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.riskyarea_test1.activity.LoginActivity;
+import com.example.riskyarea_test1.R;
 
 
 public class MainActivity extends AppCompatActivity {
