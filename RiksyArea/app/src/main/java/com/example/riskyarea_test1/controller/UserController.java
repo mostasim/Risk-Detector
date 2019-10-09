@@ -1,18 +1,14 @@
 package com.example.riskyarea_test1.controller;
 
-import android.util.Log;
-
 import com.example.riskyarea_test1.Interfaces.UserListInterface;
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
-import com.example.riskyarea_test1.data.APIConfig;
-import com.example.riskyarea_test1.data.BaseController;
+import com.example.riskyarea_test1.appConfig.APIConfig;
+import com.example.riskyarea_test1.appConfig.BaseController;
 import com.example.riskyarea_test1.model.UserList;
 import com.example.riskyarea_test1.model.UserLogIn;
 import com.example.riskyarea_test1.model.UserSignUp;
-
 import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;

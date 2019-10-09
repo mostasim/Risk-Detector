@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.data;
+package com.example.riskyarea_test1.appConfig;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

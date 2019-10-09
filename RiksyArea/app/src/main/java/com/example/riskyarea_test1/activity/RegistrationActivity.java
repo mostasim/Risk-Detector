@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1;
+package com.example.riskyarea_test1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +9,9 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
-import com.example.riskyarea_test1.controller.UserController;
-import com.example.riskyarea_test1.model.UserSignUp;
+import com.example.riskyarea_test1.R;
 
 
 public class RegistrationActivity extends AppCompatActivity implements UserSignUpInterface {
@@ -47,16 +44,17 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserSignUp user = new UserSignUp();
-                user.setName(txtName.getText().toString());
-                user.setEmail(txtEmail.getText().toString());
-                user.setPhoneNumber(txtPhone.getText().toString());
-                user.setPassword(txtPassword.getText().toString());
-                user.setAge(Integer.parseInt(txtAge.getText().toString()));
-                user.setGender(gender);
-                UserController userController = new UserController();
-                userController.setUserSignUpInterface(RegistrationActivity.this);
-                userController.signUp(user);
+//                UserSignUp user = new UserSignUp();
+//                user.setName(txtName.getText().toString());
+//                user.setEmail(txtEmail.getText().toString());
+//                user.setPhoneNumber(txtPhone.getText().toString());
+//                user.setPassword(txtPassword.getText().toString());
+//                user.setAge(Integer.parseInt(txtAge.getText().toString()));
+//                user.setGender(gender);
+//                UserController userController = new UserController();
+//                userController.setUserSignUpInterface(RegistrationActivity.this);
+//                userController.signUp(user);
+                success();
             }
         });
 

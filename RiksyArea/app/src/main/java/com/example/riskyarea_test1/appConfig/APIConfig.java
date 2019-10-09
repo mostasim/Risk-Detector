@@ -1,11 +1,9 @@
-package com.example.riskyarea_test1.data;
+package com.example.riskyarea_test1.appConfig;
 
 import com.example.riskyarea_test1.model.UserList;
 import com.example.riskyarea_test1.model.UserLogIn;
 import com.example.riskyarea_test1.model.UserSignUp;
-
 import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;

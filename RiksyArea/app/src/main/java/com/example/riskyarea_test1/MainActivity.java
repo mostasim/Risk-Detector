@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.riskyarea_test1.activity.LoginActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
-
 
     }
 

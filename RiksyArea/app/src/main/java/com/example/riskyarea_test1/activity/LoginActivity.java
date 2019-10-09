@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1;
+package com.example.riskyarea_test1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
-import com.example.riskyarea_test1.controller.UserController;
-import com.example.riskyarea_test1.model.UserLogIn;
+import com.example.riskyarea_test1.R;
 
 public class LoginActivity extends AppCompatActivity implements UserLogInInterface {
 
@@ -29,14 +28,16 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserLogIn userLogIn = new UserLogIn();
+//                UserLogIn userLogIn = new UserLogIn();
+//
+//                userLogIn.setEmail(txtEmail.getText().toString());
+//                userLogIn.setPassword(txtPass.getText().toString());
+//
+//                UserController userController=new UserController();
+//                userController.setUserLogInInterface(LoginActivity.this);
+//                userController.LogIn(userLogIn);
 
-                userLogIn.setEmail(txtEmail.getText().toString());
-                userLogIn.setPassword(txtPass.getText().toString());
-
-                UserController userController=new UserController();
-                userController.setUserLogInInterface(LoginActivity.this);
-                userController.LogIn(userLogIn);
+                success();
             }
         });
 

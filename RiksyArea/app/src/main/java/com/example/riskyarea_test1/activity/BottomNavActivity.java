@@ -1,22 +1,22 @@
-package com.example.riskyarea_test1;
+package com.example.riskyarea_test1.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import com.example.riskyarea_test1.home.HomeFragment;
+import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.fragment.DashboardFragment;
+import com.example.riskyarea_test1.fragment.NotificationsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavActivity extends AppCompatActivity {
 
 
-    final Fragment fragment1 = new HomeFragment();
+    final Fragment fragment1 = new NotificationsFragment();
     final Fragment fragment2 = new DashboardFragment();
     final Fragment fragment3 = new NotificationsFragment();
     final FragmentManager fm = getSupportFragmentManager();

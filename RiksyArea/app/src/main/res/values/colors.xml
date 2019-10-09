@@ -3,4 +3,8 @@
     <color name="colorPrimary">#33cccc</color>
     <color name="colorPrimaryDark">#00b8e6</color>
     <color name="colorAccent">#6666ff</color>
+    <color name="Wheat">#5dff40</color>
+    <color name="back">#c10f97</color>
+    <color name="Wheat2">#ffcc40</color>
+    <color name="back2">#075056</color>
 </resources>

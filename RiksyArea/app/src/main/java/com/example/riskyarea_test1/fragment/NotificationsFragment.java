@@ -1,17 +1,14 @@
-package com.example.riskyarea_test1;
+package com.example.riskyarea_test1.fragment;
 
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.fragment.app.Fragment;
+import com.example.riskyarea_test1.R;
 
 
-/**
- * A simple {@link androidx.fragment.app.Fragment} subclass.
- */
 public class NotificationsFragment extends Fragment {
 
 
