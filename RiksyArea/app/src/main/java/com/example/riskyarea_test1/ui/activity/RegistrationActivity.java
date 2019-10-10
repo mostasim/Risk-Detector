@@ -55,6 +55,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
 //                userController.setUserSignUpInterface(RegistrationActivity.this);
 //                userController.signUp(user);
                 success();
+                finish();
             }
         });
 

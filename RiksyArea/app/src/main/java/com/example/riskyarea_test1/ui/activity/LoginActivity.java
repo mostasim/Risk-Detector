@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
 //                userController.LogIn(userLogIn);
 
                 success();
+                finish();
             }
         });
 
