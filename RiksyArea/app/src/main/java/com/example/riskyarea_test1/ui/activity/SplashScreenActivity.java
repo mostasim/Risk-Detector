@@ -20,23 +20,23 @@ public class SplashScreenActivity extends AwesomeSplash {
 
         //Customize Circular Reveal
         configSplash.setBackgroundColor(R.color.colorPrimaryDark); //any color you want form colors.xml
-        configSplash.setAnimCircularRevealDuration(1000); //int ms
+        configSplash.setAnimCircularRevealDuration(800); //int ms
         configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);  //or Flags.REVEAL_LEFT
         configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM); //or Flags.REVEAL_TOP
 
         //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
 
         //Customize Logo
-        configSplash.setLogoSplash(R.drawable.app_icon); //or any other drawable
-        configSplash.setAnimLogoSplashDuration(1000); //int ms
-        configSplash.setAnimLogoSplashTechnique(Techniques.Flash); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
+        configSplash.setLogoSplash(R.drawable.ic_launcher); //or any other drawable
+        configSplash.setAnimLogoSplashDuration(2500); //int ms
+        configSplash.setAnimLogoSplashTechnique(Techniques.ZoomIn); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
 
         //Customize Path
        // configSplash.setPathSplash(SyncStateContract.Constants.DROID_LOGO); //set path String
         configSplash.setOriginalHeight(400); //in relation to your svg (path) resource
         configSplash.setOriginalWidth(400); //in relation to your svg (path) resource
-        configSplash.setAnimPathStrokeDrawingDuration(1500);
+        configSplash.setAnimPathStrokeDrawingDuration(1200);
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.colorAccent); //any color you want form colors.xml
         configSplash.setAnimPathFillingDuration(1500);
@@ -59,6 +59,7 @@ public class SplashScreenActivity extends AwesomeSplash {
     @Override
     public void animationsFinished() {
         startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
+        finish();
         //transit to another activity here
         //or do whatever you want
     }

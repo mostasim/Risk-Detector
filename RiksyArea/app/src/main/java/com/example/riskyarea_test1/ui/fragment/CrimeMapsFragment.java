@@ -50,7 +50,7 @@ public class CrimeMapsFragment extends Fragment {
                 mMap.clear(); //clear old markers
 
                 CameraPosition googlePlex = CameraPosition.builder()
-                        .target(new LatLng(23.7561324,90.4126618))//23.7561324,90.4126618,
+                        .target(new LatLng(23.752574,90.377375))
                         .zoom(18)
                         .bearing(0)
                         .tilt(45)
@@ -59,14 +59,11 @@ public class CrimeMapsFragment extends Fragment {
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
 
                 mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(23.7560103, 90.4126232)) //,
-                        .title("Pri Priota")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.spider)));
+                        .position(new LatLng(23.752574, 90.377375)) //23.752574, 90.377375
+                        .title("Shukrabaad Overbridge")
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.spider))
+                                .snippet("Crime Type : Murder"));
 
-                mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(23.7558632, 90.4066448)) //23.7558632,90.4066448
-                        .title("Mahadi Hasan Joy")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.spider)));
             }
         });
 

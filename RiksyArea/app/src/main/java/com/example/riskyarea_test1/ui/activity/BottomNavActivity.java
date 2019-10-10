@@ -1,5 +1,6 @@
 package com.example.riskyarea_test1.ui.activity;
 
+import androidx.appcompat.widget.SearchView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,7 +40,6 @@ public class BottomNavActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.main_container,fragment1, "1").commit();
 
     }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {

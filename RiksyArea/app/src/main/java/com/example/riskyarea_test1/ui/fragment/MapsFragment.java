@@ -33,6 +33,7 @@ public class MapsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
@@ -65,14 +66,16 @@ public class MapsFragment extends Fragment {
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.4629101,-122.2449094))
-                        .title("Iron Man")
-                        .snippet("His Talent : Plenty of money"));
+                        .title("Iron Man"));
+
 
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(37.3092293,-122.1136845))
                         .title("Captain America"));
             }
         });
+
+
 
 
         return rootView;
