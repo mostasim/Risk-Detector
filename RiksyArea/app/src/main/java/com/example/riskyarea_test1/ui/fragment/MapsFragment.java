@@ -90,4 +90,6 @@ public class MapsFragment extends Fragment {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+
+
 }

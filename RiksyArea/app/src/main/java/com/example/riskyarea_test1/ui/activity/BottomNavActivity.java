@@ -1,19 +1,25 @@
 package com.example.riskyarea_test1.ui.activity;
-
-import androidx.appcompat.widget.SearchView;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.ui.fragment.CrimeMapsFragment;
 import com.example.riskyarea_test1.ui.fragment.MapsFragment;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavActivity extends AppCompatActivity {
@@ -91,6 +97,48 @@ public class BottomNavActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void selectDest(View view) {
+        int PLACE_PICKER_REQUEST = 1;
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    public static Location destination;
+    public void stop(final View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Are you sure ?")
+                .setMessage("Do you really want to cancel your trip ?")
+                .setIcon(R.drawable.ic_launcher_foreground)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getBaseContext(), LocationServices.class);
+                        stopService(intent);
+                        view.setVisibility(View.INVISIBLE);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
+
     }
 
 
