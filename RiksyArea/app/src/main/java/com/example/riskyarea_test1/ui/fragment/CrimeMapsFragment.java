@@ -61,7 +61,7 @@ public class CrimeMapsFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(23.752574, 90.377375)) //23.752574, 90.377375
                         .title("Shukrabaad Overbridge")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.spider))
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.rsz_crime_image))
                                 .snippet("Crime Type : Murder"));
 
             }

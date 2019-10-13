@@ -27,7 +27,7 @@ public class SplashScreenActivity extends AwesomeSplash {
         //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
 
         //Customize Logo
-        configSplash.setLogoSplash(R.drawable.ic_launcher); //or any other drawable
+        configSplash.setLogoSplash(R.drawable.splash_image); //or any other drawable
         configSplash.setAnimLogoSplashDuration(2500); //int ms
         configSplash.setAnimLogoSplashTechnique(Techniques.ZoomIn); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 

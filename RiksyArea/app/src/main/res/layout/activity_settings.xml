@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.SettingsActivity">
+    android:background="#00FFFFFF"
+    android:padding="8dp"
+    >
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/alert_threshold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="Minimum distance to trigger alert (Meter)"
+            android:inputType="numberSigned"
+            android:drawableLeft="@drawable/ic_location_on_black_24dp"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="8dp"
+        >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <EditText
+            android:id="@+id/refresh_rate"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="Refresh rate (Sec)"
+            android:inputType="numberSigned"
+            android:drawableLeft="@drawable/ic_refresh_black_24dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_gravity="center"
+        android:text="Done"
+        android:textColor="#FFFF"
         android:layout_marginTop="8dp"
-        android:textSize="32sp"
-        android:gravity="center"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:text="This is another activity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="@drawable/button_background"
+        android:id="@+id/done"
+        />
+</LinearLayout>

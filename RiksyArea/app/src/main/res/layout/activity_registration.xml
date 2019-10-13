@@ -17,7 +17,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:text="SIGN UP"
         android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/spinner_country"
         app:layout_constraintStart_toStartOf="@+id/spinner_country"
