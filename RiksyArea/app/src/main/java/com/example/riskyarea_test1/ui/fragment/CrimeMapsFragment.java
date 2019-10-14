@@ -22,7 +22,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class CrimeMapsFragment extends Fragment {
 
     public CrimeMapsFragment() {

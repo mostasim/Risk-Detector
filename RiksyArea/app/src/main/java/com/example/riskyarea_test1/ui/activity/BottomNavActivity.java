@@ -1,11 +1,11 @@
 package com.example.riskyarea_test1.ui.activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,10 +18,14 @@ import com.example.riskyarea_test1.ui.fragment.CrimeMapsFragment;
 import com.example.riskyarea_test1.ui.fragment.MapsFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class BottomNavActivity extends AppCompatActivity {
 
 
@@ -86,7 +90,7 @@ public class BottomNavActivity extends AppCompatActivity {
 
         if (id == R.id.action_settings)
         {
-            startActivity(new Intent(BottomNavActivity.this, SettingsActivity.class));
+            showSettingsDialog();
             return true;
         }
         else if(id==R.id.action_logout)
@@ -99,7 +103,8 @@ public class BottomNavActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void selectDest(View view) {
+
+    public void searchArea(View view) {
         int PLACE_PICKER_REQUEST = 1;
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
@@ -112,33 +117,21 @@ public class BottomNavActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-    public static Location destination;
-    public void stop(final View view) {
-
+    public void showSettingsDialog()
+    {
+        View layout;
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Are you sure ?")
-                .setMessage("Do you really want to cancel your trip ?")
-                .setIcon(R.drawable.ic_launcher_foreground)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getBaseContext(), LocationServices.class);
-                        stopService(intent);
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-        builder.create().show();
-
+                .setView(layout=getLayoutInflater().inflate(R.layout.activity_settings,null));
+        final AlertDialog alertDialog= builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
+        alertDialog.setTitle("Settings");
+        layout.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        alertDialog.show();
     }
 
 

@@ -12,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.R;
-
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class LoginActivity extends AppCompatActivity implements UserLogInInterface {
 
     @Override
