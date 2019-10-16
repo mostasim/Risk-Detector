@@ -8,19 +8,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.riskyarea_test1.ui.fragment.MapsFragment"
+        android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
         android:label="@string/title_accidental"
-        tools:layout="@layout/maps_fragment" />
+        tools:layout="@layout/maps_fragment_accidental" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.riskyarea_test1.ui.fragment.MapsFragment"
+        android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
         android:label="@string/title_crime_places"
         tools:layout="@layout/crime_map_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.riskyarea_test1.ui.fragment.MapsFragment"
+        android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
         android:label="@string/title_risky_home"
-        tools:layout="@layout/maps_fragment" />
+        tools:layout="@layout/maps_fragment_accidental" />
 </navigation>

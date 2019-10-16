@@ -1,7 +1,9 @@
 package com.example.riskyarea_test1.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
+
 /**
  * @author Mahadi Hasan Joy
  * @version 1.0
@@ -24,6 +34,22 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.INTERNET)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        Log.e("Permssion:",""+report.areAllPermissionsGranted());
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                    }
+                })
+                .check();
         final EditText txtEmail = findViewById(R.id.txtEmailLogIn);
         final EditText txtPass = findViewById(R.id.txtPasswordLogIn);
         TextView signUp_text = findViewById(R.id.signUp_text);

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.riskyarea_test1.R;
-import com.example.riskyarea_test1.ui.fragment.CrimeMapsFragment;
-import com.example.riskyarea_test1.ui.fragment.MapsFragment;
+import com.example.riskyarea_test1.ui.fragment.CrimeMapFragment;
+import com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment;
+import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -29,9 +29,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BottomNavActivity extends AppCompatActivity {
 
 
-    final Fragment fragment1 = new MapsFragment();
-    final Fragment fragment2 = new CrimeMapsFragment();
-    final Fragment fragment3 = new MapsFragment();
+    final Fragment fragment1 = new AccidentalMapFragment();
+    final Fragment fragment2 = new CrimeMapFragment();
+    final Fragment fragment3 = new OverBridgesMapFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
 
@@ -39,6 +39,9 @@ public class BottomNavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_nav);
+
+
+
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

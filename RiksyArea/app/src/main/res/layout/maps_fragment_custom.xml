@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.CrimeMapFragment">
+    tools:context=".ui.fragment.AccidentalMapFragment">
+
     <fragment
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/accidentalMap"
+        android:id="@+id/customMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </FrameLayout>
