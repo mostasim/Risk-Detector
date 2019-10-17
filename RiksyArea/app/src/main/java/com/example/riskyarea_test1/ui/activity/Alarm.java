@@ -19,8 +19,8 @@ public class Alarm extends AppCompatActivity {
     @Override
     public void finish() {
         if(check==true) {
-            double lati =23.752574;
-            double longi = 90.377375;
+            double lati = 23.7738637;
+            double longi = 90.3660227;
             // Prepare data intent
             Intent i = new Intent();
             i.putExtra("alarm_location_latitude", lati);
