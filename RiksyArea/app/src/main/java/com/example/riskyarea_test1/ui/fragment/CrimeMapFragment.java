@@ -1,23 +1,35 @@
 package com.example.riskyarea_test1.ui.fragment;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.service.MyBroadcastReceiver;
+import com.example.riskyarea_test1.ui.activity.LoadAccidentalPlaces;
+import com.example.riskyarea_test1.ui.activity.LoadCrimeSpots;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,6 +37,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 /**
@@ -34,12 +48,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class CrimeMapFragment extends Fragment {
 
+    Ringtone r;
 
+    boolean flag = false;
+    private GoogleMap mMap;
     private LatLng location;
-    double current_location_latitude = 0;
-    double current_location_longitutde = 0;
-    public LocationManager lm ;
+    double alarm_location_latitude = 0;
+    double alarm_location_longitutde = 0;
+    private double current_location_latitude = 0;
+    private double current_location_longitutde = 0;
+    private LocationManager lm ;
+
     final static int REQUEST_CODE = 1 ;
+    Circle circle ;
+    boolean state = false ;
     public CrimeMapFragment() {
         // Required empty public constructor
     }
@@ -59,7 +81,9 @@ public class CrimeMapFragment extends Fragment {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.accidentalMap);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap mMap) {
+            public void onMapReady(GoogleMap googleMap) {
+
+                mMap=googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
                 mMap.clear(); //clear old markers
@@ -79,9 +103,8 @@ public class CrimeMapFragment extends Fragment {
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(current_location_latitude, current_location_longitutde)) //23.752574, 90.377375
-                        .title("Your Location Overbridge")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.rsz_crime_image))
-                                .snippet("Crime Type : Murder"));
+                        .title("Your Location"));
+                addAlaram();
 
             }
         });
@@ -113,6 +136,90 @@ public class CrimeMapFragment extends Fragment {
             current_location_longitutde = loc.getLongitude();
             // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void addAlaram(){
+        //getMyLocation();
+        Intent i = new Intent(getActivity(), LoadCrimeSpots.class);
+        i.putExtra("longitude" ,current_location_longitutde );
+        i.putExtra("latitude" ,current_location_latitude );
+        startActivityForResult(i, REQUEST_CODE);
+    }
+
+    // Checks whether user is inside of circle or not
+    public boolean IsInCircle(){
+        float distance[] ={0,0,0};
+        Location.distanceBetween( current_location_latitude,current_location_longitutde,
+                circle.getCenter().latitude, circle.getCenter().longitude, distance);
+        if( distance[0] > circle.getRadius())
+            return false;
+        else
+            return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE)
+        {
+            if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
+                state = true;
+                alarm_location_latitude = data.getExtras().getDouble("a_latitude");
+                alarm_location_longitutde = data.getExtras().getDouble("a_longitude");
+
+                location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
+                mMap.addMarker(new MarkerOptions().position(location).title("Datasoft Systems Bangladesh ltd.")
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.rsz_crime_image))
+                        .snippet("Location : Shaymoli"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                // Add a circle of radius 50 meter
+                circle = mMap.addCircle(new CircleOptions()
+                        .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
+                        .radius(50).strokeColor(Color.RED).fillColor(Color.RED));
+                CameraPosition googlePlex = CameraPosition.builder()
+                        .target(new LatLng(current_location_latitude,current_location_longitutde))
+                        .zoom(18)
+                        .bearing(0)
+                        .tilt(45)
+                        .build();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
+                //--------------- Check user is in Range or Not after 5 Seconds --------
+                final Handler handler = new Handler();
+                final int delay = 5000; //milliseconds
+                handler.postDelayed(new Runnable(){
+                    public void run(){
+                        getMyLocation();
+                        if(IsInCircle()){
+                            if(state==true)
+                            {
+                                Toast.makeText(getActivity(),"You are at most accidental area",Toast.LENGTH_SHORT).show();
+                                try {
+                                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                                    r= RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+                                    r.play();
+                                    flag=true;
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                        }
+                        else
+                        {
+                            if (flag==true)
+                            {
+                                r.stop();
+                            }
+                        }
+                        handler.postDelayed(this, delay);
+                    }
+                }, delay);
+
+
+            }
+        }
+
     }
 
 }

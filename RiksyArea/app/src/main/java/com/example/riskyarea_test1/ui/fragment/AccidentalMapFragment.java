@@ -1,8 +1,6 @@
 package com.example.riskyarea_test1.ui.fragment;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,9 +10,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +25,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
-import com.example.riskyarea_test1.ui.activity.Alarm;
-import com.example.riskyarea_test1.ui.activity.LoginActivity;
+import com.example.riskyarea_test1.data.model.SettingsValues;
+import com.example.riskyarea_test1.ui.activity.LoadAccidentalPlaces;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,20 +45,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class AccidentalMapFragment extends Fragment {
 
+    boolean flag=false;
     private GoogleMap mMap;
     private LatLng location;
-    double alarm_location_latitude = 0;
-    double alarm_location_longitutde = 0;
     private double current_location_latitude = 0;
     private double current_location_longitutde = 0;
+
     private LocationManager lm ;
 
-    final static int REQUEST_CODE = 1 ;
-    Circle circle ;
-    boolean state = false ;
-    public AccidentalMapFragment() {
-        // Required empty public constructor
-    }
+    private final static int REQUEST_CODE = 1 ;
+    private Circle circle ;
+    private boolean state = false ;
+    Ringtone r;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +64,7 @@ public class AccidentalMapFragment extends Fragment {
 
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,9 +93,7 @@ public class AccidentalMapFragment extends Fragment {
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(current_location_latitude, current_location_longitutde))
-                        .title("Shukrabaad Overbridge")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.rsz_crime_image))
-                        .snippet("Crime Type : Murder"));
+                        .title("Your Location"));
                 addAlaram();
 
             }
@@ -131,7 +128,7 @@ public class AccidentalMapFragment extends Fragment {
 
     public void addAlaram(){
         //getMyLocation();
-        Intent i = new Intent(getActivity(), Alarm.class);
+        Intent i = new Intent(getActivity(), LoadAccidentalPlaces.class);
         i.putExtra("longitude" ,current_location_longitutde );
         i.putExtra("latitude" ,current_location_latitude );
         startActivityForResult(i, REQUEST_CODE);
@@ -147,19 +144,26 @@ public class AccidentalMapFragment extends Fragment {
         else
             return true;
     }
-    //-----------After Alarm Set ---------------------
+    //-----------After LoadAccidentalPlaces Set ---------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE)
         {
-            if (data.hasExtra("alarm_location_latitude") && data.hasExtra("alarm_location_longitude")) {
+            if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
                 state = true;
-                alarm_location_latitude = data.getExtras().getDouble("alarm_location_latitude");
-                alarm_location_longitutde = data.getExtras().getDouble("alarm_location_longitude");
+                double alarm_location_latitude = data.getExtras().getDouble("a_latitude");
+                double alarm_location_longitutde = data.getExtras().getDouble("a_longitude");
 
                 location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
-                mMap.addMarker(new MarkerOptions().position(location).title("Alarm Location"));
+                mMap.addMarker(new MarkerOptions().position(location).title("Most Accidental Location"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+                CameraPosition googlePlex = CameraPosition.builder()
+                        .target(new LatLng(current_location_latitude,current_location_longitutde))
+                        .zoom(18)
+                        .bearing(0)
+                        .tilt(45)
+                        .build();
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
@@ -175,18 +179,26 @@ public class AccidentalMapFragment extends Fragment {
                         if(IsInCircle()){
                             if(state==true)
                             {
-                                Toast.makeText(getActivity(),"At Location",Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(getActivity().getApplicationContext(), MyBroadcastReceiver.class);
-//                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
-//                                        getActivity().getApplicationContext(), 234324243, intent, 0);
-//                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//                                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()
-//                                        + ( 100), pendingIntent);
-//                                state = false;
+                                Toast.makeText(getActivity(),"You are at most accidental area",Toast.LENGTH_SHORT).show();
+                                try {
+                                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                                    r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+                                    r.play();
+                                    flag=true;
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
-
+                        }
+                        else
+                        {
+                            if (flag==true)
+                            {
+                                r.stop();
                             }
                         }
+
                         handler.postDelayed(this, delay);
                     }
                 }, delay);
@@ -196,5 +208,4 @@ public class AccidentalMapFragment extends Fragment {
         }
 
     }
-
 }

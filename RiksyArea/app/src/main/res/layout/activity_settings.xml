@@ -6,27 +6,20 @@
     android:padding="8dp"
     >
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
 
         <EditText
-            android:id="@+id/alert_threshold"
+            android:id="@+id/min_alert_meter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="Minimum distance to trigger alert (Meter)"
-            android:inputType="numberSigned"
+            android:inputType="number"
             android:drawableLeft="@drawable/ic_location_on_black_24dp"
 
             />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        >
+
 
         <EditText
             android:id="@+id/refresh_rate"
@@ -34,19 +27,17 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:hint="Refresh rate (Sec)"
-            android:inputType= "numberSigned"
+            android:inputType= "number"
             android:drawableLeft="@drawable/ic_refresh_black_24dp"
             />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Done"
-        android:textColor="#FFFF"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_background"
-        android:id="@+id/done"
-        />
+        android:text="Done"
+        android:textColor="#FFFF" />
 </LinearLayout>

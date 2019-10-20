@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * @since 2019-10-14
  */
 public class BottomNavActivity extends AppCompatActivity {
+
+
 
 
     final Fragment fragment1 = new AccidentalMapFragment();
@@ -94,6 +97,7 @@ public class BottomNavActivity extends AppCompatActivity {
         if (id == R.id.action_settings)
         {
             showSettingsDialog();
+          //startActivity(new Intent(BottomNavActivity.this,SettingsActivity.class));
             return true;
         }
         else if(id==R.id.action_logout)
@@ -128,10 +132,12 @@ public class BottomNavActivity extends AppCompatActivity {
         final AlertDialog alertDialog= builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
         alertDialog.setTitle("Settings");
+
         layout.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+
             }
         });
         alertDialog.show();
