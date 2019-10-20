@@ -14,6 +14,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 
 public class UserController extends BaseController {
 

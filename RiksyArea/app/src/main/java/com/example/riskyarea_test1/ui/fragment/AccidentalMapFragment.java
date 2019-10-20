@@ -58,6 +58,9 @@ public class AccidentalMapFragment extends Fragment {
     private boolean state = false ;
     Ringtone r;
 
+    private int delay;
+    private int radius;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +150,10 @@ public class AccidentalMapFragment extends Fragment {
     //-----------After LoadAccidentalPlaces Set ---------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        radius = Integer.parseInt(SettingsValues.getRadius());
+        delay = Integer.parseInt(SettingsValues.getRefresh());
+        delay=delay*1000;
         if (requestCode == REQUEST_CODE)
         {
             if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
@@ -167,11 +174,10 @@ public class AccidentalMapFragment extends Fragment {
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
-                        .radius(50).strokeColor(Color.RED).fillColor(Color.BLUE));
+                        .radius(radius).strokeColor(Color.RED).fillColor(Color.BLUE));
 
                 //--------------- Check user is in Range or Not after 5 Seconds --------
                 final Handler handler = new Handler();
-                final int delay = 5000; //milliseconds
                 handler.postDelayed(new Runnable(){
                     public void run(){
                         //do something

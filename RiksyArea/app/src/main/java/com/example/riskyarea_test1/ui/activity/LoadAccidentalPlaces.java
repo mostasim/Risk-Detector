@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.example.riskyarea_test1.R;
 
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class LoadAccidentalPlaces extends AppCompatActivity {
     boolean check = false ;
     @Override

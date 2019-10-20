@@ -6,8 +6,6 @@
     android:padding="8dp"
     >
 
-
-
         <EditText
             android:id="@+id/min_alert_meter"
             android:layout_width="match_parent"

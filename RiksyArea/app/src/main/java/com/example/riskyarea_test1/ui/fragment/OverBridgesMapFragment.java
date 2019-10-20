@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,6 +51,8 @@ public class OverBridgesMapFragment extends Fragment {
     private double current_location_latitude = 0;
     private double current_location_longitutde = 0;
     private LocationManager lm ;
+    private int delay;
+    private int radius;
 
     final static int REQUEST_CODE = 1 ;
     Circle circle ;
@@ -145,6 +148,9 @@ public class OverBridgesMapFragment extends Fragment {
     //-----------After LoadAccidentalPlaces Set ---------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        radius = Integer.parseInt(SettingsValues.getRadius());
+        delay = Integer.parseInt(SettingsValues.getRefresh());
+        delay=delay*1000;
         if (requestCode == REQUEST_CODE)
         {
             if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
@@ -158,7 +164,7 @@ public class OverBridgesMapFragment extends Fragment {
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
-                        .radius(50).strokeColor(Color.RED).fillColor(Color.GREEN));
+                        .radius(radius).strokeColor(Color.RED).fillColor(Color.GREEN));
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude,current_location_longitutde))
                         .zoom(18)
@@ -169,7 +175,6 @@ public class OverBridgesMapFragment extends Fragment {
 
                 //--------------- Check user is in Range or Not after 5 Seconds --------
                 final Handler handler = new Handler();
-                final int delay = 5000; //milliseconds
                 handler.postDelayed(new Runnable(){
                     public void run(){
                         //do something

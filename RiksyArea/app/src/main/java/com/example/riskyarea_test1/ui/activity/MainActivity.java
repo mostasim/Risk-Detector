@@ -16,11 +16,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
 
-/**
- * @author Mahadi Hasan Joy
- * @version 1.0
- * @since 2019-10-14
- */
 public class MainActivity extends AppCompatActivity {
 
 

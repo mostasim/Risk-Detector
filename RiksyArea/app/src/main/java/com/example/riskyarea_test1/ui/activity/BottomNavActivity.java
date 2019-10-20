@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.ui.fragment.CrimeMapFragment;
 import com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment;
 import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
@@ -29,9 +30,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class BottomNavActivity extends AppCompatActivity {
 
-
-
-
     final Fragment fragment1 = new AccidentalMapFragment();
     final Fragment fragment2 = new CrimeMapFragment();
     final Fragment fragment3 = new OverBridgesMapFragment();
@@ -42,9 +40,6 @@ public class BottomNavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_nav);
-
-
-
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -123,21 +118,33 @@ public class BottomNavActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public void stopAlarm(View view) {
 
+        SettingsValues.setRing(false);
+    }
     public void showSettingsDialog()
     {
-        View layout;
+        final View layout;
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setView(layout=getLayoutInflater().inflate(R.layout.activity_settings,null));
         final AlertDialog alertDialog= builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
         alertDialog.setTitle("Settings");
 
+
+
         layout.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final EditText delay = layout.findViewById(R.id.refresh_rate);
+                final EditText radius = layout.findViewById(R.id.min_alert_meter);
+                String delayString = delay.getText().toString();
+                String radiusString = radius.getText().toString();
+                SettingsValues.radius=radiusString;
+                SettingsValues.refresh=delayString;
                 alertDialog.dismiss();
 
+                startActivity(new Intent(BottomNavActivity.this, BottomNavActivity.class));
             }
         });
         alertDialog.show();

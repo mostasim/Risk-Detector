@@ -1,8 +1,6 @@
 package com.example.riskyarea_test1.ui.fragment;
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.service.MyBroadcastReceiver;
 import com.example.riskyarea_test1.ui.activity.LoadAccidentalPlaces;
 import com.example.riskyarea_test1.ui.activity.LoadCrimeSpots;
@@ -49,6 +48,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class CrimeMapFragment extends Fragment {
 
     Ringtone r;
+
+    private int delay;
+    private int radius;
 
     boolean flag = false;
     private GoogleMap mMap;
@@ -159,6 +161,10 @@ public class CrimeMapFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        radius = Integer.parseInt(SettingsValues.getRadius());
+        delay = Integer.parseInt(SettingsValues.getRefresh());
+        delay=delay*1000;
         if (requestCode == REQUEST_CODE)
         {
             if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
@@ -174,7 +180,7 @@ public class CrimeMapFragment extends Fragment {
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
-                        .radius(50).strokeColor(Color.RED).fillColor(Color.RED));
+                        .radius(radius).strokeColor(Color.TRANSPARENT).fillColor(Color.RED));
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude,current_location_longitutde))
                         .zoom(18)
@@ -184,14 +190,13 @@ public class CrimeMapFragment extends Fragment {
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
                 //--------------- Check user is in Range or Not after 5 Seconds --------
                 final Handler handler = new Handler();
-                final int delay = 5000; //milliseconds
                 handler.postDelayed(new Runnable(){
                     public void run(){
                         getMyLocation();
                         if(IsInCircle()){
                             if(state==true)
                             {
-                                Toast.makeText(getActivity(),"You are at most accidental area",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),"You are at most crime area",Toast.LENGTH_SHORT).show();
                                 try {
                                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                                     r= RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);

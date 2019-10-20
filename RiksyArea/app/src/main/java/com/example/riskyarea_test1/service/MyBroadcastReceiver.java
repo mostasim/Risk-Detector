@@ -8,6 +8,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.widget.Toast;
 
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

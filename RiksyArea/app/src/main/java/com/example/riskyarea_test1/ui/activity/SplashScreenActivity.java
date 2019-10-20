@@ -33,7 +33,7 @@ public class SplashScreenActivity extends AwesomeSplash {
         configSplash.setTitleSplash("Risky Area"); //change your app name here
         configSplash.setTitleTextColor(R.color.colorAccent);
         configSplash.setTitleTextSize(45f); //float value
-        configSplash.setAnimTitleDuration(1800);
+        configSplash.setAnimTitleDuration(1300);
         configSplash.setAnimTitleTechnique(Techniques.FadeInDown);
         configSplash.setTitleFont("fonts/Pacifico.ttf"); //provide string to your font located in assets/fonts/
     }

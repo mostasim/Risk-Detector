@@ -1,7 +1,11 @@
 package com.example.riskyarea_test1.data.model;
 import com.google.gson.annotations.SerializedName;
 
-
+/**
+ * @author Mahadi Hasan Joy
+ * @version 1.0
+ * @since 2019-10-14
+ */
 public class UserSignUp {
 
 	@SerializedName("password")
