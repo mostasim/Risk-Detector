@@ -159,7 +159,9 @@ public class OverBridgesMapFragment extends Fragment {
                 alarm_location_longitutde = data.getExtras().getDouble("a_longitude");
 
                 location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
-                mMap.addMarker(new MarkerOptions().position(location).title("DIU-SWE Over Bridge"));
+                mMap.addMarker(new MarkerOptions().position(location).title("DIU-SWE Over Bridge")
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.over_bridge_red))
+                        .snippet("Location : Dhanmondi 32"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()

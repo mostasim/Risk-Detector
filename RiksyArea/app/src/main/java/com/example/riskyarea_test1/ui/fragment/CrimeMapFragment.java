@@ -175,12 +175,12 @@ public class CrimeMapFragment extends Fragment {
                 location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
                 mMap.addMarker(new MarkerOptions().position(location).title("Datasoft Systems Bangladesh ltd.")
                         .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.rsz_crime_image))
-                        .snippet("Location : Shaymoli"));
+                        .snippet("Most Crime Area"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
-                        .radius(radius).strokeColor(Color.TRANSPARENT).fillColor(Color.RED));
+                        .radius(radius).strokeColor(Color.RED).fillColor(Color.TRANSPARENT));
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude,current_location_longitutde))
                         .zoom(18)

@@ -120,7 +120,7 @@ public class BottomNavActivity extends AppCompatActivity {
     }
     public void stopAlarm(View view) {
 
-        SettingsValues.setRing(false);
+        SettingsValues.setRing(true);
     }
     public void showSettingsDialog()
     {

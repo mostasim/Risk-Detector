@@ -162,7 +162,9 @@ public class AccidentalMapFragment extends Fragment {
                 double alarm_location_longitutde = data.getExtras().getDouble("a_longitude");
 
                 location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
-                mMap.addMarker(new MarkerOptions().position(location).title("Most Accidental Location"));
+                mMap.addMarker(new MarkerOptions().position(location).title("Aam Bagan,Hatirjhil")
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.car_crash))
+                        .snippet("Most Accidental Area"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude,current_location_longitutde))
