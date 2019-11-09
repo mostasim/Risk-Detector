@@ -26,8 +26,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
-import com.example.riskyarea_test1.service.MyBroadcastReceiver;
-import com.example.riskyarea_test1.ui.activity.LoadAccidentalPlaces;
 import com.example.riskyarea_test1.ui.activity.LoadCrimeSpots;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
