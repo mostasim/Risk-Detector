@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
+import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadAccidentalPlaces;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -187,6 +188,8 @@ public class AccidentalMapFragment extends Fragment {
                         if(IsInCircle()){
                             if(state==true)
                             {
+                                SendNotification sendNotification = new SendNotification(getActivity());
+                                sendNotification.execute("Accidental Area");
                                 Toast.makeText(getActivity(),"You are at most accidental area",Toast.LENGTH_SHORT).show();
                                 try {
                                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);

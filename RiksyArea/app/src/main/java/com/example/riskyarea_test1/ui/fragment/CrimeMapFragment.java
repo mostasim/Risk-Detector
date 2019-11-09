@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
+import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadCrimeSpots;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +39,8 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+
 /**
  * @author Mahadi Hasan Joy
  * @version 1.0
@@ -46,6 +49,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class CrimeMapFragment extends Fragment {
 
     Ringtone r;
+    private static final String CHANNEL_ID = "CHANNEL_ID";
+    private static final String TAG = "main";
 
     private int delay;
     private int radius;
@@ -194,6 +199,9 @@ public class CrimeMapFragment extends Fragment {
                         if(IsInCircle()){
                             if(state==true)
                             {
+                                SendNotification sendNotification = new SendNotification(getActivity());
+                                sendNotification.execute("Crime Ara");
+
                                 Toast.makeText(getActivity(),"You are at most crime area",Toast.LENGTH_SHORT).show();
                                 try {
                                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
