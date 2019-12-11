@@ -76,6 +76,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
     @Override
     public void success() {
         Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

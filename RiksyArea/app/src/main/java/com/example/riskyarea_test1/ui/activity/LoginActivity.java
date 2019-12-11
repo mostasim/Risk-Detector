@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
                 UserController userController=new UserController();
                 userController.setUserLogInInterface(LoginActivity.this);
                 userController.LogIn(userLogIn);
+
             }
         });
 
@@ -85,6 +86,8 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
     public void success() {
         Toast.makeText(LoginActivity.this,"Logged In",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(LoginActivity.this, BottomNavActivity.class));
+        finish();
+
     }
 
     @Override
