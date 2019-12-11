@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riskyarea_test1.Interfaces.UserLogInInterface;
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.controller.UserController;
+import com.example.riskyarea_test1.data.model.UserLogIn;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -58,17 +60,14 @@ public class LoginActivity extends AppCompatActivity implements UserLogInInterfa
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                UserLogIn userLogIn = new UserLogIn();
-//
-//                userLogIn.setEmail(txtEmail.getText().toString());
-//                userLogIn.setPassword(txtPass.getText().toString());
-//
-//                UserController userController=new UserController();
-//                userController.setUserLogInInterface(LoginActivity.this);
-//                userController.LogIn(userLogIn);
+                UserLogIn userLogIn = new UserLogIn();
 
-                success();
-                finish();
+                userLogIn.setEmail(txtEmail.getText().toString());
+                userLogIn.setPassword(txtPass.getText().toString());
+
+                UserController userController=new UserController();
+                userController.setUserLogInInterface(LoginActivity.this);
+                userController.LogIn(userLogIn);
             }
         });
 

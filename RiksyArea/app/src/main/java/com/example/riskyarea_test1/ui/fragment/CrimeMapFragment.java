@@ -109,7 +109,7 @@ public class CrimeMapFragment extends Fragment {
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(current_location_latitude, current_location_longitutde)) //23.752574, 90.377375
                         .title("Your Location"));
-                addAlaram();
+                addAlarm();
 
             }
         });
@@ -143,7 +143,7 @@ public class CrimeMapFragment extends Fragment {
         }
     }
 
-    public void addAlaram(){
+    public void addAlarm(){
         //getMyLocation();
         Intent i = new Intent(getActivity(), LoadCrimeSpots.class);
         i.putExtra("longitude" ,current_location_longitutde );

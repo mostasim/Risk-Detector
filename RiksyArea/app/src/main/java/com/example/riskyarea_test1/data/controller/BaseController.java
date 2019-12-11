@@ -11,8 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BaseController {
 
     public  Retrofit.Builder getBuilder(){
-        return new Retrofit.Builder().baseUrl("http://192.168.1.213:8082/").
+//        return new Retrofit.Builder().baseUrl("http://192.168.1.213:8082/").
+//                addConverterFactory(GsonConverterFactory.create());
+        return new Retrofit.Builder().baseUrl("https://riskyarea1.herokuapp.com/").
                 addConverterFactory(GsonConverterFactory.create());
+
     }
 
 }

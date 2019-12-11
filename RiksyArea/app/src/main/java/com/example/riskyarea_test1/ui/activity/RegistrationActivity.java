@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.controller.UserController;
+import com.example.riskyarea_test1.data.model.UserSignUp;
 
 /**
  * @author Mahadi Hasan Joy
@@ -48,18 +50,16 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                UserSignUp user = new UserSignUp();
-//                user.setName(txtName.getText().toString());
-//                user.setEmail(txtEmail.getText().toString());
-//                user.setPhoneNumber(txtPhone.getText().toString());
-//                user.setPassword(txtPassword.getText().toString());
-//                user.setAge(Integer.parseInt(txtAge.getText().toString()));
-//                user.setGender(gender);
-//                UserController userController = new UserController();
-//                userController.setUserSignUpInterface(RegistrationActivity.this);
-//                userController.signUp(user);
-                success();
-                finish();
+                UserSignUp user = new UserSignUp();
+                user.setName(txtName.getText().toString());
+                user.setEmail(txtEmail.getText().toString());
+                user.setPhoneNumber(txtPhone.getText().toString());
+                user.setPassword(txtPassword.getText().toString());
+                user.setAge(Integer.parseInt(txtAge.getText().toString()));
+                user.setGender(gender);
+                UserController userController = new UserController();
+                userController.setUserSignUpInterface(RegistrationActivity.this);
+                userController.signUp(user);
             }
         });
 
@@ -80,6 +80,6 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
 
     @Override
     public void failed() {
-        Toast.makeText(RegistrationActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegistrationActivity.this, "Email Exists", Toast.LENGTH_SHORT).show();
     }
 }
