@@ -18,6 +18,7 @@ import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.ui.fragment.CrimeMapFragment;
 import com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment;
 import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
+import com.example.riskyarea_test1.ui.fragment.PassportListFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -30,9 +31,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class BottomNavActivity extends AppCompatActivity {
 
-    final Fragment fragment1 = new AccidentalMapFragment();
-    final Fragment fragment2 = new CrimeMapFragment();
-    final Fragment fragment3 = new OverBridgesMapFragment();
+    final Fragment fragment1 = new OverBridgesMapFragment();
+    final Fragment fragment2 = new PassportListFragment();
+    final Fragment fragment3 = new PassportListFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
 

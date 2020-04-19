@@ -175,11 +175,18 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                 mMap.addMarker(new MarkerOptions().position(location).title("DIU-SWE Over Bridge")
                         .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.over_bridge_red))
                         .snippet("Location : Dhanmondi 32"));
+
+//                25.637558, 88.645393
+                LatLng second_location = new LatLng(25.637558,88.645393);
+                mMap.addMarker(new MarkerOptions().position(second_location).title("Another")
+                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.over_bridge_red))
+                        .snippet("Location : Fakirpara"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 // Add a circle of radius 50 meter
                 circle = mMap.addCircle(new CircleOptions()
                         .center(new LatLng(alarm_location_latitude, alarm_location_longitutde))
                         .radius(radius).strokeColor(Color.RED).fillColor(Color.GREEN));
+                mMap.addCircle(new CircleOptions().center(second_location).radius(radius).strokeColor(Color.GREEN).fillColor(Color.RED));
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude,current_location_longitutde))
                         .zoom(18)

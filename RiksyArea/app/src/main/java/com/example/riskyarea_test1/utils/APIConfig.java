@@ -1,8 +1,13 @@
 package com.example.riskyarea_test1.utils;
 
+import com.example.riskyarea_test1.data.dto.DoctorDto;
 import com.example.riskyarea_test1.data.model.UserList;
 import com.example.riskyarea_test1.data.model.UserLogIn;
 import com.example.riskyarea_test1.data.model.UserSignUp;
+import com.example.riskyarea_test1.data.model.response.Doctor;
+import com.example.riskyarea_test1.data.model.response.Passport;
+
+import java.util.ArrayList;
 import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -21,5 +26,13 @@ public interface APIConfig {
     @POST("/rest/user/logIn")
     public Call<ResponseBody> logIn(@Body UserLogIn user);
 
+    @GET("doctor/")
+    public Call<ArrayList<Doctor>> getDoctorList();
 
+
+    @POST("doctor/")
+    public Call<ResponseBody> registerDoctor(@Body DoctorDto doctor);
+
+    @GET("passport_info/")
+    public Call<ArrayList<Passport>> getPassportList();
 }

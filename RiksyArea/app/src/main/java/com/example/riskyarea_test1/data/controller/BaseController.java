@@ -13,7 +13,9 @@ public class BaseController {
     public  Retrofit.Builder getBuilder(){
 //        return new Retrofit.Builder().baseUrl("http://192.168.1.213:8082/").
 //                addConverterFactory(GsonConverterFactory.create());
-        return new Retrofit.Builder().baseUrl("https://riskyarea1.herokuapp.com/").
+//        return new Retrofit.Builder().baseUrl("https://riskyarea1.herokuapp.com/").
+//                addConverterFactory(GsonConverterFactory.create());
+        return new Retrofit.Builder().baseUrl("http://206.189.197.151:8888/api/").
                 addConverterFactory(GsonConverterFactory.create());
 
     }
