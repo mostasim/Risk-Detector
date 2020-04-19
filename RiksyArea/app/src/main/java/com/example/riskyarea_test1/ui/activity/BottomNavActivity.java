@@ -98,7 +98,6 @@ public class BottomNavActivity extends AppCompatActivity {
         }
         else if(id==R.id.action_logout)
         {
-            startActivity(new Intent(BottomNavActivity.this,LoginActivity.class));
             Toast.makeText(BottomNavActivity.this,"Sign Out",Toast.LENGTH_SHORT).show();
             return true;
         }
