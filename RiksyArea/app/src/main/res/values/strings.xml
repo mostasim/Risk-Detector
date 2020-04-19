@@ -1,13 +1,12 @@
 <resources>
-    <string name="app_name">Risky Area</string>
+    <string name="app_name">InfoHub</string>
 
     <string name="radio_male">Male</string>
     <string name="radio_female">Female</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_accidental">Home</string>
-    <string name="title_crime_places">Passport</string>
-    <string name="title_risky_home">Doctor</string>
+    <string name="title_crime_places">Doctor</string>
     <string name="title_risky_notifications">Notifications</string>
     <string name="settings">Settings</string>
 
