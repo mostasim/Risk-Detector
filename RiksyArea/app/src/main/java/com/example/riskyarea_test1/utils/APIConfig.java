@@ -4,7 +4,9 @@ import com.example.riskyarea_test1.data.dto.DoctorDto;
 import com.example.riskyarea_test1.data.model.UserList;
 import com.example.riskyarea_test1.data.model.UserLogIn;
 import com.example.riskyarea_test1.data.model.UserSignUp;
+import com.example.riskyarea_test1.data.model.response.Announcement;
 import com.example.riskyarea_test1.data.model.response.Doctor;
+import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.data.model.response.Passport;
 
 import java.util.ArrayList;
@@ -35,4 +37,11 @@ public interface APIConfig {
 
     @GET("passport_info/")
     public Call<ArrayList<Passport>> getPassportList();
+
+    @GET("marked_place/")
+    public Call<ArrayList<MarkedPlace>> getMarkedPlace();
+
+    @GET("announcements/")
+    public Call<ArrayList<Announcement>> getAnnouncement();
+
 }
