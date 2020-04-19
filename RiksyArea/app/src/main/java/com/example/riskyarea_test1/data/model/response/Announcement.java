@@ -2,30 +2,16 @@ package com.example.riskyarea_test1.data.model.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Announcement{
-
-	@SerializedName("created_at")
-	private String createdAt;
+public class Announcement {
 
 	@SerializedName("details")
 	private String details;
 
-	@SerializedName("id")
-	private int id;
+	@SerializedName("time")
+	private String time;
 
 	@SerializedName("title")
 	private String title;
-
-	@SerializedName("modified_at")
-	private String modifiedAt;
-
-	public void setCreatedAt(String createdAt){
-		this.createdAt = createdAt;
-	}
-
-	public String getCreatedAt(){
-		return createdAt;
-	}
 
 	public void setDetails(String details){
 		this.details = details;
@@ -35,12 +21,12 @@ public class Announcement{
 		return details;
 	}
 
-	public void setId(int id){
-		this.id = id;
+	public void setTime(String time){
+		this.time = time;
 	}
 
-	public int getId(){
-		return id;
+	public String getTime(){
+		return time;
 	}
 
 	public void setTitle(String title){
@@ -51,23 +37,13 @@ public class Announcement{
 		return title;
 	}
 
-	public void setModifiedAt(String modifiedAt){
-		this.modifiedAt = modifiedAt;
-	}
-
-	public String getModifiedAt(){
-		return modifiedAt;
-	}
-
 	@Override
  	public String toString(){
 		return 
-			"Announcement{" + 
-			"created_at = '" + createdAt + '\'' + 
-			",details = '" + details + '\'' + 
-			",id = '" + id + '\'' + 
+			"AnnouncementsItem{" + 
+			"details = '" + details + '\'' + 
+			",time = '" + time + '\'' + 
 			",title = '" + title + '\'' + 
-			",modified_at = '" + modifiedAt + '\'' + 
 			"}";
 		}
 }

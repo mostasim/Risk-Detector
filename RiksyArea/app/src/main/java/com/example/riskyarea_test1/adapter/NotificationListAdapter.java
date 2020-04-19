@@ -3,7 +3,6 @@ package com.example.riskyarea_test1.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.riskyarea_test1.R;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class NotificationListAdapter extends ListAdapter<Announcement, NotificationListAdapter.CountryListViewHolder> {
+public class NotificationListAdapter extends ListAdapter<Announcement, NotificationListAdapter.AnnouncementItemViewHolder> {
 
     NotificationItemClickListener notificationItemClickListener;
 
@@ -32,25 +31,25 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
 
     @NonNull
     @Override
-    public CountryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AnnouncementItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcement_item_row, parent, false);
-        return new CountryListViewHolder(view);
+        return new AnnouncementItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CountryListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AnnouncementItemViewHolder holder, int position) {
         holder.bind(getItem(position));
 
     }
 
-    public class CountryListViewHolder extends RecyclerView.ViewHolder {
+    public static class AnnouncementItemViewHolder extends RecyclerView.ViewHolder {
 
         View itemLayout;
         TextView tvAnnounceTitle;
         TextView tvAnnounceTime;
         TextView tvAnnounceBody;
 
-        public CountryListViewHolder(@NonNull View itemView) {
+        public AnnouncementItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemLayout = itemView;
@@ -62,7 +61,7 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
         public void bind(final Announcement item) {
             tvAnnounceTitle.setText(item.getTitle());
             tvAnnounceBody.setText(item.getDetails());
-            itemLayout.setOnClickListener(v -> notificationItemClickListener.onClick(item));
+//            itemLayout.setOnClickListener(v -> notificationItemClickListener.onClick(item));
         }
     }
 }

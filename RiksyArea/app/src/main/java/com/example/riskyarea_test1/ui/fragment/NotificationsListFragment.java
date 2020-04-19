@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.adapter.AnnouncementSection;
 import com.example.riskyarea_test1.adapter.NotificationDiffCallback;
 import com.example.riskyarea_test1.adapter.NotificationItemClickListener;
 import com.example.riskyarea_test1.adapter.NotificationListAdapter;
 import com.example.riskyarea_test1.data.model.response.Announcement;
+import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,10 +26,12 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
+
 public class NotificationsListFragment extends Fragment {
 
     private RecyclerView rvPassportList;
-    private LiveData<ArrayList<Announcement>> announcementList;
+    private LiveData<ArrayList<SectionAnnouncement>> announcementList;
     public static NotificationsListFragment newInstance() {
         return new NotificationsListFragment();
     }
@@ -48,18 +52,16 @@ public class NotificationsListFragment extends Fragment {
 
         NotificationsListViewModel mViewModel = ViewModelProviders.of(this).get(NotificationsListViewModel.class);
         announcementList = mViewModel.getAnnouncementList();
-        announcementList.observe(this, new Observer<ArrayList<Announcement>>() {
+        announcementList.observe(this, new Observer<ArrayList<SectionAnnouncement>>() {
             @Override
-            public void onChanged(ArrayList<Announcement> passportListResponses) {
+            public void onChanged(ArrayList<SectionAnnouncement> passportListResponses) {
                 Log.e("RESPONSE", Arrays.toString(passportListResponses.toArray()));
-                NotificationListAdapter notificationListAdapter = new NotificationListAdapter(new NotificationDiffCallback(), new NotificationItemClickListener() {
-                    @Override
-                    public void onClick(Announcement passport) {
-
-                    }
-                });
-                rvPassportList.setAdapter(notificationListAdapter);
-                notificationListAdapter.submitList(passportListResponses);
+                SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
+                for (SectionAnnouncement sectionAnnouncement : passportListResponses){
+                    sectionedRecyclerViewAdapter.addSection(new AnnouncementSection(sectionAnnouncement.getDate(),sectionAnnouncement.getAnnouncements()));
+                }
+                rvPassportList.setAdapter(sectionedRecyclerViewAdapter);
+//                notificationListAdapter.submitList(passportListResponses);
             }
         });
 

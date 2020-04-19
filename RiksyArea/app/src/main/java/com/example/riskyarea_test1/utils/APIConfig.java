@@ -4,10 +4,10 @@ import com.example.riskyarea_test1.data.dto.DoctorDto;
 import com.example.riskyarea_test1.data.model.UserList;
 import com.example.riskyarea_test1.data.model.UserLogIn;
 import com.example.riskyarea_test1.data.model.UserSignUp;
-import com.example.riskyarea_test1.data.model.response.Announcement;
 import com.example.riskyarea_test1.data.model.response.Doctor;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.data.model.response.Passport;
+import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,6 @@ public interface APIConfig {
     public Call<ArrayList<MarkedPlace>> getMarkedPlace();
 
     @GET("announcements/")
-    public Call<ArrayList<Announcement>> getAnnouncement();
+    public Call<ArrayList<SectionAnnouncement>> getAnnouncement();
 
 }

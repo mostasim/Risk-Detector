@@ -2,10 +2,10 @@ package com.example.riskyarea_test1.adapter;
 
 import android.annotation.SuppressLint;
 
-import com.example.riskyarea_test1.data.model.response.Announcement;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+
+import com.example.riskyarea_test1.data.model.response.Announcement;
 
 
 public class NotificationDiffCallback extends DiffUtil.ItemCallback<Announcement> {

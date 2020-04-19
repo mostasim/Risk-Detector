@@ -7,12 +7,41 @@
     android:layout_height="match_parent"
     android:background="@color/background_color">
 
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Add  Volunteer Doctor"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:background="@color/blue_color"
         android:foreground="?android:attr/selectableItemBackground"
         android:text="Register"
@@ -78,7 +107,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:hint="Phone Number"
-        android:inputType="textPhonetic"
+        android:inputType="number"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtDegree"
         app:layout_constraintStart_toStartOf="@+id/txtDegree"
@@ -92,7 +121,6 @@
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:hint="Working place"
-        android:inputType="textPassword"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtPhone"
         app:layout_constraintHorizontal_bias="0.0"
@@ -107,7 +135,6 @@
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:hint="Specialized in"
-        android:inputType="textPassword"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtPhone"
         app:layout_constraintHorizontal_bias="0.0"
@@ -122,39 +149,11 @@
         android:layout_marginTop="8dp"
         android:background="@color/white"
         android:hint="Location want to serve in"
-        android:inputType="textPassword"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtPhone"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtPhone"
         app:layout_constraintTop_toBottomOf="@+id/txtSpecializedIn"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:text="Register"
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="As a Volunteer Doctor"
-        android:textColor="@color/colorAccent"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -172,18 +171,11 @@
         app:layout_constraintGuide_percent="0.38" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.14" />
+        app:layout_constraintGuide_percent="0.11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

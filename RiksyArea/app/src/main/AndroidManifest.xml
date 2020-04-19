@@ -41,7 +41,8 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity android:name=".ui.activity.RegistrationActivity" />
+        <activity android:name=".ui.activity.RegistrationActivity" android:parentActivityName=".ui.activity.BottomNavActivity"/>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
