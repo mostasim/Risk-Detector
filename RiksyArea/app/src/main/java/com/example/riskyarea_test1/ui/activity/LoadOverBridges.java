@@ -25,8 +25,8 @@ public class LoadOverBridges extends AppCompatActivity {
     @Override
     public void finish() {
         if(check==true) {
-            double lati = 23.7527583;
-            double longi = 90.37771;
+            double lati = 25.638751;  //25.638751, 88.645633
+            double longi = 88.645633;
             // Prepare data intent
             Intent i = new Intent();
             i.putExtra("a_latitude", lati);

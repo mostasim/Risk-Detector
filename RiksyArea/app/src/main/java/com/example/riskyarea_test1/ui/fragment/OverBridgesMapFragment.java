@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -43,7 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * @version 1.0
  * @since 2019-10-14
  */
-public class OverBridgesMapFragment extends Fragment {
+public class OverBridgesMapFragment extends Fragment implements LocationListener {
 
     private GoogleMap mMap;
     private LatLng location;
@@ -58,7 +60,9 @@ public class OverBridgesMapFragment extends Fragment {
     final static int REQUEST_CODE = 1 ;
     Circle circle ;
     boolean state = false ;
-
+    LocationManager locationManager;
+    Criteria criteria;
+    String bestProvider;
     public OverBridgesMapFragment() {
         // Required empty public constructor
     }
@@ -121,11 +125,19 @@ public class OverBridgesMapFragment extends Fragment {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
+            locationManager = (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
+            criteria = new Criteria();
+            bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
 
-            Location loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            current_location_latitude = loc.getLatitude();
-            current_location_longitutde = loc.getLongitude();
-            // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
+            Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (loc !=null){
+                current_location_latitude = loc.getLatitude();
+                current_location_longitutde = loc.getLongitude();
+                // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
+            }else {
+                locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
+            }
+
         }
     }
     public void addAlaram1(){
@@ -213,4 +225,28 @@ public class OverBridgesMapFragment extends Fragment {
 
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        locationManager.removeUpdates(this);
+
+        //open the map:
+        current_location_latitude = location.getLatitude();
+        current_location_longitutde = location.getLongitude();
+//        Toast.makeText(MainActivity.this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
+
+    }
 }

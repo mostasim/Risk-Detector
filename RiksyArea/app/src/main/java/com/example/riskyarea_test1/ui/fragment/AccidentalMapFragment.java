@@ -8,7 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -44,7 +46,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * @version 1.0
  * @since 2019-10-14
  */
-public class AccidentalMapFragment extends Fragment {
+public class AccidentalMapFragment extends Fragment implements LocationListener {
 
     boolean flag=false;
     private GoogleMap mMap;
@@ -54,6 +56,9 @@ public class AccidentalMapFragment extends Fragment {
 
     private LocationManager lm ;
 
+    LocationManager locationManager;
+    Criteria criteria;
+    String bestProvider;
     private final static int REQUEST_CODE = 1 ;
     private Circle circle ;
     private boolean state = false ;
@@ -123,10 +128,22 @@ public class AccidentalMapFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
 
-            Location loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            current_location_latitude = loc.getLatitude();
-            current_location_longitutde = loc.getLongitude();
-            // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
+//            Location loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+//            current_location_latitude = loc.getLatitude();
+//            current_location_longitutde = loc.getLongitude();
+//            // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
+            locationManager = (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
+            criteria = new Criteria();
+            bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
+
+            Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (loc !=null){
+                current_location_latitude = loc.getLatitude();
+                current_location_longitutde = loc.getLongitude();
+                // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
+            }else {
+                locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
+            }
         }
     }
 
@@ -217,6 +234,31 @@ public class AccidentalMapFragment extends Fragment {
 
             }
         }
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        locationManager.removeUpdates(this);
+
+        //open the map:
+        current_location_latitude = location.getLatitude();
+        current_location_longitutde = location.getLongitude();
+//        Toast.makeText(Main
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
 
     }
 }
