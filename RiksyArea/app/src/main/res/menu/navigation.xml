@@ -9,11 +9,11 @@
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_dashboard"
-        android:title="@string/title_crime_places" />
+        android:title="@string/title_risky_home" />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications"
-        android:title="@string/title_risky_home" />
+        android:title="@string/title_risky_notifications" />
 
 </menu>

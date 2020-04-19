@@ -1,4 +1,5 @@
 package com.example.riskyarea_test1.ui.activity;
+
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -13,12 +14,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
-import com.example.riskyarea_test1.ui.fragment.CrimeMapFragment;
-import com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment;
+import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
 import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
-import com.example.riskyarea_test1.ui.fragment.PassportListFragment;
+import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -32,8 +33,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class BottomNavActivity extends AppCompatActivity {
 
     final Fragment fragment1 = new OverBridgesMapFragment();
-    final Fragment fragment2 = new PassportListFragment();
-    final Fragment fragment3 = new PassportListFragment();
+    final Fragment fragment2 = new DoctorListFragment();
+    final Fragment fragment3 = new NotificationsListFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
 
@@ -51,8 +52,7 @@ public class BottomNavActivity extends AppCompatActivity {
 
         fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
         fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.main_container,fragment1, "1").commit();
-
+        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -86,20 +86,18 @@ public class BottomNavActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             showSettingsDialog();
-          //startActivity(new Intent(BottomNavActivity.this,SettingsActivity.class));
+            //startActivity(new Intent(BottomNavActivity.this,SettingsActivity.class));
             return true;
-        }
-        else if(id==R.id.action_logout)
-        {
-            startActivity(new Intent(BottomNavActivity.this,LoginActivity.class));
-            Toast.makeText(BottomNavActivity.this,"Sign Out",Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_logout) {
+            startActivity(new Intent(BottomNavActivity.this, LoginActivity.class));
+            Toast.makeText(BottomNavActivity.this, "Sign Out", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -119,19 +117,18 @@ public class BottomNavActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    public void stopAlarm(View view) {
 
+    public void stopAlarm(View view) {
         SettingsValues.setRing(true);
     }
-    public void showSettingsDialog()
-    {
+
+    public void showSettingsDialog() {
         final View layout;
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setView(layout=getLayoutInflater().inflate(R.layout.activity_settings,null));
-        final AlertDialog alertDialog= builder.create();
+                .setView(layout = getLayoutInflater().inflate(R.layout.activity_settings, null));
+        final AlertDialog alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
         alertDialog.setTitle("Settings");
-
 
 
         layout.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
@@ -141,8 +138,8 @@ public class BottomNavActivity extends AppCompatActivity {
                 final EditText radius = layout.findViewById(R.id.min_alert_meter);
                 String delayString = delay.getText().toString();
                 String radiusString = radius.getText().toString();
-                SettingsValues.radius=radiusString;
-                SettingsValues.refresh=delayString;
+                SettingsValues.radius = radiusString;
+                SettingsValues.refresh = delayString;
                 alertDialog.dismiss();
 
                 startActivity(new Intent(BottomNavActivity.this, BottomNavActivity.class));

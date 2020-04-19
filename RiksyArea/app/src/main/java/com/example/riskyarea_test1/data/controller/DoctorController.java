@@ -19,7 +19,7 @@ public class DoctorController extends BaseController {
     private APIConfig apiConfig = retrofit.create(APIConfig.class);
     MutableLiveData<ArrayList<Doctor>> _list = new MutableLiveData<>();
 
-    public LiveData<ArrayList<Doctor>> getPassportList() {
+    public LiveData<ArrayList<Doctor>> getDoctorList() {
 //        MutableLiveData<ArrayList<PassportListResponse>> _list = new MutableLiveData<>();
         apiConfig.getDoctorList().enqueue(new Callback<ArrayList<Doctor>>() {
             @Override

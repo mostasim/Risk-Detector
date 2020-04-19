@@ -41,6 +41,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 /**
  * @author Mahadi Hasan Joy
  * @version 1.0
@@ -48,20 +49,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class AccidentalMapFragment extends Fragment implements LocationListener {
 
-    boolean flag=false;
+    boolean flag = false;
     private GoogleMap mMap;
     private LatLng location;
     private double current_location_latitude = 0;
     private double current_location_longitutde = 0;
 
-    private LocationManager lm ;
+    private LocationManager lm;
 
     LocationManager locationManager;
     Criteria criteria;
     String bestProvider;
-    private final static int REQUEST_CODE = 1 ;
-    private Circle circle ;
-    private boolean state = false ;
+    private final static int REQUEST_CODE = 1;
+    private Circle circle;
+    private boolean state = false;
     Ringtone r;
 
     private int delay;
@@ -70,10 +71,7 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,16 +83,16 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-                mMap=googleMap;
+                mMap = googleMap;
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
                 mMap.clear(); //clear old markers
                 mMap.setMyLocationEnabled(true);
-                lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+                lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 getMyLocation();
-                location=new LatLng(current_location_latitude, current_location_longitutde);
+                location = new LatLng(current_location_latitude, current_location_longitutde);
                 CameraPosition googlePlex = CameraPosition.builder()
-                        .target(new LatLng(current_location_latitude,current_location_longitutde))
+                        .target(new LatLng(current_location_latitude, current_location_longitutde))
                         .zoom(18)
                         .bearing(0)
                         .tilt(45)
@@ -104,7 +102,6 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
                         .position(new LatLng(current_location_latitude, current_location_longitutde))
                         .title("Your Location"));
                 addAlaram();
-
             }
         });
 
@@ -121,7 +118,7 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
     }
 
     // update the current location of user
-    public  void getMyLocation() {
+    public void getMyLocation() {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -137,43 +134,43 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
             bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
 
             Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            if (loc !=null){
+            if (loc != null) {
                 current_location_latitude = loc.getLatitude();
                 current_location_longitutde = loc.getLongitude();
                 // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
             }
         }
     }
 
-    public void addAlaram(){
+    public void addAlaram() {
         //getMyLocation();
         Intent i = new Intent(getActivity(), LoadAccidentalPlaces.class);
-        i.putExtra("longitude" ,current_location_longitutde );
-        i.putExtra("latitude" ,current_location_latitude );
+        i.putExtra("longitude", current_location_longitutde);
+        i.putExtra("latitude", current_location_latitude);
         startActivityForResult(i, REQUEST_CODE);
     }
 
     // Checks whether user is inside of circle or not
-    public boolean IsInCircle(){
-        float distance[] ={0,0,0};
-        Location.distanceBetween( current_location_latitude,current_location_longitutde,
+    public boolean IsInCircle() {
+        float distance[] = {0, 0, 0};
+        Location.distanceBetween(current_location_latitude, current_location_longitutde,
                 circle.getCenter().latitude, circle.getCenter().longitude, distance);
-        if( distance[0] > circle.getRadius())
+        if (distance[0] > circle.getRadius())
             return false;
         else
             return true;
     }
+
     //-----------After LoadAccidentalPlaces Set ---------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         radius = Integer.parseInt(SettingsValues.getRadius());
         delay = Integer.parseInt(SettingsValues.getRefresh());
-        delay=delay*1000;
-        if (requestCode == REQUEST_CODE)
-        {
+        delay = delay * 1000;
+        if (requestCode == REQUEST_CODE) {
             if (data.hasExtra("a_latitude") && data.hasExtra("a_longitude")) {
                 state = true;
                 double alarm_location_latitude = data.getExtras().getDouble("a_latitude");
@@ -181,11 +178,11 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
 
                 location = new LatLng(alarm_location_latitude, alarm_location_longitutde);
                 mMap.addMarker(new MarkerOptions().position(location).title("Aam Bagan,Hatirjhil")
-                        .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.car_crash))
+                        .icon(bitmapDescriptorFromVector(getActivity(), R.drawable.car_crash))
                         .snippet("Most Accidental Area"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
                 CameraPosition googlePlex = CameraPosition.builder()
-                        .target(new LatLng(current_location_latitude,current_location_longitutde))
+                        .target(new LatLng(current_location_latitude, current_location_longitutde))
                         .zoom(18)
                         .bearing(0)
                         .tilt(45)
@@ -198,31 +195,27 @@ public class AccidentalMapFragment extends Fragment implements LocationListener 
 
                 //--------------- Check user is in Range or Not after 5 Seconds --------
                 final Handler handler = new Handler();
-                handler.postDelayed(new Runnable(){
-                    public void run(){
+                handler.postDelayed(new Runnable() {
+                    public void run() {
                         //do something
                         getMyLocation();
-                        if(IsInCircle()){
-                            if(state==true)
-                            {
+                        if (IsInCircle()) {
+                            if (state == true) {
                                 SendNotification sendNotification = new SendNotification(getActivity());
                                 sendNotification.execute("Accidental Area");
-                                Toast.makeText(getActivity(),"You are at most accidental area",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "You are at most accidental area", Toast.LENGTH_SHORT).show();
                                 try {
                                     Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                                     r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
                                     r.play();
-                                    flag=true;
+                                    flag = true;
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
 
-                        }
-                        else
-                        {
-                            if (flag==true)
-                            {
+                        } else {
+                            if (flag == true) {
                                 r.stop();
                             }
                         }
