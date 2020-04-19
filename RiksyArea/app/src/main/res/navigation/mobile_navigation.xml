@@ -15,12 +15,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
-        android:label="@string/title_crime_places"
+        android:label="@string/call_doctor"
         tools:layout="@layout/crime_map_fragment" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
-        android:label="@string/title_crime_places"
+        android:label="@string/call_doctor"
         tools:layout="@layout/maps_fragment_accidental" />
 </navigation>
