@@ -25,9 +25,9 @@ public class DoctorListAdapter extends ListAdapter<Doctor, DoctorListAdapter.Cou
         submitList(countryListModels);
     }
 
-    public DoctorListAdapter(@NonNull DiffUtil.ItemCallback<Doctor> diffCallback, DoctorListItemClickListener countryListItemClickListener) {
+    public DoctorListAdapter(@NonNull DiffUtil.ItemCallback<Doctor> diffCallback, DoctorListItemClickListener doctorListItemClickListener) {
         super(diffCallback);
-        this.doctorListItemClickListener = countryListItemClickListener;
+        this.doctorListItemClickListener = doctorListItemClickListener;
     }
 
     @NonNull

@@ -1,10 +1,13 @@
 package com.example.riskyarea_test1.ui.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.adapter.DoctorDiffCallback;
@@ -55,12 +58,19 @@ public class DoctorListFragment extends Fragment {
                 DoctorListAdapter doctorListAdapter = new DoctorListAdapter(new DoctorDiffCallback(), new DoctorListItemClickListener() {
                     @Override
                     public void onClick(Doctor doctor) {
-
+                        callToDoctor(doctor.getPhone());
                     }
                 });
                 rvPassportList.setAdapter(doctorListAdapter);
                 doctorListAdapter.submitList(doctorListResponses);
             }
         });
+    }
+    private void callToDoctor(String number){
+        Intent intent = new Intent(Intent.ACTION_CALL);
+
+        intent.setData(Uri.parse("tel:" + number));
+        startActivity(intent);
+//        Toast.makeText(DoctorListFragment.this, "" + doctor.getName(), Toast.LENGTH_SHORT).show();
     }
 }
