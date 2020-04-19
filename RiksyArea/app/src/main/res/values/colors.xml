@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <color name="colorPrimary">#000000</color>
-  <color name="colorPrimaryDark">#388E3C</color>
+  <color name="colorPrimaryDark">#8060CA</color>
   <color name="colorAccent">#C8E6C9</color>
   <color name="colorIcon">#FF5722</color>
   <color name="transperantWhite">#CCFFFFFF</color>
@@ -22,5 +22,7 @@
   <color name="trolleygrey">#808080</color>
   <color name="munsell_1">#f2effa</color>
   <color name="rose">#ff1071</color>
+  <color name="background_color">#E5E5E5</color>
+  <color name="blue_color">#8060CA</color>
 </resources>
 

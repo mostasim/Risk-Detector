@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,11 +32,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class BottomNavActivity extends AppCompatActivity {
 
+    private TextView txtViewTitle;
+
     final Fragment fragment1 = new OverBridgesMapFragment();
     final Fragment fragment2 = new DoctorListFragment();
     final Fragment fragment3 = new NotificationsListFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -43,16 +47,19 @@ public class BottomNavActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    txtViewTitle.setText(getResources().getString(R.string.risky_area));
                     fm.beginTransaction().hide(active).show(fragment1).commit();
                     active = fragment1;
                     return true;
 
                 case R.id.navigation_dashboard:
+                    txtViewTitle.setText(getResources().getString(R.string.doctor_list));
                     fm.beginTransaction().hide(active).show(fragment2).commit();
                     active = fragment2;
                     return true;
 
                 case R.id.navigation_notifications:
+                    txtViewTitle.setText(getResources().getString(R.string.announcement));
                     fm.beginTransaction().hide(active).show(fragment3).commit();
                     active = fragment3;
                     return true;
@@ -69,6 +76,7 @@ public class BottomNavActivity extends AppCompatActivity {
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        txtViewTitle = findViewById(R.id.toolbar_title);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
