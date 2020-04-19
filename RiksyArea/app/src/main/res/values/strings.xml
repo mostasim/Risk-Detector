@@ -5,9 +5,9 @@
     <string name="radio_female">Female</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_accidental">Accidental</string>
-    <string name="title_crime_places">Criminal Spots</string>
-    <string name="title_risky_home">Over Bridges</string>
+    <string name="title_accidental">Home</string>
+    <string name="title_crime_places">Passport</string>
+    <string name="title_risky_home">Doctor</string>
     <string name="settings">Settings</string>
 
 <!--    <string name="channel_name">Channel name</string>-->
