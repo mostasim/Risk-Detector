@@ -33,7 +33,7 @@ public class DoctorListAdapter extends ListAdapter<Doctor, DoctorListAdapter.Cou
     @NonNull
     @Override
     public CountryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.passport_item_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_item_row, parent, false);
         return new CountryListViewHolder(view);
     }
 
@@ -47,18 +47,24 @@ public class DoctorListAdapter extends ListAdapter<Doctor, DoctorListAdapter.Cou
 
         View itemLayout;
         ImageView ivCountryFlag;
-        TextView tvCountryName;
+        TextView tvDoctorName;
+        TextView tvDoctorTitle;
+        TextView tvDoctorSpecial;
 
         public CountryListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemLayout = itemView;
-            ivCountryFlag = itemView.findViewById(R.id.ivCountryFlag);
-            tvCountryName = itemView.findViewById(R.id.tvCountryName);
+            ivCountryFlag = itemView.findViewById(R.id.ivDoctor);
+            tvDoctorName = itemView.findViewById(R.id.tvDoctorName);
+            tvDoctorTitle = itemView.findViewById(R.id.tvDoctorTitle);
+            tvDoctorSpecial = itemView.findViewById(R.id.tvSpecial);
         }
 
         public void bind(final Doctor item) {
-            tvCountryName.setText(item.getName());
+            tvDoctorName.setText(item.getName());
+            tvDoctorSpecial.setText(item.getSpecializedIn());
+            tvDoctorTitle.setText(item.getDegree());
             itemLayout.setOnClickListener(v -> doctorListItemClickListener.onClick(item));
         }
     }

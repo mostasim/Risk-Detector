@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.riskyarea_test1.R;
-import com.example.riskyarea_test1.data.model.response.Doctor;
 import com.example.riskyarea_test1.data.model.response.Passport;
 
 import java.util.ArrayList;
@@ -56,8 +55,8 @@ public class PassportListAdapter extends ListAdapter<Passport, PassportListAdapt
             super(itemView);
 
             itemLayout = itemView;
-            ivCountryFlag = itemView.findViewById(R.id.ivCountryFlag);
-            tvCountryName = itemView.findViewById(R.id.tvCountryName);
+            ivCountryFlag = itemView.findViewById(R.id.ivDoctor);
+            tvCountryName = itemView.findViewById(R.id.tvDoctorName);
         }
 
         public void bind(final Passport item) {

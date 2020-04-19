@@ -49,6 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * @author Mahadi Hasan Joy
@@ -73,6 +74,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private int delay;
     private int radius;
 
+    Handler handler;
+    Runnable runnable;
     public OverBridgesMapFragment() {
         // Required empty public constructor
     }
@@ -145,7 +148,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 
     // update the current location of user
     public void getMyLocation() {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
@@ -179,6 +182,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         float distance[] = {0, 0, 0};
         Location.distanceBetween(current_location_latitude, current_location_longitutde,
                 circle.getCenter().latitude, circle.getCenter().longitude, distance);
+        Log.e("RESULT",""+Arrays.toString(distance)+" radius "+circle.getRadius() );
         if (distance[0] > circle.getRadius())
             return false;
         else
@@ -237,8 +241,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
 
         //--------------- Check user is in Range or Not after 5 Seconds --------
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        handler = new Handler();
+        runnable = new Runnable() {
             public void run() {
                 //do something
                 getMyLocation();
@@ -262,7 +266,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                 }
                 handler.postDelayed(this, delay);
             }
-        }, delay);
+        };
+        handler.postDelayed(runnable, delay);
 
 
     }
@@ -339,6 +344,12 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 //        }
 //
 //    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(runnable);
+    }
 
     @Override
     public void onLocationChanged(Location location) {

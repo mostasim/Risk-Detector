@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,9 +16,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
+import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
 import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
 import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
-import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -37,24 +36,6 @@ public class BottomNavActivity extends AppCompatActivity {
     final Fragment fragment3 = new NotificationsListFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.bottom_nav);
-
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
-    }
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -80,6 +61,22 @@ public class BottomNavActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.bottom_nav);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -95,13 +92,8 @@ public class BottomNavActivity extends AppCompatActivity {
             showSettingsDialog();
             //startActivity(new Intent(BottomNavActivity.this,SettingsActivity.class));
             return true;
-        } else if (id == R.id.action_logout) {
-            Toast.makeText(BottomNavActivity.this, "Sign Out", Toast.LENGTH_SHORT).show();
-        }
-        else if(id==R.id.action_logout)
-        {
-            Toast.makeText(BottomNavActivity.this,"Sign Out",Toast.LENGTH_SHORT).show();
-            return true;
+        } else if (id == R.id.action_register_doctor) {
+            startActivity(new Intent(this, RegistrationActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

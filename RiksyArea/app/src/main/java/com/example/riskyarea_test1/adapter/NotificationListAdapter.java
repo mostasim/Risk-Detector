@@ -53,8 +53,8 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
             super(itemView);
 
             itemLayout = itemView;
-            ivCountryFlag = itemView.findViewById(R.id.ivCountryFlag);
-            tvCountryName = itemView.findViewById(R.id.tvCountryName);
+            ivCountryFlag = itemView.findViewById(R.id.ivDoctor);
+            tvCountryName = itemView.findViewById(R.id.tvDoctorName);
         }
 
         public void bind(final Announcement item) {

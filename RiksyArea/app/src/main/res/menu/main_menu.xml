@@ -3,20 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/action_register_doctor"
         android:orderInCategory="100"
-        android:title="Profile"
+        android:title="Register Volunteer Doctor"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/settings"
         app:showAsAction="never"/>
-    <item
-    android:id="@+id/action_logout"
-    android:orderInCategory="100"
-    android:title="Logout"
-    app:showAsAction="never"/>
 
 
 </menu>

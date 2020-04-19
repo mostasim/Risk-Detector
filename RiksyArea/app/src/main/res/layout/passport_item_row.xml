@@ -8,7 +8,7 @@
     android:layout_marginBottom="8dp">
 
     <ImageView
-        android:id="@+id/ivCountryFlag"
+        android:id="@+id/ivDoctor"
         android:layout_width="96dp"
         android:layout_height="96dp"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         android:contentDescription="dummy" />
 
     <TextView
-        android:id="@+id/tvCountryName"
+        android:id="@+id/tvDoctorName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -35,8 +35,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ivCountryFlag"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDoctor"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivCountryFlag"
+        app:layout_constraintStart_toEndOf="@+id/ivDoctor"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

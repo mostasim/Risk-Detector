@@ -1,19 +1,20 @@
 package com.example.riskyarea_test1.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
 import com.example.riskyarea_test1.R;
-import com.example.riskyarea_test1.data.controller.UserController;
-import com.example.riskyarea_test1.data.model.UserSignUp;
+import com.example.riskyarea_test1.data.controller.DoctorController;
+import com.example.riskyarea_test1.data.dto.DoctorDto;
+import com.example.riskyarea_test1.ui.fragment.DoctorListViewModel;
 
 /**
  * @author Mahadi Hasan Joy
@@ -22,53 +23,53 @@ import com.example.riskyarea_test1.data.model.UserSignUp;
  */
 public class RegistrationActivity extends AppCompatActivity implements UserSignUpInterface {
     String gender = "Male";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        DoctorListViewModel mViewModel = ViewModelProviders.of(this).get(DoctorListViewModel.class);
 
         final EditText txtEmail = findViewById(R.id.txtEmailSignUp);
         final EditText txtName = findViewById(R.id.txtUserName);
         final EditText txtPhone = findViewById(R.id.txtPhone);
-        final EditText txtPassword = findViewById(R.id.txtPasswordSignUp);
-        final EditText txtAge = findViewById(R.id.txtAge);
-        final RadioGroup txtGender = findViewById(R.id.radioSex);
+        final EditText txtWorkInPlace = findViewById(R.id.txtWorkInPlace);
+        final EditText txtDegree = findViewById(R.id.txtDegree);
+        final EditText txtSpecializedIn = findViewById(R.id.txtSpecializedIn);
+        final EditText txtLocationWantToServe = findViewById(R.id.txtLocationWantToServe);
 
         Button btnSignUp = findViewById(R.id.btnSignUp);
-        txtGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Log.e("__DEBUG__","ID: "+checkedId);
-                if (checkedId == R.id.radioFemale) {
-                    gender = "Female";
-                } else
-                    gender = "Male";
-            }
-        });
+
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserSignUp user = new UserSignUp();
-                user.setName(txtName.getText().toString());
-                user.setEmail(txtEmail.getText().toString());
-                user.setPhoneNumber(txtPhone.getText().toString());
-                user.setPassword(txtPassword.getText().toString());
-                user.setAge(Integer.parseInt(txtAge.getText().toString()));
-                user.setGender(gender);
-                UserController userController = new UserController();
-                userController.setUserSignUpInterface(RegistrationActivity.this);
-                userController.signUp(user);
+                DoctorDto doctorDto = new DoctorDto();
+                doctorDto.setName(txtName.getText().toString());
+                doctorDto.setEmail(txtEmail.getText().toString());
+                doctorDto.setDegree(txtDegree.getText().toString());
+                doctorDto.setLocationWantToServeIn(txtLocationWantToServe.getText().toString());
+                doctorDto.setPhone(txtPhone.getText().toString());
+                doctorDto.setWorkingPlace(txtWorkInPlace.getText().toString());
+                doctorDto.setSpecializedIn(txtSpecializedIn.getText().toString());
+                registerUser(doctorDto);
             }
         });
 
-        TextView signIn_text = findViewById(R.id.signIn_text);
-        signIn_text.setOnClickListener(new View.OnClickListener() {
+    }
+
+    private void registerUser(DoctorDto doctorDto) {
+        DoctorController userController = new DoctorController();
+        userController.registerDoctor(doctorDto).observe(this, new Observer<Boolean>() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-                finish();
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(RegistrationActivity.this, "Email Exists", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -15,13 +15,14 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="SIGN UP"
+        android:text="Register"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_country"
-        app:layout_constraintStart_toStartOf="@+id/spinner_country"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_country"
+        app:layout_constraintEnd_toEndOf="@+id/txtLocationWantToServe"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtLocationWantToServe"
+        app:layout_constraintTop_toBottomOf="@+id/txtLocationWantToServe"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -33,7 +34,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@color/colorAccent"
-        android:hint="Username"
+        android:hint="Name"
         android:inputType="textPersonName"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,13 +59,12 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/txtAge"
+        android:id="@+id/txtDegree"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:hint="Age"
-        android:inputType="number"
+        android:hint="Degree"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtEmailSignUp"
         app:layout_constraintStart_toStartOf="@+id/txtEmailSignUp"
@@ -80,18 +80,18 @@
         android:hint="Phone Number"
         android:inputType="textPhonetic"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtAge"
-        app:layout_constraintStart_toStartOf="@+id/txtAge"
-        app:layout_constraintTop_toBottomOf="@+id/txtAge"
+        app:layout_constraintEnd_toEndOf="@+id/txtDegree"
+        app:layout_constraintStart_toStartOf="@+id/txtDegree"
+        app:layout_constraintTop_toBottomOf="@+id/txtDegree"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/txtPasswordSignUp"
+        android:id="@+id/txtWorkInPlace"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:hint="Password"
+        android:hint="Working place"
         android:inputType="textPassword"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtPhone"
@@ -100,49 +100,34 @@
         app:layout_constraintTop_toBottomOf="@+id/txtPhone"
         tools:ignore="MissingConstraints" />
 
-    <RadioGroup
-        android:id="@+id/radioSex"
+    <EditText
+        android:id="@+id/txtSpecializedIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPasswordSignUp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/txtPasswordSignUp"
-        tools:ignore="MissingConstraints"
-        android:outlineAmbientShadowColor="@color/colorIcon"
-        android:outlineSpotShadowColor="@color/colorIcon">
-
-        <RadioButton
-            android:id="@+id/radioMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/radio_male" />
-
-        <RadioButton
-            android:id="@+id/radioFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:text="@string/radio_female" />
-    </RadioGroup>
-
-    <Spinner
-        android:id="@+id/spinner_country"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorAccent"
-        android:entries="@array/country_arrays"
+        android:hint="Specialized in"
+        android:inputType="textPassword"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/radioSex"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/radioSex"
+        app:layout_constraintEnd_toEndOf="@+id/txtPhone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtPhone"
+        app:layout_constraintTop_toBottomOf="@+id/txtWorkInPlace"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/txtLocationWantToServe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
+        android:hint="Location want to serve in"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtPhone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtPhone"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpecializedIn"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -151,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
-        android:text="SIGN UP"
+        android:text="Register"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -164,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="Welcome to Risky Area."
+        android:text="As a Volunteer Doctor"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
@@ -172,25 +157,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/signIn_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:padding="10dp"
-        android:text="Already Have an Account?  Sign in"
-        android:textAllCaps="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="13dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
-        app:layout_constraintStart_toStartOf="@+id/btnSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignUp"
-        tools:ignore="MissingConstraints" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -209,19 +184,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.14" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent"
-        android:gravity="center|start"
-        android:paddingLeft="16dp"
-        android:text="Gender"
-        app:layout_constraintBottom_toBottomOf="@+id/radioSex"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="@+id/txtPasswordSignUp"
-        app:layout_constraintTop_toTopOf="@+id/radioSex" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
