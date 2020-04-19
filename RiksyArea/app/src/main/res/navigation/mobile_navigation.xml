@@ -21,6 +21,6 @@
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
-        android:label="@string/title_risky_home"
+        android:label="@string/title_crime_places"
         tools:layout="@layout/maps_fragment_accidental" />
 </navigation>
