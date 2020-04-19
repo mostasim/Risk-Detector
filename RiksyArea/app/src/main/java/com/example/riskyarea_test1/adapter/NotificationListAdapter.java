@@ -33,7 +33,7 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
     @NonNull
     @Override
     public CountryListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.passport_item_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.announcement_item_row, parent, false);
         return new CountryListViewHolder(view);
     }
 
@@ -46,19 +46,22 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
     public class CountryListViewHolder extends RecyclerView.ViewHolder {
 
         View itemLayout;
-        ImageView ivCountryFlag;
-        TextView tvCountryName;
+        TextView tvAnnounceTitle;
+        TextView tvAnnounceTime;
+        TextView tvAnnounceBody;
 
         public CountryListViewHolder(@NonNull View itemView) {
             super(itemView);
 
             itemLayout = itemView;
-            ivCountryFlag = itemView.findViewById(R.id.ivDoctor);
-            tvCountryName = itemView.findViewById(R.id.tvDoctorName);
+            tvAnnounceTitle = itemView.findViewById(R.id.tvAnnounceTitle);
+            tvAnnounceBody = itemView.findViewById(R.id.tvAnnounceBody);
+            tvAnnounceTime = itemView.findViewById(R.id.tvAnnounceTime);
         }
 
         public void bind(final Announcement item) {
-            tvCountryName.setText(item.getTitle());
+            tvAnnounceTitle.setText(item.getTitle());
+            tvAnnounceBody.setText(item.getDetails());
             itemLayout.setOnClickListener(v -> notificationItemClickListener.onClick(item));
         }
     }

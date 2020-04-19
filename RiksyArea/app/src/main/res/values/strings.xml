@@ -6,8 +6,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_accidental">Home</string>
-    <string name="title_crime_places">Doctor</string>
-    <string name="title_risky_notifications">Notifications</string>
+    <string name="call_doctor">Call Doctor</string>
+    <string name="announce">Announce</string>
     <string name="settings">Settings</string>
     <string name="risky_area">Risky Area</string>
     <string name="doctor_list">Doctors List</string>
