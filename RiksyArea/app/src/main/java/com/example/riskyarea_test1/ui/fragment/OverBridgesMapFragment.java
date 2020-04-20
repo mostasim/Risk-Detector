@@ -33,6 +33,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
+import com.example.riskyarea_test1.helper.MarkedPlaceType;
 import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -157,7 +158,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
             criteria = new Criteria();
             bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
 
-            Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (loc != null) {
                 current_location_latitude = loc.getLatitude();
                 current_location_longitutde = loc.getLongitude();
@@ -193,10 +194,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
-//                .anchor(0.5f, 0.5f)
                 .title(title)
-                .snippet("Type : "+snippet)
-                .icon(bitmapDescriptorFromVector(getActivity(),R.drawable.over_bridge_red)));
+                .snippet("Type : "+snippet));
     }
 
     public void drawMarkedArea(ArrayList<MarkedPlace> markedPlaces) {
@@ -206,8 +205,16 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
             createMarker(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude(), markedPlaces.get(i).getTitle(), markedPlaces.get(i).getMarkedAs());
         }
         for (int i = 0; i < markedPlaces.size(); i++) {
+            int color = Color.TRANSPARENT;
+            if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.COMMUNITY_TRANSMISSION.label)){
+                color = Color.MAGENTA;
+            }else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.INFECTED.label)){
+                color = Color.RED;
+            }else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.LOCAL_GATHERING.label)){
+                color = Color.LTGRAY;
+            }
 
-           circle =  mMap.addCircle(new CircleOptions().center(new LatLng(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude())).radius(markedPlaces.get(i).getRadius()).strokeColor(Color.GREEN).fillColor(Color.RED));
+           circle =  mMap.addCircle(new CircleOptions().center(new LatLng(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude())).radius(markedPlaces.get(i).getRadius()).strokeColor(Color.WHITE).fillColor(color));
         }
         radius = Integer.parseInt(SettingsValues.getRadius());
         delay = Integer.parseInt(SettingsValues.getRefresh());
@@ -249,8 +256,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                 if (IsInCircle()) {
                     if (state) {
                         SendNotification sendNotification = new SendNotification(getActivity());
-                        sendNotification.execute("Over-Bridge");
-                        Toast.makeText(getActivity(), "You are near to a over bridge", Toast.LENGTH_SHORT).show();
+                        sendNotification.execute("Infected Zone");
+                        Toast.makeText(getActivity(), "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
                             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                             Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
