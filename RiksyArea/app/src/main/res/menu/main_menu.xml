@@ -5,13 +5,12 @@
     <item
         android:id="@+id/action_register_doctor"
         android:orderInCategory="100"
-        android:title="Register Volunteer Doctor"
+        android:title="@string/add_volunteer_doctor"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/settings"
         app:showAsAction="never"/>
-
 
 </menu>

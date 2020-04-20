@@ -1,41 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#00FFFFFF"
-    android:padding="8dp"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_border_background"
+    android:orientation="vertical"
+    android:padding="@dimen/txt_view_margin_15">
 
-        <EditText
-            android:id="@+id/min_alert_meter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="Minimum distance to trigger alert (Meter)"
-            android:inputType="number"
-            android:drawableLeft="@drawable/ic_location_on_black_24dp"
-
-            />
-
-
-
-        <EditText
-            android:id="@+id/refresh_rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:hint="Refresh rate (Sec)"
-            android:inputType= "number"
-            android:drawableLeft="@drawable/ic_refresh_black_24dp"
-            />
-
-    <Button
-        android:id="@+id/done"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/button_background"
-        android:text="Done"
-        android:textColor="#FFFF" />
+        android:layout_marginTop="@dimen/txt_view_margin_10"
+        android:text="@string/settings"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtview_toolbar_title_22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/txt_view_margin_15"
+        android:text="@string/minimum_distance_alarm"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtview_toolbar_title_22sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/min_alert_meter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/txt_view_margin_5"
+        android:background="@drawable/edittext_custom_background_gray"
+        android:hint="@string/type_range"
+        android:inputType="number"
+        android:padding="@dimen/txt_view_margin_15"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/txt_view_margin_15"
+        android:text="@string/refresh_rate"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtview_toolbar_title_22sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/refresh_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/txt_view_margin_5"
+        android:background="@drawable/edittext_custom_background_gray"
+        android:hint="@string/type_rate"
+        android:inputType="number"
+        android:padding="@dimen/txt_view_margin_15"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/txt_view_margin_15"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/txt_view_margin_15"
+            android:background="@color/transparent"
+            android:text="@string/cancel"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/txt_view_margin_15"
+            android:background="@color/transparent"
+            android:text="@string/update"
+            android:textColor="@color/blue_color" />
+
+    </LinearLayout>
+
 </LinearLayout>

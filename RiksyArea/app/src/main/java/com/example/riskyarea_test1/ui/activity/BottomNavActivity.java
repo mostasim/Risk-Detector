@@ -111,11 +111,12 @@ public class BottomNavActivity extends AppCompatActivity {
 //
 //            }
 //        }).check();
-    loadFragments();
+        loadFragments();
 
     }
-    private void loadFragments(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+
+    private void loadFragments() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Dexter.withActivity(this)
                     .withPermissions(
                             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -123,19 +124,22 @@ public class BottomNavActivity extends AppCompatActivity {
                             Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                             Manifest.permission.CALL_PHONE
                     ).withListener(new MultiplePermissionsListener() {
-                @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
-                    if (  report.areAllPermissionsGranted()){
+                @Override
+                public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    if (report.areAllPermissionsGranted()) {
                         fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
                         fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
                         fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
                     }
                 }
-                @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                     token.continuePermissionRequest();
 
                 }
             }).check();
-        }else {
+        } else {
             fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
             fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
             fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
@@ -192,26 +196,27 @@ public class BottomNavActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setView(layout = getLayoutInflater().inflate(R.layout.activity_settings, null));
         final AlertDialog alertDialog = builder.create();
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
-        alertDialog.setTitle("Settings");
+        /*alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
+        alertDialog.setTitle("Settings");*/
 
 
-        layout.findViewById(R.id.done).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final EditText delay = layout.findViewById(R.id.refresh_rate);
-                final EditText radius = layout.findViewById(R.id.min_alert_meter);
-                String delayString = delay.getText().toString();
-                String radiusString = radius.getText().toString();
-                SettingsValues.radius = radiusString;
-                SettingsValues.refresh = delayString;
-                alertDialog.dismiss();
+        layout.findViewById(R.id.done).setOnClickListener(view -> {
+            final EditText delay = layout.findViewById(R.id.refresh_rate);
+            final EditText radius = layout.findViewById(R.id.min_alert_meter);
+            String delayString = delay.getText().toString();
+            String radiusString = radius.getText().toString();
+            SettingsValues.radius = radiusString;
+            SettingsValues.refresh = delayString;
+            alertDialog.dismiss();
 
-                startActivity(new Intent(BottomNavActivity.this, BottomNavActivity.class));
-            }
+            startActivity(new Intent(BottomNavActivity.this, BottomNavActivity.class));
         });
+
+        layout.findViewById(R.id.btn_cancel).setOnClickListener(view -> {
+            if (alertDialog != null && alertDialog.isShowing())
+                alertDialog.dismiss();
+        });
+
         alertDialog.show();
     }
-
-
 }
