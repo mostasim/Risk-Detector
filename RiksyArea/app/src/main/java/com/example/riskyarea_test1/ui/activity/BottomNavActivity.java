@@ -1,9 +1,7 @@
 package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,12 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
@@ -34,6 +26,12 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * @author Mahadi Hasan Joy
@@ -136,7 +134,6 @@ public class BottomNavActivity extends AppCompatActivity {
                 @Override
                 public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                     token.continuePermissionRequest();
-
                 }
             }).check();
         } else {
@@ -144,7 +141,6 @@ public class BottomNavActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
             fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
         }
-
     }
 
     @Override
@@ -198,7 +194,6 @@ public class BottomNavActivity extends AppCompatActivity {
         final AlertDialog alertDialog = builder.create();
         /*alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transperantWhite)));
         alertDialog.setTitle("Settings");*/
-
 
         layout.findViewById(R.id.done).setOnClickListener(view -> {
             final EditText delay = layout.findViewById(R.id.refresh_rate);

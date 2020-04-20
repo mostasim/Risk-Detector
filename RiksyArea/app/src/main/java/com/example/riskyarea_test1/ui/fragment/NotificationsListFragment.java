@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,19 +46,14 @@ public class NotificationsListFragment extends Fragment {
 
         NotificationsListViewModel mViewModel = ViewModelProviders.of(this).get(NotificationsListViewModel.class);
         announcementList = mViewModel.getAnnouncementList();
-        announcementList.observe(this, new Observer<ArrayList<SectionAnnouncement>>() {
-            @Override
-            public void onChanged(ArrayList<SectionAnnouncement> passportListResponses) {
-                Log.e("RESPONSE", Arrays.toString(passportListResponses.toArray()));
-                SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
-                for (SectionAnnouncement sectionAnnouncement : passportListResponses){
-                    sectionedRecyclerViewAdapter.addSection(new AnnouncementSection(sectionAnnouncement.getDate(),sectionAnnouncement.getAnnouncements()));
-                }
-                rvPassportList.setAdapter(sectionedRecyclerViewAdapter);
-//                notificationListAdapter.submitList(passportListResponses);
+        announcementList.observe(this, passportListResponses -> {
+            Log.e("RESPONSE", Arrays.toString(passportListResponses.toArray()));
+            SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
+            for (SectionAnnouncement sectionAnnouncement : passportListResponses){
+                sectionedRecyclerViewAdapter.addSection(new AnnouncementSection(sectionAnnouncement.getDate(),sectionAnnouncement.getAnnouncements()));
             }
+            rvPassportList.setAdapter(sectionedRecyclerViewAdapter);
+//                notificationListAdapter.submitList(passportListResponses);
         });
-
     }
-
 }

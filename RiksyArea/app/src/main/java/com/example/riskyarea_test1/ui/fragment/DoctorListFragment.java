@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.adapter.DoctorDiffCallback;
@@ -22,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,20 +50,17 @@ public class DoctorListFragment extends Fragment {
         DoctorListViewModel mViewModel = ViewModelProviders.of(this).get(DoctorListViewModel.class);
 
         doctorList = mViewModel.getDoctorList();;
-        doctorList.observe(this, new Observer<ArrayList<Doctor>>() {
-            @Override
-            public void onChanged(ArrayList<Doctor> doctorListResponses) {
-                Log.e("RESPONSE", Arrays.toString(doctorListResponses.toArray()));
-                DoctorListAdapter doctorListAdapter = new DoctorListAdapter(new DoctorDiffCallback(), new DoctorListItemClickListener() {
-                    @Override
-                    public void onClick(Doctor doctor) {
-                        callToDoctor(doctor.getPhone());
-                    }
-                });
-                rvPassportList.setAdapter(doctorListAdapter);
-                doctorListAdapter.submitList(doctorListResponses);
-                doctorListAdapter.notifyDataSetChanged();
-            }
+        doctorList.observe(this, doctorListResponses -> {
+            Log.e("RESPONSE", Arrays.toString(doctorListResponses.toArray()));
+            DoctorListAdapter doctorListAdapter = new DoctorListAdapter(new DoctorDiffCallback(), new DoctorListItemClickListener() {
+                @Override
+                public void onClick(Doctor doctor) {
+                    callToDoctor(doctor.getPhone());
+                }
+            });
+            rvPassportList.setAdapter(doctorListAdapter);
+            doctorListAdapter.submitList(doctorListResponses);
+            doctorListAdapter.notifyDataSetChanged();
         });
     }
     private void callToDoctor(String number){
