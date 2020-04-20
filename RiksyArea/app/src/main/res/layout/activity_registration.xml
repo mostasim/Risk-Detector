@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    android:orientation="vertical">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
@@ -37,145 +38,187 @@
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@color/blue_color"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:text="Register"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="@+id/txtLocationWantToServe"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtLocationWantToServe"
-        app:layout_constraintTop_toBottomOf="@+id/txtLocationWantToServe"
-        tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/txtUserName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/white"
-        android:hint="@string/your_name"
-        android:inputType="textPersonName"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
-        tools:ignore="MissingConstraints" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtEmailSignUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtUserName"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtUserName"
-        app:layout_constraintTop_toBottomOf="@+id/txtUserName"
-        tools:ignore="MissingConstraints" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/txt_view_margin_5"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/txtDegree"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Degree"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtEmailSignUp"
-        app:layout_constraintStart_toStartOf="@+id/txtEmailSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmailSignUp"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/full_name"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
-    <EditText
-        android:id="@+id/txtPhone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Phone Number"
-        android:inputType="number"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtDegree"
-        app:layout_constraintStart_toStartOf="@+id/txtDegree"
-        app:layout_constraintTop_toBottomOf="@+id/txtDegree"
-        tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/txtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/your_name"
+                android:inputType="textPersonName"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/txtWorkInPlace"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Working place"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPhone"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtPhone"
-        app:layout_constraintTop_toBottomOf="@+id/txtPhone"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/degree"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
-    <EditText
-        android:id="@+id/txtSpecializedIn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Specialized in"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPhone"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtPhone"
-        app:layout_constraintTop_toBottomOf="@+id/txtWorkInPlace"
-        tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/txtDegree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/degree"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/txtLocationWantToServe"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white"
-        android:hint="Location want to serve in"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/txtPhone"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtPhone"
-        app:layout_constraintTop_toBottomOf="@+id/txtSpecializedIn"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/working_place"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.38" />
+            <EditText
+                android:id="@+id/txtWorkInPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/working_place"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.38" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/specialized_in"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.11" />
+            <EditText
+                android:id="@+id/txtSpecializedIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/specialized_in"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/email"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
+
+            <EditText
+                android:id="@+id/txtEmailSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/mobile_number"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
+
+            <EditText
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/mobile_number"
+                android:inputType="number"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_5"
+                android:text="@string/location_want_to_serve_in"
+                android:textSize="@dimen/txtview_toolbar_title_22sp" />
+
+            <EditText
+                android:id="@+id/txtLocationWantToServe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:background="@color/white"
+                android:hint="@string/location_want_to_serve_in"
+                android:padding="@dimen/txt_view_margin_15"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_marginTop="@dimen/txt_view_margin_15"
+                android:layout_marginRight="@dimen/txt_view_margin_10"
+                android:layout_marginBottom="@dimen/txt_view_margin_15"
+                android:background="@color/blue_color"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:padding="@dimen/txt_view_margin_15"
+                android:text="Register"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtview_toolbar_title_22sp"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

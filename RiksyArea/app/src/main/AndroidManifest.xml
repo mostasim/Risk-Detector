@@ -30,8 +30,7 @@
         <activity
             android:name=".ui.fragment.AccidentalMapFragment"
             android:label="@string/title_activity_maps_fragment" />
-        <activity android:name=".ui.activity.SplashScreenActivity">
-        </activity>
+        <activity android:name=".ui.activity.SplashScreenActivity"></activity>
         <activity android:name=".ui.activity.LoginActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,7 +40,10 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <activity android:name=".ui.activity.RegistrationActivity" android:parentActivityName=".ui.activity.BottomNavActivity"/>
+        <activity
+            android:name=".ui.activity.RegistrationActivity"
+            android:parentActivityName=".ui.activity.BottomNavActivity"
+            android:screenOrientation="portrait" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -52,7 +54,9 @@
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.BottomNavActivity">
+        <activity
+            android:name=".ui.activity.BottomNavActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -64,7 +68,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key" />
     </application>
-
 
 
 </manifest>
