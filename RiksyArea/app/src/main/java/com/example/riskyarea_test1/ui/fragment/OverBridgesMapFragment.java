@@ -65,7 +65,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     Criteria criteria;
     String bestProvider;
     Uri notification;
-    Ringtone r;
+    Ringtone ringtone;
     private GoogleMap mMap;
     private LatLng location;
     private double current_location_latitude = 0;
@@ -93,7 +93,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
         context = getContext();
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-        r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
+        ringtone = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
 
         mViewModel.getMarkedAreaList().observe(this, markedPlaces -> {
             Log.e("RESPONSE", Arrays.toString(markedPlaces.toArray()));
@@ -259,9 +259,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                         sendNotification.execute("Infected Zone");
                         Toast.makeText(context, "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
-                            if (!r.isPlaying())
-                                r.play();
-
+                            if (ringtone != null && !ringtone.isPlaying())
+                                ringtone.play();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -273,8 +272,6 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
             }
         };
         handler.postDelayed(runnable, delay);
-
-
     }
     //-----------After LoadAccidentalPlaces Set ---------------------
 //    @Override
@@ -359,7 +356,10 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     @Override
     public void onPause() {
         super.onPause();
-//        handler.removeCallbacks(runnable);
+        if(handler != null)
+            handler.removeCallbacks(runnable);
+        if(ringtone != null && ringtone.isPlaying())
+            ringtone.stop();
     }
 
     @Override
