@@ -1,8 +1,10 @@
 package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -90,25 +92,54 @@ public class BottomNavActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setItemIconTintList(null);
 
-        Dexter.withActivity(this)
-                .withPermissions(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                        Manifest.permission.CALL_PHONE
-                ).withListener(new MultiplePermissionsListener() {
-            @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
-                if (  report.areAllPermissionsGranted()){
-                    fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-                    fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-                    fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
-                }
-            }
-            @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                token.continuePermissionRequest();
+//        Dexter.withActivity(this)
+//                .withPermissions(
+//                        Manifest.permission.ACCESS_FINE_LOCATION,
+//                        Manifest.permission.ACCESS_COARSE_LOCATION,
+//                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+//                        Manifest.permission.CALL_PHONE
+//                ).withListener(new MultiplePermissionsListener() {
+//            @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
+//                if (  report.areAllPermissionsGranted()){
+//                    fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+//                    fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+//                    fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+//                }
+//            }
+//            @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+//                token.continuePermissionRequest();
+//
+//            }
+//        }).check();
+    loadFragments();
 
-            }
-        }).check();
+    }
+    private void loadFragments(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+            Dexter.withActivity(this)
+                    .withPermissions(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                            Manifest.permission.CALL_PHONE
+                    ).withListener(new MultiplePermissionsListener() {
+                @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    if (  report.areAllPermissionsGranted()){
+                        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+                        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+                        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+                    }
+                }
+                @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                    token.continuePermissionRequest();
+
+                }
+            }).check();
+        }else {
+            fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+            fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+            fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+        }
 
     }
 
@@ -133,6 +164,11 @@ public class BottomNavActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 
     public void searchArea(View view) {
         int PLACE_PICKER_REQUEST = 1;

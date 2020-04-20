@@ -7,16 +7,17 @@ import com.example.riskyarea_test1.data.model.response.Doctor;
 import java.util.ArrayList;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class DoctorListViewModel extends ViewModel {
 
-    private LiveData<ArrayList<Doctor>> doctorList ;
+    public LiveData<ArrayList<Doctor>> doctorList = new MutableLiveData<>();
     private DoctorController doctorController = new DoctorController();
 
     public LiveData<ArrayList<Doctor>> getDoctorList() {
-        doctorList = doctorController.getDoctorList();
-        return doctorList;
+//        doctorList = ;
+        return doctorController.getDoctorList();
     }
     public LiveData<Boolean> registerDoctor(DoctorDto doctorDto) {
         return doctorController.registerDoctor(doctorDto);

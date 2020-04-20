@@ -91,6 +91,8 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
+                    DoctorController doctorController = new DoctorController();
+                    doctorController.getDoctorList();
                     Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {

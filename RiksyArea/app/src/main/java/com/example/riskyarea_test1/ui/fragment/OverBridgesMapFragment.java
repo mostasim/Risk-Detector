@@ -76,6 +76,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private Handler handler;
     private Runnable runnable;
 
+    Uri notification ;
+    Ringtone r ;
     private ArrayList<MarkedPlace> markedPlaceArrayList = new ArrayList<>();
 
     public OverBridgesMapFragment() {
@@ -91,6 +93,9 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
+
+        notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
 
         mViewModel.getMarkedAreaList().observe(this, markedPlaces -> {
             Log.e("RESPONSE", Arrays.toString(markedPlaces.toArray()));
@@ -256,9 +261,9 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                         sendNotification.execute("Infected Zone");
                         Toast.makeText(getActivity(), "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
-                            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                            Ringtone r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
-                            r.play();
+                            if(!r.isPlaying())
+                                r.play();
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -350,7 +355,20 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     @Override
     public void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(runnable);
+//        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        if (handler!=null)
+//            handler.postDelayed(runnable,delay);
     }
 
     @Override

@@ -50,7 +50,8 @@ public class DoctorListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         DoctorListViewModel mViewModel = ViewModelProviders.of(this).get(DoctorListViewModel.class);
-        doctorList = mViewModel.getDoctorList();
+
+        doctorList = mViewModel.getDoctorList();;
         doctorList.observe(this, new Observer<ArrayList<Doctor>>() {
             @Override
             public void onChanged(ArrayList<Doctor> doctorListResponses) {
@@ -63,6 +64,7 @@ public class DoctorListFragment extends Fragment {
                 });
                 rvPassportList.setAdapter(doctorListAdapter);
                 doctorListAdapter.submitList(doctorListResponses);
+                doctorListAdapter.notifyDataSetChanged();
             }
         });
     }
