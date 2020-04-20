@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/filer_medicine"
+        android:orderInCategory="100"
+        android:title="@string/medicine"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/filer_cardiologist"
+        android:orderInCategory="100"
+        android:title="Cardiologist "
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/filer_dermatologist"
+        android:orderInCategory="100"
+        android:title="Dermatologist "
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/filer_endocrinologist"
+        android:orderInCategory="100"
+        android:title="Endocrinologist"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/filer_gynecologist"
+        android:orderInCategory="100"
+        android:title="Gynecologist "
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/filer_microbiologist"
+        android:orderInCategory="100"
+        android:title="Microbiologist"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/filer_neurologist"
+        android:orderInCategory="100"
+        android:title="Neurologist"
+        app:showAsAction="never"/>
+</menu>

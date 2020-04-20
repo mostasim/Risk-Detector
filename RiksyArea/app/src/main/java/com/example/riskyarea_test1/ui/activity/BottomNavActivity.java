@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
@@ -27,12 +33,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 /**
  * @author Mahadi Hasan Joy
  * @version 1.0
@@ -40,14 +40,13 @@ import androidx.fragment.app.FragmentManager;
  */
 public class BottomNavActivity extends AppCompatActivity {
 
-    private TextView txtViewTitle;
-
     final Fragment fragment1 = new OverBridgesMapFragment();
     final Fragment fragment2 = new DoctorListFragment();
     final Fragment fragment3 = new NotificationsListFragment();
     final FragmentManager fm = getSupportFragmentManager();
+    androidx.appcompat.widget.Toolbar toolbar;
     Fragment active = fragment1;
-
+    private TextView txtViewTitle;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -56,18 +55,24 @@ public class BottomNavActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     txtViewTitle.setText(getResources().getString(R.string.risky_area));
+                    toolbar.setOverflowIcon(getDrawable(R.drawable.ic_more_vert_white_24dp));
+                    invalidateOptionsMenu();
                     fm.beginTransaction().hide(active).show(fragment1).commit();
                     active = fragment1;
                     return true;
 
                 case R.id.navigation_dashboard:
                     txtViewTitle.setText(getResources().getString(R.string.doctor_list));
+                    toolbar.setOverflowIcon(getDrawable(R.drawable.ic_filter_list_white_24dp));
+                    invalidateOptionsMenu();
                     fm.beginTransaction().hide(active).show(fragment2).commit();
                     active = fragment2;
                     return true;
 
                 case R.id.navigation_notifications:
                     txtViewTitle.setText(getResources().getString(R.string.announcement));
+                    toolbar.setOverflowIcon(null);
+                    invalidateOptionsMenu();
                     fm.beginTransaction().hide(active).show(fragment3).commit();
                     active = fragment3;
                     return true;
@@ -81,9 +86,9 @@ public class BottomNavActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_nav);
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ;
         txtViewTitle = findViewById(R.id.toolbar_title);
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -147,6 +152,20 @@ public class BottomNavActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (txtViewTitle.getText().toString().equalsIgnoreCase(getString(R.string.doctor_list))) {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.filter_menu, menu);
+        } else if (txtViewTitle.getText().toString().equalsIgnoreCase(getString(R.string.announcement))) {
+            menu.clear();
+        } else {
+            menu.clear();
+            getMenuInflater().inflate(R.menu.main_menu, menu);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -34,6 +37,12 @@ public class DoctorListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.passport_list_fragment, container, false);
@@ -48,7 +57,6 @@ public class DoctorListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         DoctorListViewModel mViewModel = ViewModelProviders.of(this).get(DoctorListViewModel.class);
-
         doctorList = mViewModel.getDoctorList();;
         doctorList.observe(this, doctorListResponses -> {
             Log.e("RESPONSE", Arrays.toString(doctorListResponses.toArray()));
@@ -70,4 +78,13 @@ public class DoctorListFragment extends Fragment {
         startActivity(intent);
 //        Toast.makeText(DoctorListFragment.this, "" + doctor.getName(), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        Log.e("MENU ITEM", ""+ id);
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }

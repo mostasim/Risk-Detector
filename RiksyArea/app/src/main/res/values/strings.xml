@@ -33,6 +33,7 @@
     <string name="refresh_rate">Refresh Rate</string>
     <string name="type_range">Type Range (In Meter)</string>
     <string name="type_rate">Type Rate (In Second)</string>
+    <string name="medicine">Medicine</string>
     <string-array name="specialized_in">
         <item>Select</item>
         <item>Medicine</item>
