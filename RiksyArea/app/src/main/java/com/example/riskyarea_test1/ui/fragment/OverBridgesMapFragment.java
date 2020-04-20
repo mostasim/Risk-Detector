@@ -23,12 +23,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
 import com.example.riskyarea_test1.helper.SendNotification;
-import com.example.riskyarea_test1.ui.activity.BottomNavActivity;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,13 +48,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * @author Mahadi Hasan Joy
@@ -66,6 +64,8 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     LocationManager locationManager;
     Criteria criteria;
     String bestProvider;
+    Uri notification;
+    Ringtone r;
     private GoogleMap mMap;
     private LatLng location;
     private double current_location_latitude = 0;
@@ -76,9 +76,6 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private Context context;
     private Handler handler;
     private Runnable runnable;
-
-    Uri notification ;
-    Ringtone r ;
     private ArrayList<MarkedPlace> markedPlaceArrayList = new ArrayList<>();
 
     public OverBridgesMapFragment() {
@@ -262,7 +259,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                         sendNotification.execute("Infected Zone");
                         Toast.makeText(context, "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
-                            if(!r.isPlaying())
+                            if (!r.isPlaying())
                                 r.play();
 
                         } catch (Exception e) {

@@ -91,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
                     Toast.makeText(RegistrationActivity.this, "All field must be filled", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if ((spinnerSpecialize.getSelectedItem().toString().equalsIgnoreCase("Select"))){
+                if ((spinnerSpecialize.getSelectedItem().toString().equalsIgnoreCase("Select"))) {
                     Toast.makeText(RegistrationActivity.this, "Invalid specialize selection", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -127,7 +127,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
                 if (aBoolean) {
                     DoctorController doctorController = new DoctorController();
                     doctorController.getDoctorList();
-                    Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
@@ -138,12 +138,12 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
 
     @Override
     public void success() {
-        Toast.makeText(RegistrationActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegistrationActivity.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void failed() {
-        Toast.makeText(RegistrationActivity.this, "Email Exists", Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegistrationActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
     }
 }
