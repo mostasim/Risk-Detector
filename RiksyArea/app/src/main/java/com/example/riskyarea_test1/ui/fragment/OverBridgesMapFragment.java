@@ -62,7 +62,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     final static int REQUEST_CODE = 1;
     double alarm_location_latitude = 0;
     double alarm_location_longitutde = 0;
-    Circle circle;
+    //    Circle circle;
     boolean state = false;
     LocationManager locationManager;
     Criteria criteria;
@@ -75,8 +75,11 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private int delay;
     private int radius;
 
-    Handler handler;
-    Runnable runnable;
+    private Handler handler;
+    private Runnable runnable;
+
+    private ArrayList<MarkedPlace> markedPlaceArrayList = new ArrayList<>();
+
     public OverBridgesMapFragment() {
         // Required empty public constructor
     }
@@ -84,8 +87,6 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -93,18 +94,16 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         super.onActivityCreated(savedInstanceState);
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
 
-        mViewModel.getMarkedAreaList().observe(this, new Observer<ArrayList<MarkedPlace>>() {
-            @Override
-            public void onChanged(ArrayList<MarkedPlace> markedPlaces) {
-                Log.e("RESPONSE", Arrays.toString(markedPlaces.toArray()));
-                drawMarkedArea(markedPlaces);
-            }
+        mViewModel.getMarkedAreaList().observe(this, markedPlaces -> {
+            Log.e("RESPONSE", Arrays.toString(markedPlaces.toArray()));
+            markedPlaceArrayList.clear();
+            markedPlaceArrayList.addAll(markedPlaces);
+            drawMarkedArea(markedPlaces);
         });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.maps_fragment_custom, container, false);
 
@@ -180,14 +179,19 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 
     // Checks whether user is inside of circle or not
     public boolean IsInCircle() {
-        float distance[] = {0, 0, 0};
-        Location.distanceBetween(current_location_latitude, current_location_longitutde,
-                circle.getCenter().latitude, circle.getCenter().longitude, distance);
-        Log.e("RESULT",""+Arrays.toString(distance)+" radius "+circle.getRadius() );
-        if (distance[0] > circle.getRadius())
-            return false;
-        else
-            return true;
+        if (markedPlaceArrayList != null && markedPlaceArrayList.size() > 0) {
+            for (MarkedPlace markedPlace : markedPlaceArrayList) {
+                float distance[] = {0, 0, 0};
+                Location.distanceBetween(current_location_latitude, current_location_longitutde,
+                        markedPlace.getLatitude(), markedPlace.getLongitude(), distance);
+                Log.e("RESULT", "" + Arrays.toString(distance) + " radius " + markedPlace.getRadius());
+                if (distance[0] > markedPlace.getRadius())
+                    return false;
+                else
+                    return true;
+            }
+        }
+        return false;
     }
 
     private void createMarker(double latitude, double longitude, String title, String snippet) {
@@ -195,26 +199,25 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(title)
-                .snippet("Type : "+snippet));
+                .snippet("Type : " + snippet));
     }
 
     public void drawMarkedArea(ArrayList<MarkedPlace> markedPlaces) {
 
         for (int i = 0; i < markedPlaces.size(); i++) {
-
             createMarker(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude(), markedPlaces.get(i).getTitle(), markedPlaces.get(i).getMarkedAs());
         }
         for (int i = 0; i < markedPlaces.size(); i++) {
             int color = Color.TRANSPARENT;
-            if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.COMMUNITY_TRANSMISSION.label)){
+            if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.COMMUNITY_TRANSMISSION.label)) {
                 color = Color.MAGENTA;
-            }else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.INFECTED.label)){
+            } else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.INFECTED.label)) {
                 color = Color.RED;
-            }else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.LOCAL_GATHERING.label)){
+            } else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.LOCAL_GATHERING.label)) {
                 color = Color.LTGRAY;
             }
 
-           circle =  mMap.addCircle(new CircleOptions().center(new LatLng(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude())).radius(markedPlaces.get(i).getRadius()).strokeColor(Color.WHITE).fillColor(color));
+            mMap.addCircle(new CircleOptions().center(new LatLng(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude())).radius(markedPlaces.get(i).getRadius()).strokeColor(Color.WHITE).fillColor(color));
         }
         radius = Integer.parseInt(SettingsValues.getRadius());
         delay = Integer.parseInt(SettingsValues.getRefresh());
@@ -265,8 +268,6 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 } else {
 
