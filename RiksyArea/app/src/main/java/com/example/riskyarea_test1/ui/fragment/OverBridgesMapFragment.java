@@ -23,13 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
@@ -43,7 +36,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -51,6 +43,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * @author Mahadi Hasan Joy
@@ -70,7 +68,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private GoogleMap mMap;
     private LatLng location;
     private double current_location_latitude = 0;
-    private double current_location_longitutde = 0;
+    private double current_location_longitude = 0;
     private LocationManager lm;
     private int delay;
     private int radius;
@@ -118,19 +116,18 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                 mMap.setMyLocationEnabled(true);
                 lm = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 getMyLocation();
-                location = new LatLng(current_location_latitude, current_location_longitutde);
+                location = new LatLng(current_location_latitude, current_location_longitude);
                 CameraPosition googlePlex = CameraPosition.builder()
-                        .target(new LatLng(current_location_latitude, current_location_longitutde))
+                        .target(new LatLng(current_location_latitude, current_location_longitude))
                         .zoom(18)
                         .bearing(0)
                         .tilt(45)
                         .build();
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
                 mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(current_location_latitude, current_location_longitutde))
+                        .position(new LatLng(current_location_latitude, current_location_longitude))
                         .title("Your Location"));
 //                addAlaram1();
-
             }
         });
 
@@ -160,7 +157,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
             Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (loc != null) {
                 current_location_latitude = loc.getLatitude();
-                current_location_longitutde = loc.getLongitude();
+                current_location_longitude = loc.getLongitude();
                 // Toast.makeText(getApplicationContext(),current_location_latitude+" , "+ current_location_longitutde , Toast.LENGTH_SHORT).show();
             } else {
                 locationManager.requestLocationUpdates(bestProvider, 1000, 0, this);
@@ -172,7 +169,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     public void addAlaram1() {
         //getMyLocation();
         Intent i = new Intent(getActivity(), LoadOverBridges.class);
-        i.putExtra("longitude", current_location_longitutde);
+        i.putExtra("longitude", current_location_longitude);
         i.putExtra("latitude", current_location_latitude);
         startActivityForResult(i, REQUEST_CODE);
     }
@@ -182,12 +179,9 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
         if (markedPlaceArrayList != null && markedPlaceArrayList.size() > 0) {
             for (MarkedPlace markedPlace : markedPlaceArrayList) {
                 float distance[] = {0, 0, 0};
-                Location.distanceBetween(current_location_latitude, current_location_longitutde,
+                Location.distanceBetween(current_location_latitude, current_location_longitude,
                         markedPlace.getLatitude(), markedPlace.getLongitude(), distance);
-                Log.e("RESULT", "" + Arrays.toString(distance) + " radius " + markedPlace.getRadius());
-                if (distance[0] > markedPlace.getRadius())
-                    return false;
-                else
+                if (distance[0] < markedPlace.getRadius())
                     return true;
             }
         }
@@ -243,7 +237,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 //                .radius(radius).strokeColor(Color.RED).fillColor(Color.GREEN));
 //        mMap.addCircle(new CircleOptions().center(second_location).radius(radius).strokeColor(Color.GREEN).fillColor(Color.RED));
         CameraPosition googlePlex = CameraPosition.builder()
-                .target(new LatLng(current_location_latitude, current_location_longitutde))
+                .target(new LatLng(current_location_latitude, current_location_longitude))
                 .zoom(18)
                 .bearing(0)
                 .tilt(45)
@@ -365,7 +359,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
 
         //open the map:
         current_location_latitude = location.getLatitude();
-        current_location_longitutde = location.getLongitude();
+        current_location_longitude = location.getLongitude();
 //        Toast.makeText(MainActivity.this, "latitude:" + latitude + " longitude:" + longitude, Toast.LENGTH_SHORT).show();
     }
 
