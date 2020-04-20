@@ -8,11 +8,12 @@
 
     <TextView
         android:id="@+id/tvSectionHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="@dimen/txt_view_margin_10"
+        android:layout_marginTop="@dimen/txt_view_margin_5"
+        android:layout_marginEnd="@dimen/txt_view_margin_10"
+        android:layout_marginBottom="@dimen/txt_view_margin_5"
         android:text="Section"
         android:textColor="@color/darkjunglegreen"
         android:textSize="20sp"

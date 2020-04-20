@@ -8,10 +8,6 @@ import android.view.ViewGroup;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.adapter.AnnouncementSection;
-import com.example.riskyarea_test1.adapter.NotificationDiffCallback;
-import com.example.riskyarea_test1.adapter.NotificationItemClickListener;
-import com.example.riskyarea_test1.adapter.NotificationListAdapter;
-import com.example.riskyarea_test1.data.model.response.Announcement;
 import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
 
 import java.util.ArrayList;
@@ -25,7 +21,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
 public class NotificationsListFragment extends Fragment {

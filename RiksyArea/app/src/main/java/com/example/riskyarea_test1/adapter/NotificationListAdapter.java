@@ -48,6 +48,7 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
         TextView tvAnnounceTitle;
         TextView tvAnnounceTime;
         TextView tvAnnounceBody;
+        TextView txtViewBottomLine;
 
         public AnnouncementItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +57,7 @@ public class NotificationListAdapter extends ListAdapter<Announcement, Notificat
             tvAnnounceTitle = itemView.findViewById(R.id.tvAnnounceTitle);
             tvAnnounceBody = itemView.findViewById(R.id.tvAnnounceBody);
             tvAnnounceTime = itemView.findViewById(R.id.tvAnnounceTime);
+            txtViewBottomLine = itemView.findViewById(R.id.view_line);
         }
 
         public void bind(final Announcement item) {

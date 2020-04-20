@@ -14,15 +14,16 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.Section;
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 
 public class AnnouncementSection extends Section {
-    private  String title;
-    private  List<Announcement> list;
+    private String title;
+    private List<Announcement> list;
+
     public AnnouncementSection(@NonNull String title, List<Announcement> list) {
         super(SectionParameters.builder()
                 .itemResourceId(R.layout.announcement_item_row)
                 .headerResourceId(R.layout.announcement_section_header)
                 .build());
-        this.title=title;
-        this.list=list;
+        this.title = title;
+        this.list = list;
     }
 
     @Override
@@ -41,12 +42,18 @@ public class AnnouncementSection extends Section {
         ((NotificationListAdapter.AnnouncementItemViewHolder) holder).tvAnnounceBody.setText(list.get(position).getDetails());
         ((NotificationListAdapter.AnnouncementItemViewHolder) holder).tvAnnounceTime.setText(list.get(position).getTime());
         ((NotificationListAdapter.AnnouncementItemViewHolder) holder).tvAnnounceTitle.setText(list.get(position).getTitle());
+
+        if (position == list.size() - 1)
+            ((NotificationListAdapter.AnnouncementItemViewHolder) holder).txtViewBottomLine.setVisibility(View.GONE);
+        else
+            ((NotificationListAdapter.AnnouncementItemViewHolder) holder).txtViewBottomLine.setVisibility(View.VISIBLE);
     }
 
     @Override
     public RecyclerView.ViewHolder getHeaderViewHolder(View view) {
         return new HeaderViewHolder(view);
     }
+
     @Override
     public void onBindHeaderViewHolder(final RecyclerView.ViewHolder holder) {
         final HeaderViewHolder headerHolder = (HeaderViewHolder) holder;

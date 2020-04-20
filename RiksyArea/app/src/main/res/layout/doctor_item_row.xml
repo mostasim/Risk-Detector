@@ -4,78 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_marginBottom="8dp"
-    android:background="@color/cardview_light_background">
+    android:layout_marginLeft="@dimen/txt_view_margin_10"
+    android:layout_marginTop="@dimen/txt_view_margin_10"
+    android:layout_marginRight="@dimen/txt_view_margin_10"
+    android:background="@color/transparent">
 
-    <ImageView
-        android:id="@+id/ivDoctor"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:contentDescription="dummy"
-        android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/doctor" />
-
-    <TextView
-        android:id="@+id/tvDoctorName"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="monospace"
-        android:text="Dr. Iqbal Bahar Shihab"
-        android:textColor="@color/darkjunglegreen"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivDoctor"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/txt_view_margin_5"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/tvSpecial"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="monospace"
-        android:text="Neurologist"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/darkjunglegreen"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivDoctor"
-        app:layout_constraintTop_toBottomOf="@+id/tvDoctorName" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/txt_view_margin_10">
 
-    <TextView
-        android:id="@+id/tvDoctorTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="monospace"
-        android:text="MMBS, FCPS   I   DMC"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/trolleygrey"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/ivDoctor"
-        app:layout_constraintTop_toBottomOf="@+id/tvSpecial" />
+            <ImageView
+                android:id="@+id/ivDoctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="dummy"
+                android:src="@drawable/doctor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/txt_view_margin_10"
+                android:layout_toRightOf="@+id/ivDoctor"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDoctorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:text="Dr. Iqbal Bahar Shihab"
+                    android:textColor="@color/darkjunglegreen"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSpecial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_view_margin_5"
+                    android:fontFamily="monospace"
+                    android:text="Neurologist"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/darkjunglegreen"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/tvDoctorTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/txt_view_margin_5"
+                    android:fontFamily="monospace"
+                    android:text="MMBS, FCPS   I   DMC"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/trolleygrey"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
