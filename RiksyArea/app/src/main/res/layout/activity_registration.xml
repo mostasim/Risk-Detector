@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <!-- Toolbar -->
@@ -57,6 +57,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/full_name"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -65,7 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
+                android:background="@drawable/edittext_custom_background_gray"
                 android:hint="@string/your_name"
                 android:inputType="textPersonName"
                 android:padding="@dimen/txt_view_margin_15"
@@ -79,6 +80,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/degree"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -87,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/degree"
+                android:background="@drawable/edittext_custom_background_gray"
+                android:hint="MBBS, FCPS, BCS"
                 android:padding="@dimen/txt_view_margin_15"
                 tools:ignore="MissingConstraints" />
 
@@ -100,6 +102,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/working_place"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -108,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/working_place"
+                android:background="@drawable/edittext_custom_background_gray"
+                android:hint="Where you work"
                 android:padding="@dimen/txt_view_margin_15"
                 tools:ignore="MissingConstraints" />
 
@@ -121,18 +124,40 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/specialized_in"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
-            <EditText
-                android:id="@+id/txtSpecializedIn"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/specialized_in"
-                android:padding="@dimen/txt_view_margin_15"
-                tools:ignore="MissingConstraints" />
+                android:background="@drawable/edittext_custom_background_gray"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+
+                <Spinner
+                    android:id="@+id/txtSpecializedIn"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1.6"
+                    android:background="@color/transparent"
+                    android:padding="@dimen/txt_view_margin_15"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageButton
+                    android:id="@+id/ivSpinnerArrow"
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_weight=".4"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_expand_more_black_24dp"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -142,6 +167,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/email"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -150,8 +176,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/email"
+                android:background="@drawable/edittext_custom_background_gray"
+                android:hint="yourname@email.com"
                 android:inputType="textEmailAddress"
                 android:padding="@dimen/txt_view_margin_15"
                 tools:ignore="MissingConstraints" />
@@ -164,6 +190,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/mobile_number"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -172,8 +199,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/mobile_number"
+                android:background="@drawable/edittext_custom_background_gray"
+                android:hint="017xxxxxxxx"
                 android:inputType="number"
                 android:padding="@dimen/txt_view_margin_15"
                 tools:ignore="MissingConstraints" />
@@ -186,6 +213,7 @@
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_5"
                 android:text="@string/location_want_to_serve_in"
+                android:textColor="@color/darkjunglegreen"
                 android:textSize="@dimen/txtview_toolbar_title_22sp" />
 
             <EditText
@@ -194,8 +222,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/txt_view_margin_10"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
-                android:background="@color/white"
-                android:hint="@string/location_want_to_serve_in"
+                android:background="@drawable/edittext_custom_background_gray"
+                android:hint="Where you want to work"
                 android:padding="@dimen/txt_view_margin_15"
                 tools:ignore="MissingConstraints" />
 
@@ -207,10 +235,10 @@
                 android:layout_marginTop="@dimen/txt_view_margin_15"
                 android:layout_marginRight="@dimen/txt_view_margin_10"
                 android:layout_marginBottom="@dimen/txt_view_margin_15"
-                android:background="@color/blue_color"
+                android:background="@drawable/button_background_blue"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/txt_view_margin_15"
-                android:text="Register"
+                android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txtview_toolbar_title_22sp"

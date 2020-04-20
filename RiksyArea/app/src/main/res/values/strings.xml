@@ -26,15 +26,14 @@
     <string name="email">Email (Optional)</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="location_want_to_serve_in">Location want to serve in</string>
-    <string-array name="country_arrays">
-        <item>Choose Country</item>
-        <item>Bangladesh</item>
-        <item>United States</item>
-        <item>Indonesia</item>
-        <item>France</item>
-        <item>Italy</item>
-        <item>Singapore</item>
-        <item>New Zealand</item>
-        <item>India</item>
+    <string-array name="specialized_in">
+        <item>Select</item>
+        <item>Medicine</item>
+        <item>Cardiologist</item>
+        <item>Dermatologist</item>
+        <item>Endocrinologist</item>
+        <item>Gynecologist</item>
+        <item>Microbiologist</item>
+        <item>Neurologist</item>
     </string-array>
 </resources>

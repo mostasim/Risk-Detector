@@ -28,6 +28,7 @@ import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
 import com.example.riskyarea_test1.helper.SendNotification;
+import com.example.riskyarea_test1.ui.activity.BottomNavActivity;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,7 +73,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private LocationManager lm;
     private int delay;
     private int radius;
-
+    private Context context;
     private Handler handler;
     private Runnable runnable;
 
@@ -93,7 +94,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
-
+        context = getContext();
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         r = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
 
@@ -149,13 +150,13 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     }
 
     // update the current location of user
-    public void getMyLocation() {
-        if (ActivityCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+    private void getMyLocation() {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         } else {
-            locationManager = (LocationManager) this.getActivity().getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             criteria = new Criteria();
             bestProvider = String.valueOf(lm.getBestProvider(criteria, true)).toString();
 
@@ -257,9 +258,9 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
                 getMyLocation();
                 if (IsInCircle()) {
                     if (state) {
-                        SendNotification sendNotification = new SendNotification(getActivity());
+                        SendNotification sendNotification = new SendNotification(context);
                         sendNotification.execute("Infected Zone");
-                        Toast.makeText(getActivity(), "You are near to a infected zone", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
                             if(!r.isPlaying())
                                 r.play();
