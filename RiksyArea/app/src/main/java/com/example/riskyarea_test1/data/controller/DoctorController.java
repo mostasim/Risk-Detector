@@ -16,12 +16,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class DoctorController extends BaseController {
+    public LiveData<ArrayList<Doctor>> _doctorList;
     MutableLiveData<ArrayList<Doctor>> _list = new MutableLiveData<>();
     MutableLiveData<Boolean> _isRegister = new MutableLiveData<>();
     private Retrofit retrofit = getBuilder().build();
     private APIConfig apiConfig = retrofit.create(APIConfig.class);
 
     public LiveData<ArrayList<Doctor>> getDoctorList() {
+        fetchDoctorList();
+        _doctorList = _list;
+        return _doctorList;
+    }
+
+    public void fetchDoctorList() {
 //        MutableLiveData<ArrayList<PassportListResponse>> _list = new MutableLiveData<>();
         apiConfig.getDoctorList().enqueue(new Callback<ArrayList<Doctor>>() {
             @Override
@@ -34,7 +41,6 @@ public class DoctorController extends BaseController {
 
             }
         });
-        return _list;
     }
 
     public LiveData<Boolean> registerDoctor(DoctorDto doctorDto) {
@@ -43,7 +49,7 @@ public class DoctorController extends BaseController {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     _isRegister.postValue(true);
-                }else {
+                } else {
                     _isRegister.postValue(false);
                 }
             }

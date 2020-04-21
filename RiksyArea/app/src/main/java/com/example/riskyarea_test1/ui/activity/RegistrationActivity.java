@@ -126,7 +126,7 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     DoctorController doctorController = new DoctorController();
-                    doctorController.getDoctorList();
+                    doctorController.fetchDoctorList();
                     Toast.makeText(RegistrationActivity.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
