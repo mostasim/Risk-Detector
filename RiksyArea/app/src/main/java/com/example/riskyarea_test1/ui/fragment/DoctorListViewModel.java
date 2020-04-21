@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DoctorListViewModel extends ViewModel {
 
     public LiveData<ArrayList<Doctor>> doctorList = new MutableLiveData<>();
-    private DoctorController doctorController = new DoctorController();
+    private DoctorController doctorController = DoctorController.getController();
 
     public LiveData<ArrayList<Doctor>> getDoctorList() {
 //        doctorList = ;

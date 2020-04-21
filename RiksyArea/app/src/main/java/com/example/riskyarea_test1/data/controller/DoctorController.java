@@ -21,6 +21,17 @@ public class DoctorController extends BaseController {
     MutableLiveData<Boolean> _isRegister = new MutableLiveData<>();
     private Retrofit retrofit = getBuilder().build();
     private APIConfig apiConfig = retrofit.create(APIConfig.class);
+    private static DoctorController doctorController;
+
+    private DoctorController() {
+    }
+
+    public static DoctorController getController() {
+        if (doctorController == null) {
+            doctorController = new DoctorController();
+        }
+        return doctorController;
+    }
 
     public LiveData<ArrayList<Doctor>> getDoctorList() {
         fetchDoctorList();

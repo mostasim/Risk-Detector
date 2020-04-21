@@ -120,12 +120,12 @@ public class RegistrationActivity extends AppCompatActivity implements UserSignU
     }
 
     private void registerUser(DoctorDto doctorDto) {
-        DoctorController userController = new DoctorController();
+        DoctorController userController = DoctorController.getController();
         userController.registerDoctor(doctorDto).observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    DoctorController doctorController = new DoctorController();
+                    DoctorController doctorController = DoctorController.getController();
                     doctorController.fetchDoctorList();
                     Toast.makeText(RegistrationActivity.this, "Successfully submitted", Toast.LENGTH_SHORT).show();
                     finish();
