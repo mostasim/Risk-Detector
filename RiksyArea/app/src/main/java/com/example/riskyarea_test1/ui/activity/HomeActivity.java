@@ -45,7 +45,7 @@ import java.util.List;
  * @version 1.0
  * @since 2019-10-14
  */
-public class BottomNavActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "BottomNavActivity";
     final Fragment fragment1 = new InfectedMapFragment();
     final Fragment fragment2 = new DoctorListFragment();
@@ -136,7 +136,7 @@ public class BottomNavActivity extends AppCompatActivity {
 
                 @Override
                 public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-                    Toast.makeText(BottomNavActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -266,7 +266,7 @@ public class BottomNavActivity extends AppCompatActivity {
             SettingsValues.refresh = delayString;
             alertDialog.dismiss();
 
-            startActivity(new Intent(BottomNavActivity.this, BottomNavActivity.class));
+            startActivity(new Intent(HomeActivity.this, HomeActivity.class));
         });
 
         layout.findViewById(R.id.btn_cancel).setOnClickListener(view -> {
