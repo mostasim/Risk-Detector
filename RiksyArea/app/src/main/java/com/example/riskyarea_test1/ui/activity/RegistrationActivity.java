@@ -21,7 +21,7 @@ import com.example.riskyarea_test1.Interfaces.UserSignUpInterface;
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.controller.DoctorController;
 import com.example.riskyarea_test1.data.dto.DoctorDto;
-import com.example.riskyarea_test1.ui.fragment.DoctorListViewModel;
+import com.example.riskyarea_test1.ui.view_model.DoctorListViewModel;
 
 /**
  * @author Mahadi Hasan Joy

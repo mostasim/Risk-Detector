@@ -22,6 +22,7 @@ import com.example.riskyarea_test1.adapter.DoctorDiffCallback;
 import com.example.riskyarea_test1.adapter.DoctorListAdapter;
 import com.example.riskyarea_test1.adapter.DoctorListItemClickListener;
 import com.example.riskyarea_test1.data.model.response.Doctor;
+import com.example.riskyarea_test1.ui.view_model.DoctorListViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,16 +79,14 @@ public class DoctorListFragment extends Fragment {
 
     private void callToDoctor(String number) {
         Intent intent = new Intent(Intent.ACTION_CALL);
-
         intent.setData(Uri.parse("tel:" + number));
         startActivity(intent);
-//        Toast.makeText(DoctorListFragment.this, "" + doctor.getName(), Toast.LENGTH_SHORT).show();
     }
 
     private void sortDoctorList(String specializedIn) {
         ArrayList<Doctor> sortedList = new ArrayList<>();
         for (Doctor doctor : doctorListArray) {
-            if (doctor.getSpecializedIn().equalsIgnoreCase(specializedIn)) {
+            if (doctor.getSpecializedIn().trim().equalsIgnoreCase(specializedIn.trim())) {
                 sortedList.add(doctor);
             }
         }

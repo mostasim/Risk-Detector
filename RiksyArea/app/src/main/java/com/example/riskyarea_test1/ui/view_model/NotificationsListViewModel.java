@@ -1,16 +1,16 @@
-package com.example.riskyarea_test1.ui.fragment;
+package com.example.riskyarea_test1.ui.view_model;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.riskyarea_test1.data.controller.AnnouncementController;
 import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
 
 import java.util.ArrayList;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
-
 public class NotificationsListViewModel extends ViewModel {
 
-    private LiveData<ArrayList<SectionAnnouncement>> announcementList ;
+    private LiveData<ArrayList<SectionAnnouncement>> announcementList;
     private AnnouncementController announcementController = new AnnouncementController();
 
     public LiveData<ArrayList<SectionAnnouncement>> getAnnouncementList() {

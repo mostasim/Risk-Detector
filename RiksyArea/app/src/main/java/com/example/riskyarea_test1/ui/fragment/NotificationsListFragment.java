@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.adapter.AnnouncementSection;
 import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
+import com.example.riskyarea_test1.ui.view_model.NotificationsListViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

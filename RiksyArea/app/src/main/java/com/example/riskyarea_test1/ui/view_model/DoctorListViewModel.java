@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.ui.fragment;
+package com.example.riskyarea_test1.ui.view_model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,7 +16,6 @@ public class DoctorListViewModel extends ViewModel {
     private DoctorController doctorController = DoctorController.getController();
 
     public LiveData<ArrayList<Doctor>> getDoctorList() {
-//        doctorList = ;
         return doctorController.getDoctorList();
     }
 
@@ -27,6 +26,5 @@ public class DoctorListViewModel extends ViewModel {
     public void fetch() {
         doctorController.fetchDoctorList();
     }
-
 }
 

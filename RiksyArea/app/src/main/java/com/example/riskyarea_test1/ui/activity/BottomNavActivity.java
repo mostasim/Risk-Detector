@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -28,8 +30,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
 
@@ -39,7 +46,7 @@ import java.util.List;
  * @since 2019-10-14
  */
 public class BottomNavActivity extends AppCompatActivity {
-
+    private static final String TAG = "BottomNavActivity";
     final Fragment fragment1 = new OverBridgesMapFragment();
     final Fragment fragment2 = new DoctorListFragment();
     final Fragment fragment3 = new NotificationsListFragment();
@@ -85,7 +92,7 @@ public class BottomNavActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_nav);
-
+        Log.e(TAG, "onCreate: ");
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ;
@@ -114,25 +121,52 @@ public class BottomNavActivity extends AppCompatActivity {
 //
 //            }
 //        }).check();
-        loadFragments();
+        checkPermission();
 
     }
 
-    private void loadFragments() {
+    //above android Q
+    private void getBackgroundLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Dexter.withContext(this).withPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION).withListener(new PermissionListener() {
+                @Override
+                public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                    checkPermission();
+                }
+
+                @Override
+                public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
+                    Toast.makeText(BottomNavActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                    permissionToken.continuePermissionRequest();
+                }
+            }).check();
+        } else {
+            checkPermission();
+        }
+    }
+
+    private void checkPermission() {
+        Log.e(TAG, "loadFragments: ");
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Dexter.withActivity(this)
+            Log.e(TAG, "loadFragments: " + Build.VERSION.SDK_INT);
+            Dexter.withContext(this)
                     .withPermissions(
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                             Manifest.permission.CALL_PHONE
                     ).withListener(new MultiplePermissionsListener() {
                 @Override
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
+                    Log.e(TAG, "loadFragments: " + report.toString());
+
                     if (report.areAllPermissionsGranted()) {
-                        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-                        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-                        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+                        Log.e(TAG, "onPermissionsChecked: ");
+                        loadAllFragments();
                     }
                 }
 
@@ -140,12 +174,21 @@ public class BottomNavActivity extends AppCompatActivity {
                 public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                     token.continuePermissionRequest();
                 }
+            }).withErrorListener(new PermissionRequestErrorListener() {
+                @Override
+                public void onError(DexterError dexterError) {
+                    Log.e(TAG, "onError: permission");
+                }
             }).check();
         } else {
-            fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-            fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-            fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+            loadAllFragments();
         }
+    }
+
+    private void loadAllFragments() {
+        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
     }
 
     @Override

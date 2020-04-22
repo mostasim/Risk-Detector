@@ -1,5 +1,7 @@
 package com.example.riskyarea_test1.data.controller;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -16,12 +18,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class DoctorController extends BaseController {
-    public LiveData<ArrayList<Doctor>> _doctorList;
-    MutableLiveData<ArrayList<Doctor>> _list = new MutableLiveData<>();
-    MutableLiveData<Boolean> _isRegister = new MutableLiveData<>();
+    private static final String TAG = "DoctorController";
+    private static DoctorController doctorController;
+    private LiveData<ArrayList<Doctor>> _doctorList;
+    private MutableLiveData<ArrayList<Doctor>> _list = new MutableLiveData<>();
+    private MutableLiveData<Boolean> _isRegister = new MutableLiveData<>();
     private Retrofit retrofit = getBuilder().build();
     private APIConfig apiConfig = retrofit.create(APIConfig.class);
-    private static DoctorController doctorController;
 
     private DoctorController() {
     }
@@ -40,7 +43,6 @@ public class DoctorController extends BaseController {
     }
 
     public void fetchDoctorList() {
-//        MutableLiveData<ArrayList<PassportListResponse>> _list = new MutableLiveData<>();
         apiConfig.getDoctorList().enqueue(new Callback<ArrayList<Doctor>>() {
             @Override
             public void onResponse(Call<ArrayList<Doctor>> call, Response<ArrayList<Doctor>> response) {
@@ -49,7 +51,7 @@ public class DoctorController extends BaseController {
 
             @Override
             public void onFailure(Call<ArrayList<Doctor>> call, Throwable t) {
-
+                Log.e(TAG, "Data fetching failed : " + t.toString());
             }
         });
     }

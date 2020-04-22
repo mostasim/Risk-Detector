@@ -1,4 +1,4 @@
-package com.example.riskyarea_test1.ui.fragment;
+package com.example.riskyarea_test1.ui.view_model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
