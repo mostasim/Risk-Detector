@@ -56,7 +56,7 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2019-10-14
  */
-public class OverBridgesMapFragment extends Fragment implements LocationListener {
+public class InfectedMapFragment extends Fragment implements LocationListener {
 
     final static int REQUEST_CODE = 1;
     double alarm_location_latitude = 0;
@@ -81,7 +81,7 @@ public class OverBridgesMapFragment extends Fragment implements LocationListener
     private Runnable runnable;
     private ArrayList<MarkedPlace> markedPlaceArrayList = new ArrayList<>();
 
-    public OverBridgesMapFragment() {
+    public InfectedMapFragment() {
         // Required empty public constructor
     }
 

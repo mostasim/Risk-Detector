@@ -22,7 +22,7 @@ import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
 import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
-import com.example.riskyarea_test1.ui.fragment.OverBridgesMapFragment;
+import com.example.riskyarea_test1.ui.fragment.InfectedMapFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -47,7 +47,7 @@ import java.util.List;
  */
 public class BottomNavActivity extends AppCompatActivity {
     private static final String TAG = "BottomNavActivity";
-    final Fragment fragment1 = new OverBridgesMapFragment();
+    final Fragment fragment1 = new InfectedMapFragment();
     final Fragment fragment2 = new DoctorListFragment();
     final Fragment fragment3 = new NotificationsListFragment();
     final FragmentManager fm = getSupportFragmentManager();
