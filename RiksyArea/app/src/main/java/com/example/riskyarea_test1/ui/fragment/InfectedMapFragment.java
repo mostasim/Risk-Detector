@@ -22,15 +22,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.controller.AnnouncementController;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
@@ -111,6 +114,18 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.maps_fragment_custom, container, false);
+
+        TextView tvScrollNews = rootView.findViewById(R.id.tvScrollNews);
+        AnnouncementController announcementController = AnnouncementController.getAnnouncementController();
+        announcementController.getScrollAnnouncement().observe(this, new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                String allNews = "";
+                for (String news: strings) allNews = allNews.concat(news.concat(" | "));
+                tvScrollNews.setText(allNews);
+            }
+        });
+        tvScrollNews.setSelected(true);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.customMap);  //use SuppoprtMapFragment for using in fragment instead of activity  MapFragment = activity   SupportMapFragment = fragment
         mapFragment.getMapAsync(new OnMapReadyCallback() {

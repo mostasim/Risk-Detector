@@ -34,8 +34,8 @@ public class NotificationsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.passport_list_fragment, container, false);
-        rvPassportList =  rootView.findViewById(R.id.rv_passport_list);
+        View rootView = inflater.inflate(R.layout.doctor_list_fragment, container, false);
+        rvPassportList =  rootView.findViewById(R.id.rv_doctor_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         rvPassportList.setLayoutManager(layoutManager);
         return rootView;

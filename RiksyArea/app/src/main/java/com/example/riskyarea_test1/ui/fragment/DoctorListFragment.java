@@ -31,7 +31,7 @@ public class DoctorListFragment extends Fragment {
 
     DoctorListAdapter doctorListAdapter;
     DoctorListViewModel mViewModel;
-    private RecyclerView rvPassportList;
+    private RecyclerView rvDoctorList;
     private LiveData<ArrayList<Doctor>> doctorList;
     private ArrayList<Doctor> doctorListArray;
 
@@ -48,10 +48,10 @@ public class DoctorListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.passport_list_fragment, container, false);
-        rvPassportList = rootView.findViewById(R.id.rv_passport_list);
+        View rootView = inflater.inflate(R.layout.doctor_list_fragment, container, false);
+        rvDoctorList = rootView.findViewById(R.id.rv_doctor_list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
-        rvPassportList.setLayoutManager(layoutManager);
+        rvDoctorList.setLayoutManager(layoutManager);
         return rootView;
     }
 
@@ -71,7 +71,7 @@ public class DoctorListFragment extends Fragment {
                 }
             });
             doctorListArray = doctorListResponses;
-            rvPassportList.setAdapter(doctorListAdapter);
+            rvDoctorList.setAdapter(doctorListAdapter);
             doctorListAdapter.submitList(doctorListResponses);
             doctorListAdapter.notifyDataSetChanged();
         });

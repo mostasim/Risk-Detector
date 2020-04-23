@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.DoctorListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_passport_list"
+        android:id="@+id/rv_doctor_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"

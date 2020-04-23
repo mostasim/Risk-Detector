@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class NotificationsListViewModel extends ViewModel {
 
     private LiveData<ArrayList<SectionAnnouncement>> announcementList;
-    private AnnouncementController announcementController = new AnnouncementController();
+    private AnnouncementController announcementController = AnnouncementController.getAnnouncementController();
 
     public LiveData<ArrayList<SectionAnnouncement>> getAnnouncementList() {
         announcementList = announcementController.getAnnouncementList();
