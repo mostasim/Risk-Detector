@@ -39,6 +39,7 @@ import com.example.riskyarea_test1.data.controller.AnnouncementController;
 import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
+import com.example.riskyarea_test1.helper.NearbyHelper;
 import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.example.riskyarea_test1.ui.view_model.MapViewModel;
@@ -87,6 +88,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     private Activity activity;
     private Handler handler;
     private Runnable runnable;
+    private NearbyHelper nearbyHelper;
     private ArrayList<MarkedPlace> markedPlaceArrayList = new ArrayList<>();
 
     public InfectedMapFragment() {
@@ -96,6 +98,26 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        nearbyHelper = new NearbyHelper(this.getActivity().getApplicationContext());
+        nearbyHelper.initBluetoothOnly();
+        nearbyHelper.getMessageLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.e(TAG, "onChanged: " + s);
+            }
+        });
+        nearbyHelper.getSenderInRange().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.e(TAG, "onChanged: " + integer);
+            }
+        });
+        nearbyHelper.getSenderWentOutsideOfRange().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.e(TAG, "onChanged: " + integer);
+            }
+        });
     }
 
     @Override
@@ -298,6 +320,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             public void run() {
                 //do something
                 getMyLocation();
+                nearbyHelper.publishMessage(2);
                 if (IsInCircle()) {
                     if (state) {
                         SendNotification sendNotification = new SendNotification(activity);
