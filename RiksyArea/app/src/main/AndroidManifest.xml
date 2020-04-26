@@ -16,7 +16,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.LoadCrimeSpots"></activity>
+        <activity android:name=".ui.activity.HealthCheckUpActivity"></activity>
+        <activity android:name=".ui.activity.LoadCrimeSpots" />
         <activity android:name=".ui.activity.LoadOverBridges" />
         <activity android:name=".ui.activity.LoadAccidentalPlaces" />
         <!--
@@ -30,7 +31,7 @@
         <activity
             android:name=".ui.fragment.AccidentalMapFragment"
             android:label="@string/title_activity_maps_fragment" />
-        <activity android:name=".ui.activity.SplashScreenActivity"></activity>
+        <activity android:name=".ui.activity.SplashScreenActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -44,7 +45,6 @@
             android:name=".ui.activity.RegistrationActivity"
             android:parentActivityName=".ui.activity.HomeActivity"
             android:screenOrientation="portrait" />
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -68,6 +68,5 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key" />
     </application>
-
 
 </manifest>
