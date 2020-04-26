@@ -179,7 +179,15 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             e.printStackTrace();
         }
         String cityName = addresses != null && addresses.size() > 0 ? addresses.get(0).getSubAdminArea() : null;
-        Log.e(TAG, "getMyCityName: " + cityName);
+
+        if (cityName != null) {
+            if (cityName.contains("District")) {
+                cityName = cityName.replace("District", "");
+                Log.e(TAG, "getMyCityName: " + cityName);
+            } else {
+                Log.e(TAG, "getMyCityName: " + cityName);
+            }
+        }
     }
 
     // update the current location of user
