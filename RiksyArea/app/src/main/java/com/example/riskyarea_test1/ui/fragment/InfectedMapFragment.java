@@ -9,7 +9,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -51,8 +53,11 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Mahadi Hasan Joy
@@ -60,8 +65,8 @@ import java.util.Arrays;
  * @since 2019-10-14
  */
 public class InfectedMapFragment extends Fragment implements LocationListener {
-
     final static int REQUEST_CODE = 1;
+    private static final String TAG = "InfectedMapFragment";
     double alarm_location_latitude = 0;
     double alarm_location_longitutde = 0;
     //    Circle circle;
@@ -102,7 +107,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getActivity().getApplicationContext(), notification);
 
-        mViewModel.getMarkedAreaList().observe(this, markedPlaces -> {
+        mViewModel.getMarkedAreaList().observe(this.getViewLifecycleOwner(), markedPlaces -> {
             Log.e("RESPONSE", Arrays.toString(markedPlaces.toArray()));
             markedPlaceArrayList.clear();
             markedPlaceArrayList.addAll(markedPlaces);
@@ -117,11 +122,11 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 
         TextView tvScrollNews = rootView.findViewById(R.id.tvScrollNews);
         AnnouncementController announcementController = AnnouncementController.getAnnouncementController();
-        announcementController.getScrollAnnouncement().observe(this, new Observer<ArrayList<String>>() {
+        announcementController.getScrollAnnouncement().observe(this.getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> strings) {
                 String allNews = "";
-                for (String news: strings) allNews = allNews.concat(news.concat(" | "));
+                for (String news : strings) allNews = allNews.concat(news.concat(" | "));
                 tvScrollNews.setText(allNews);
             }
         });
@@ -165,6 +170,18 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+    private void getMyCityName() {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(current_location_latitude, current_location_longitude, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String cityName = addresses != null && addresses.size() > 0 ? addresses.get(0).getSubAdminArea() : null;
+        Log.e(TAG, "getMyCityName: " + cityName);
+    }
+
     // update the current location of user
     private void getMyLocation() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) !=
@@ -198,6 +215,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 
     // Checks whether user is inside of circle or not
     public boolean IsInCircle() {
+        getMyCityName();
         if (markedPlaceArrayList != null && markedPlaceArrayList.size() > 0) {
             for (MarkedPlace markedPlace : markedPlaceArrayList) {
                 float distance[] = {0, 0, 0};
@@ -285,7 +303,8 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                         }
                     }
                 } else {
-
+                    if (ringtone != null && ringtone.isPlaying())
+                        ringtone.stop();
                 }
                 handler.postDelayed(this, delay);
             }

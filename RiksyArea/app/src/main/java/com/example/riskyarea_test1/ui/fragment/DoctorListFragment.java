@@ -62,7 +62,7 @@ public class DoctorListFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(DoctorListViewModel.class);
         doctorList = mViewModel.getDoctorList();
         ;
-        doctorList.observe(this, doctorListResponses -> {
+        doctorList.observe(this.getViewLifecycleOwner(), doctorListResponses -> {
             Log.e("RESPONSE", Arrays.toString(doctorListResponses.toArray()));
             doctorListAdapter = new DoctorListAdapter(new DoctorDiffCallback(), new DoctorListItemClickListener() {
                 @Override

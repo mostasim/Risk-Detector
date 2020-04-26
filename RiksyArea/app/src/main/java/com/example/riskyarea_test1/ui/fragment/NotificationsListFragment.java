@@ -47,7 +47,7 @@ public class NotificationsListFragment extends Fragment {
 
         NotificationsListViewModel mViewModel = ViewModelProviders.of(this).get(NotificationsListViewModel.class);
         announcementList = mViewModel.getAnnouncementList();
-        announcementList.observe(this, passportListResponses -> {
+        announcementList.observe(this.getViewLifecycleOwner(), passportListResponses -> {
             Log.e("RESPONSE", Arrays.toString(passportListResponses.toArray()));
             SectionedRecyclerViewAdapter sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();
             for (SectionAnnouncement sectionAnnouncement : passportListResponses){
