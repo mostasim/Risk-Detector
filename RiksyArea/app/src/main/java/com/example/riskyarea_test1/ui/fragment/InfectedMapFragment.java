@@ -98,31 +98,39 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        nearbyHelper = new NearbyHelper(this.getActivity().getApplicationContext());
-        nearbyHelper.initBluetoothOnly();
-        nearbyHelper.getMessageLiveData().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.e(TAG, "onChanged: " + s);
-            }
-        });
-        nearbyHelper.getSenderInRange().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                Log.e(TAG, "onChanged: " + integer);
-            }
-        });
-        nearbyHelper.getSenderWentOutsideOfRange().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                Log.e(TAG, "onChanged: " + integer);
-            }
-        });
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        nearbyHelper = new NearbyHelper(this.getActivity());
+        nearbyHelper.initBluetoothOnly();
+        nearbyHelper.getMessageLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText( getContext(),"Message : "+s,Toast.LENGTH_SHORT).show();
+            }
+        });
+        nearbyHelper.getSenderInRange().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.e(TAG, "onChanged: " + integer);
+            }
+        });
+        nearbyHelper.getSenderWentOutsideOfRange().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                Log.e(TAG, "onChanged: " + integer);
+            }
+        });
+
+        new Thread(()->{
+            nearbyHelper.publishMessage(2);
+        }).start();
+
+
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
         context = getContext();
         activity = getActivity();
@@ -176,6 +184,8 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(current_location_latitude, current_location_longitude))
                         .title("Your Location"));
+
+
 //                addAlaram1();
             }
         });
@@ -320,7 +330,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             public void run() {
                 //do something
                 getMyLocation();
-                nearbyHelper.publishMessage(2);
+//                nearbyHelper.publishMessage(2);
                 if (IsInCircle()) {
                     if (state) {
                         SendNotification sendNotification = new SendNotification(activity);
