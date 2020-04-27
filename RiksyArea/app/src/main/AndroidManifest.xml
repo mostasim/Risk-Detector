@@ -64,6 +64,8 @@
             </intent-filter>
         </activity>
 
+        <service android:name=".helper.NotificationService" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBlxJ33wMT3FA5OWPhQ7no7L1ovPYnko1g" />

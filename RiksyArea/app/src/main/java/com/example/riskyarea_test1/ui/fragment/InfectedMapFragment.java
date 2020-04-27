@@ -40,6 +40,7 @@ import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
 import com.example.riskyarea_test1.helper.NearbyHelper;
+import com.example.riskyarea_test1.helper.NotificationService;
 import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.example.riskyarea_test1.ui.view_model.MapViewModel;
@@ -98,7 +99,6 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -107,29 +107,13 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 
         nearbyHelper = new NearbyHelper(this.getActivity());
         nearbyHelper.initBluetoothOnly();
-        nearbyHelper.getMessageLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText( getContext(),"Message : "+s,Toast.LENGTH_SHORT).show();
-            }
-        });
-        nearbyHelper.getSenderInRange().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                Log.e(TAG, "onChanged: " + integer);
-            }
-        });
-        nearbyHelper.getSenderWentOutsideOfRange().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                Log.e(TAG, "onChanged: " + integer);
-            }
-        });
+        nearbyHelper.getMessageLiveData().observe(getViewLifecycleOwner(), s -> Toast.makeText(getContext(), "Message : " + s, Toast.LENGTH_SHORT).show());
+        nearbyHelper.getSenderInRange().observe(getViewLifecycleOwner(), integer -> Log.e(TAG, "onChanged: " + integer));
+        nearbyHelper.getSenderWentOutsideOfRange().observe(getViewLifecycleOwner(), integer -> Log.e(TAG, "onChanged: " + integer));
 
-        new Thread(()->{
+        new Thread(() -> {
             nearbyHelper.publishMessage(8);
         }).start();
-
 
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
         context = getContext();
@@ -143,6 +127,17 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             markedPlaceArrayList.addAll(markedPlaces);
             drawMarkedArea(markedPlaces);
         });
+    }
+
+    public void startService() {
+        Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
+        serviceIntent.putExtra("inputExtra", "Send some message");
+        ContextCompat.startForegroundService(getActivity(), serviceIntent);
+    }
+
+    public void stopService() {
+        Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
+        getActivity().stopService(serviceIntent);
     }
 
     @Override
@@ -184,8 +179,6 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                 mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(current_location_latitude, current_location_longitude))
                         .title("Your Location"));
-
-
 //                addAlaram1();
             }
         });
