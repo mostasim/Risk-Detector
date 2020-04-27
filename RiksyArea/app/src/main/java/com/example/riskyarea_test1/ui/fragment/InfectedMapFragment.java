@@ -344,6 +344,8 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             }
         };
         handler.postDelayed(runnable, delay);
+
+        startService();
     }
     //-----------After LoadAccidentalPlaces Set ---------------------
 //    @Override
@@ -432,6 +434,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             handler.removeCallbacks(runnable);
         if (ringtone != null && ringtone.isPlaying())
             ringtone.stop();
+//        stopService();
     }
 
     @Override
