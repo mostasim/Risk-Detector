@@ -105,7 +105,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        nearbyHelper = new NearbyHelper(this.getActivity());
+        /*nearbyHelper = new NearbyHelper(this.getActivity());
         nearbyHelper.initBluetoothOnly();
         nearbyHelper.getMessageLiveData().observe(getViewLifecycleOwner(), s -> Toast.makeText(getContext(), "Message : " + s, Toast.LENGTH_SHORT).show());
         nearbyHelper.getSenderInRange().observe(getViewLifecycleOwner(), integer -> Log.e(TAG, "onChanged: " + integer));
@@ -113,7 +113,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 
         new Thread(() -> {
             nearbyHelper.publishMessage(8);
-        }).start();
+        }).start();*/
 
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
         context = getContext();
@@ -129,16 +129,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
         });
     }
 
-    public void startService() {
-        Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-        serviceIntent.putExtra("inputExtra", "Send some message");
-        ContextCompat.startForegroundService(getActivity(), serviceIntent);
-    }
 
-    public void stopService() {
-        Intent serviceIntent = new Intent(getActivity(), NotificationService.class);
-        getActivity().stopService(serviceIntent);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -344,8 +335,6 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             }
         };
         handler.postDelayed(runnable, delay);
-
-        startService();
     }
     //-----------After LoadAccidentalPlaces Set ---------------------
 //    @Override

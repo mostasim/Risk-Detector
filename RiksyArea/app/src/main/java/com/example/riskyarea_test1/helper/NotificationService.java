@@ -11,6 +11,7 @@ import com.example.riskyarea_test1.ui.activity.HomeActivity;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.MediatorLiveData;
 
 import static com.example.riskyarea_test1.MyApp.CHANNEL_ID;
 
@@ -23,6 +24,29 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        NearbyHelper nearbyHelper = new NearbyHelper(this);
+
+        MediatorLiveData<Boolean> mediatorLiveData = new MediatorLiveData<>();
+        mediatorLiveData.addSource(nearbyHelper.getMessageLiveData(), s -> {
+
+        });
+
+        mediatorLiveData.addSource(nearbyHelper.getSenderInRange(), integer -> {
+            //start alarm
+        });
+
+        mediatorLiveData.addSource(nearbyHelper.getSenderWentOutsideOfRange(), integer -> {
+            // Call off alarm
+        });
+
+        nearbyHelper.initBluetoothOnly();
+
+        new Thread(() -> {
+            nearbyHelper.publishMessage(8);
+        }).start();
+
+
         String input = intent.getStringExtra("inputExtra");
 
         Intent notificationIntent = new Intent(this, HomeActivity.class);

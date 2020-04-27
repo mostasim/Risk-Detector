@@ -3,7 +3,12 @@ package com.example.riskyarea_test1;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
+
+import com.example.riskyarea_test1.helper.NotificationService;
+
+import androidx.core.content.ContextCompat;
 
 public class MyApp extends Application {
     public static final String CHANNEL_ID = "exampleServiceChannel";
@@ -13,6 +18,7 @@ public class MyApp extends Application {
         super.onCreate();
 
         createNotificationChannel();
+        startService();
     }
 
     private void createNotificationChannel() {
@@ -26,5 +32,16 @@ public class MyApp extends Application {
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(serviceChannel);
         }
+    }
+
+    public void startService() {
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        serviceIntent.putExtra("inputExtra", "Send some message");
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
+
+    public void stopService() {
+        Intent serviceIntent = new Intent(this, NotificationService.class);
+        this.stopService(serviceIntent);
     }
 }
