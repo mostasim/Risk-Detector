@@ -127,7 +127,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
         });
 
         new Thread(()->{
-            nearbyHelper.publishMessage(2);
+            nearbyHelper.publishMessage(8);
         }).start();
 
 
