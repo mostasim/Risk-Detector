@@ -5,22 +5,58 @@
     android:id="@+id/healthcheckup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.activity.HealthCheckUpActivity">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:inputType="textMultiLine"
-        android:maxLines="6"
+        android:elegantTextHeight="true"
+        android:freezesText="false"
+        android:gravity="center|fill"
+        android:padding="24dp"
         android:singleLine="false"
-        android:text="HealthCheckUpFragment"
+        android:text="@string/welcome_message"
+        android:textAlignment="viewStart"
+        android:textColor="@color/darkjunglegreen"
+        android:textSize="24sp"
+        app:autoSizeTextType="none"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btSkip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/skip_button_background"
+        android:text="Skip"
+        android:textColor="@color/blue_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btContinue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background_blue"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Continue"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btSkip"
+        app:layout_constraintEnd_toEndOf="@+id/btSkip"
+        app:layout_constraintStart_toStartOf="@+id/btSkip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

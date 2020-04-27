@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#8060CA</color>
-    <color name="colorAccent">#C8E6C9</color>
+    <color name="colorAccent">#8060CA</color>
     <color name="colorIcon">#FF5722</color>
     <color name="transperantWhite">#CCFFFFFF</color>
     <color name="transparent">#0000ffff</color>
@@ -30,5 +30,6 @@
     <color name="recover_bg">#82c74e</color>
     <color name="test_bg">#00acde</color>
     <color name="deepcoffee">#78464a</color>
+    <color name="orange">#FF8C43</color>
 </resources>
 
