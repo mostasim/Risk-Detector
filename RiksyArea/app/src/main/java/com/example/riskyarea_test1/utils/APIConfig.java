@@ -9,6 +9,7 @@ import com.example.riskyarea_test1.data.model.response.Doctor;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.data.model.response.Passport;
 import com.example.riskyarea_test1.data.model.response.SectionAnnouncement;
+import com.example.riskyarea_test1.data.model.response.UpdateResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public interface APIConfig {
     public Call<ArrayList<SectionAnnouncement>> getAnnouncement();
 
     @GET("updates/{city}")
-    public Call<ResponseBody> getUpdatesByLocation(@Path("city") String city);
+    public Call<UpdateResponse> getUpdatesByLocation(@Path("city") String city);
 
     @POST("device_register/")
     public Call<ResponseBody> registerDevice(@Body DeviceDto deviceDto);

@@ -2,6 +2,8 @@ package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +41,9 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Mahadi Hasan Joy
@@ -195,6 +199,25 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+//    private void getMyCityName() {
+//        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+//        List<Address> addresses = null;
+//        try {
+//            addresses = geocoder.getFromLocation(current_location_latitude, current_location_longitude, 1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String cityName = addresses != null && addresses.size() > 0 ? addresses.get(0).getSubAdminArea() : null;
+//
+//        if (cityName != null) {
+//            if (cityName.contains("District")) {
+//                cityName = cityName.replace("District", "");
+//                Log.e(TAG, "getMyCityName: " + cityName);
+//            } else {
+//                Log.e(TAG, "getMyCityName: " + cityName);
+//            }
+//        }
+//    }
     private void loadAllFragments() {
         fm.beginTransaction().add(R.id.main_container, notificationsListFragment, "3").hide(notificationsListFragment).commit();
         fm.beginTransaction().add(R.id.main_container, doctorListFragment, "2").hide(doctorListFragment).commit();

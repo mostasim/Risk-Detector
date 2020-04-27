@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.riskyarea_test1.data.dto.DeviceDto;
+import com.example.riskyarea_test1.data.model.response.UpdateResponse;
 import com.example.riskyarea_test1.utils.APIConfig;
 
 import okhttp3.ResponseBody;
@@ -21,8 +22,8 @@ public class UpdatesByLocationController extends BaseController {
     private Retrofit retrofit = getBuilder().build();
     private APIConfig apiConfig = retrofit.create(APIConfig.class);
 
-    private MutableLiveData<ResponseBody> _update = new MutableLiveData<>();
-    private LiveData<ResponseBody> update = _update;
+    private MutableLiveData<UpdateResponse> _update = new MutableLiveData<>();
+    private LiveData<UpdateResponse> update = _update;
 
     private UpdatesByLocationController() {
     }
@@ -35,15 +36,19 @@ public class UpdatesByLocationController extends BaseController {
     }
 
 
-    public LiveData<ResponseBody> fetchUpdatesByLocation(String city) {
-        apiConfig.getUpdatesByLocation(city).enqueue(new Callback<ResponseBody>() {
+    public LiveData<UpdateResponse> fetchUpdatesByLocation(String city) {
+        apiConfig.getUpdatesByLocation(city).enqueue(new Callback<UpdateResponse>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                _update.postValue(response.body());
+            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+                if (response.isSuccessful()) {
+                    _update.postValue(response.body());
+                } else {
+                    Log.e(TAG, "onResponse: " + response.code());
+                }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<UpdateResponse> call, Throwable t) {
                 Log.e(TAG, "onFailure: " + t.toString());
             }
         });
