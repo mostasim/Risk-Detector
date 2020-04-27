@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home"
+    app:startDestination="@+id/navigation_map"
     tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_map"
         android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
-        android:label="@string/title_accidental"
+        android:label="@string/home"
         tools:layout="@layout/maps_fragment_accidental" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_doctor"
         android:name="com.example.riskyarea_test1.ui.fragment.AccidentalMapFragment"
         android:label="@string/call_doctor"
         tools:layout="@layout/crime_map_fragment" />

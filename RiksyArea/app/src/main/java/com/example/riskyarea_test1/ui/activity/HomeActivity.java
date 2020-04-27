@@ -20,9 +20,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
+import com.example.riskyarea_test1.ui.fragment.DashboardFragment;
 import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
-import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
 import com.example.riskyarea_test1.ui.fragment.InfectedMapFragment;
+import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
@@ -47,12 +48,13 @@ import java.util.List;
  */
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "BottomNavActivity";
-    final Fragment fragment1 = new InfectedMapFragment();
-    final Fragment fragment2 = new DoctorListFragment();
-    final Fragment fragment3 = new NotificationsListFragment();
+    final Fragment infectedMapFragment = new InfectedMapFragment();
+    final Fragment doctorListFragment = new DoctorListFragment();
+    final Fragment notificationsListFragment = new NotificationsListFragment();
+    final Fragment dashboardFragment = new DashboardFragment();
     final FragmentManager fm = getSupportFragmentManager();
     androidx.appcompat.widget.Toolbar toolbar;
-    Fragment active = fragment1;
+    Fragment active = dashboardFragment;
     private TextView txtViewTitle;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -60,28 +62,35 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_dashboard:
+                    txtViewTitle.setText(getResources().getString(R.string.dashboard_title));
+                    toolbar.setOverflowIcon(getDrawable(R.drawable.ic_more_vert_white_24dp));
+                    invalidateOptionsMenu();
+                    fm.beginTransaction().hide(active).show(dashboardFragment).commit();
+                    active = dashboardFragment;
+                    return true;
+                case R.id.navigation_map:
                     txtViewTitle.setText(getResources().getString(R.string.risky_area));
                     toolbar.setOverflowIcon(getDrawable(R.drawable.ic_more_vert_white_24dp));
                     invalidateOptionsMenu();
-                    fm.beginTransaction().hide(active).show(fragment1).commit();
-                    active = fragment1;
+                    fm.beginTransaction().hide(active).show(infectedMapFragment).commit();
+                    active = infectedMapFragment;
                     return true;
 
-                case R.id.navigation_dashboard:
+                case R.id.navigation_doctor:
                     txtViewTitle.setText(getResources().getString(R.string.doctor_list));
                     toolbar.setOverflowIcon(getDrawable(R.drawable.ic_filter_list_white_24dp));
                     invalidateOptionsMenu();
-                    fm.beginTransaction().hide(active).show(fragment2).commit();
-                    active = fragment2;
+                    fm.beginTransaction().hide(active).show(doctorListFragment).commit();
+                    active = doctorListFragment;
                     return true;
 
                 case R.id.navigation_notifications:
                     txtViewTitle.setText(getResources().getString(R.string.announcement));
                     toolbar.setOverflowIcon(null);
                     invalidateOptionsMenu();
-                    fm.beginTransaction().hide(active).show(fragment3).commit();
-                    active = fragment3;
+                    fm.beginTransaction().hide(active).show(notificationsListFragment).commit();
+                    active = notificationsListFragment;
                     return true;
             }
             return false;
@@ -100,6 +109,7 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        navigation.ti
         navigation.setItemIconTintList(null);
 
 //        Dexter.withActivity(this)
@@ -186,9 +196,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void loadAllFragments() {
-        fm.beginTransaction().add(R.id.main_container, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.main_container, fragment1, "1").commit();
+        fm.beginTransaction().add(R.id.main_container, notificationsListFragment, "3").hide(notificationsListFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, doctorListFragment, "2").hide(doctorListFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, infectedMapFragment, "2").hide(infectedMapFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, dashboardFragment, "1").commit();
     }
 
     @Override

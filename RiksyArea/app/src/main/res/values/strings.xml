@@ -5,11 +5,13 @@
     <string name="radio_female">Female</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
-    <string name="title_accidental">Home</string>
+    <string name="home">Home</string>
+    <string name="map_view">Map View</string>
     <string name="call_doctor">Call Doctor</string>
     <string name="announce">Announce</string>
     <string name="settings">Settings</string>
     <string name="risky_area">Risky Area</string>
+    <string name="dashboard_title">Coronavirus Updates</string>
     <string name="doctor_list">Doctors List</string>
     <string name="announcement">Announcement</string>
 
@@ -43,5 +45,9 @@
         <item>Gynecologist</item>
         <item>Microbiologist</item>
         <item>Neurologist</item>
+    </string-array>
+    <string-array name="location_list">
+        <item>Dhaka</item>
+        <item>Bangladesh</item>
     </string-array>
 </resources>
