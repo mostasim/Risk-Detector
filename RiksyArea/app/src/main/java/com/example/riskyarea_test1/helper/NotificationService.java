@@ -1,64 +1,70 @@
 package com.example.riskyarea_test1.helper;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.ui.activity.HomeActivity;
 
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.lifecycle.MediatorLiveData;
-
 import static com.example.riskyarea_test1.MyApp.CHANNEL_ID;
 
-public class NotificationService extends Service {
+public class NotificationService extends Service implements NearbyListener {
+
+
 
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
+
+    public void fireNotification(String title, String message) {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Intent notificationIntent = new Intent(this, HomeActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                0, notificationIntent, 0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .build();
+        mNotificationManager.notify(1, notification);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        NearbyHelper nearbyHelper = new NearbyHelper(this);
-
-        MediatorLiveData<Boolean> mediatorLiveData = new MediatorLiveData<>();
-        mediatorLiveData.addSource(nearbyHelper.getMessageLiveData(), s -> {
-
-        });
-
-        mediatorLiveData.addSource(nearbyHelper.getSenderInRange(), integer -> {
-            //start alarm
-        });
-
-        mediatorLiveData.addSource(nearbyHelper.getSenderWentOutsideOfRange(), integer -> {
-            // Call off alarm
-        });
-
-        nearbyHelper.initBluetoothOnly();
-
-        new Thread(() -> {
-            nearbyHelper.publishMessage(8);
-        }).start();
-
-
-        String input = intent.getStringExtra("inputExtra");
 
         Intent notificationIntent = new Intent(this, HomeActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
 
+
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Example Service")
-                .setContentText(input)
+                .setContentTitle("The App is Running")
+                .setContentText("")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(pendingIntent)
                 .build();
+
+
+        NearbyHelper nearbyHelper = new NearbyHelper(this);
+        nearbyHelper.initBluetoothOnly();
+        nearbyHelper.setNearbyListener(this);
+
+        new Thread(() -> {
+            nearbyHelper.publishMessage(8);
+        }).start();
+
 
         startForeground(1, notification);
 
@@ -77,5 +83,15 @@ public class NotificationService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onUserDiscovered(int id) {
+        fireNotification("User Discovered Near You", "Risk Level " + id);
+    }
+
+    @Override
+    public void onUserLost(int id) {
+        fireNotification("User Lost Near You", "Risk Level " + id);
     }
 }

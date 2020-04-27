@@ -14,6 +14,8 @@ class NearbyHelper(private val context: Context) : MessageListener() {
     var subscribeOptions: SubscribeOptions? = null
     var publishOptions: PublishOptions? = null
 
+    var nearbyListener: NearbyListener? = null
+
     fun initBluetoothOnly() {
         subscribeOptions = SubscribeOptions.Builder()
                 .setStrategy(Strategy.BLE_ONLY)
@@ -36,11 +38,21 @@ class NearbyHelper(private val context: Context) : MessageListener() {
     }
 
     override fun onFound(message: Message?) {
-        senderInRange.postValue(message?.content?.run { String(this).toInt() })
+        val value = message?.content?.run { String(this).toInt() } ?: return
+        senderInRange.postValue(value)
+        nearbyListener?.onUserDiscovered(value)
         messageLiveData.postValue(String(message?.content ?: return))
     }
 
     override fun onLost(message: Message?) {
-        senderWentOutsideOfRange.postValue(message?.content?.run { String(this).toInt() })
+        val value = message?.content?.run { String(this).toInt() } ?: return
+        senderWentOutsideOfRange.postValue(value)
+        nearbyListener?.onUserLost(value)
     }
+}
+
+
+interface NearbyListener {
+    fun onUserDiscovered(id: Int)
+    fun onUserLost(id: Int)
 }
