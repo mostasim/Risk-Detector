@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.helper.GenericQuestion;
 import com.example.riskyarea_test1.utils.InfoHubApplication;
 
@@ -26,6 +27,8 @@ public class QuestionnairesFragment extends Fragment {
 
     private int questionNo = 1;
     private ArrayList<GenericQuestion> questionsList;
+
+    private PreferenceUtil preferenceUtil;
 
     public static QuestionnairesFragment newInstance() {
         return new QuestionnairesFragment();
@@ -55,20 +58,27 @@ public class QuestionnairesFragment extends Fragment {
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
-            } else if (questionNo == questionsList.size() - 1)
+            } else if (questionNo == questionsList.size() - 1) {
+                preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
+            }
+
         });
 
         btnNo.setOnClickListener(view -> {
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
-            } else if (questionNo == questionsList.size() - 1)
+            } else if (questionNo == questionsList.size() - 1) {
+                preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
+            }
         });
     }
 
     private void initViews(View rootView) {
+        preferenceUtil = new PreferenceUtil(getActivity().getApplicationContext());
+
         txtViewQuestionNo = rootView.findViewById(R.id.tvSteps);
         txtViewQuestion = rootView.findViewById(R.id.tvQuestion);
 
