@@ -122,7 +122,7 @@ class DashboardFragment : Fragment() {
             tvTestToday.text = it.newTestCount.toString()
             tvTestTotal.text = it.totalTestCount.toString()
         })
-        Log.e("IDS", "IMEI:${Utils().getIMEI(requireActivity())} UID${Utils().getDeviceUniqueID(requireActivity())}")
+        Log.e("IDS", "UID : ${Utils().getDeviceUniqueID(requireActivity())}")
     }
 
     private fun getCurrentLocation() {

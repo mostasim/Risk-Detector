@@ -7,12 +7,12 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 public class Utils {
-    @SuppressLint("MissingPermission")
+   /* @SuppressLint("MissingPermission")
     public String getIMEI(Activity activity) {
         TelephonyManager telephonyManager = (TelephonyManager) activity
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getDeviceId();
-    }
+    }*/
 
     public String getDeviceUniqueID(Activity activity) {
         @SuppressLint("HardwareIds") String device_unique_id = Settings.Secure.getString(activity.getContentResolver(),
