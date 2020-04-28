@@ -1,5 +1,9 @@
 package com.example.riskyarea_test1.data.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * @author Mahadi Hasan Joy
  * @version 1.0
@@ -8,8 +12,10 @@ package com.example.riskyarea_test1.data.model;
 public class SettingsValues {
 
     public static boolean ring = false;
-    public static String refresh="5";
-    public static String radius="50";
+    public static String refresh = "5";
+    public static String radius = "50";
+
+    public static String SUBMITTED_DATE = "SUBMITTED_DATE";
 
     public static void setRing(boolean ring) {
         SettingsValues.ring = ring;
@@ -34,4 +40,10 @@ public class SettingsValues {
             return refresh;
     }
 
+    public static String currentDate() {
+        Date c = Calendar.getInstance().getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        return df.format(c);
+    }
 }

@@ -22,7 +22,7 @@
         android:text="@string/welcome_message"
         android:textAlignment="viewStart"
         android:textColor="@color/darkjunglegreen"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:autoSizeTextType="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
