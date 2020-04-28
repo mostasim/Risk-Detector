@@ -4,11 +4,6 @@ import java.util.ArrayList;
 
 public class RiskFactorCalculation {
 
-    public static void main(String[] args) {
-        RiskFactorCalculation riskFactorCalculation = new RiskFactorCalculation();
-        riskFactorCalculation.loadQuestion();
-        System.out.println("Point "+riskFactorCalculation.getMatrixPoint());
-    }
     private ArrayList<GenericQuestion> questionSets;
 
     public void loadQuestion() {
@@ -31,7 +26,7 @@ public class RiskFactorCalculation {
         questionSets.add(q_8);
     }
 
-    public int getMatrixPoint() {
+    public int getMatrixPoint(ArrayList<GenericQuestion> questionSets) {
         int point = 0;
         for (GenericQuestion question : questionSets) {
             switch (question.getId()) {
