@@ -9,6 +9,7 @@ import java.util.List;
 
 public class InfoHubApplication extends Application {
     private static InfoHubApplication INSTANCE = null;
+    private List<GenericQuestion> answerList = new ArrayList<>();
 
     private InfoHubApplication() {
     }
@@ -34,5 +35,13 @@ public class InfoHubApplication extends Application {
         questionSets.add(new GenericQuestion<Boolean>(8, "   আপনি কি নিম্নের কোন অসুখে ভুগছেন? যেমন : ডায়াবেটিস, উচ্চ রক্তচাপ, হার্টের অসুখ এজমা বা হাঁপানি , দীর্ঘমেয়াদি শ্বাসকষ্টের রোগ বা সিওপিডি, কিডনি রোগ,লিভার রোগ, এইচআইভি, ক্যান্সার বা ক্যান্সারের জন্য কোন চিকিৎসা নিচ্ছেন?", true));
 
         return questionSets;
+    }
+
+    public void setAnswerList(GenericQuestion genericQuestion) {
+        answerList.add(genericQuestion);
+    }
+
+    public List<GenericQuestion> getAnswerList() {
+        return answerList;
     }
 }

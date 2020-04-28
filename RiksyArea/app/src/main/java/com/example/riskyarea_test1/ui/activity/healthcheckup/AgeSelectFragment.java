@@ -29,6 +29,7 @@ public class AgeSelectFragment extends Fragment {
 
     private int questionNo = 0;
     private ArrayList<GenericQuestion> questionsList;
+    private int userAge = 1;
 
     public static AgeSelectFragment newInstance() {
         return new AgeSelectFragment();
@@ -55,6 +56,8 @@ public class AgeSelectFragment extends Fragment {
 
     private void setListener() {
         btnNext.setOnClickListener(view -> {
+            InfoHubApplication.getInstance().getAnswerList().clear();
+            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(), userAge));
             ((HealthCheckUpActivity) getActivity()).replaceFragments(QuestionnairesFragment.class);
         });
 
@@ -73,6 +76,7 @@ public class AgeSelectFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // TODO Auto-generated method stub
+                userAge = progress;
                 txtViewAge.setText(progress + " Years");
             }
         });
