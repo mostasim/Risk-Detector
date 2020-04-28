@@ -1,6 +1,7 @@
 package com.example.riskyarea_test1.ui.activity.healthcheckup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.helper.GenericQuestion;
+import com.example.riskyarea_test1.helper.RiskFactorCalculation;
 import com.example.riskyarea_test1.utils.InfoHubApplication;
 
 import java.util.ArrayList;
@@ -55,10 +57,12 @@ public class QuestionnairesFragment extends Fragment {
 
     private void setListener() {
         btnYes.setOnClickListener(view -> {
+            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(),true));
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
+                Log.e("Answer Point is", "____________" + new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
             }
@@ -66,10 +70,12 @@ public class QuestionnairesFragment extends Fragment {
         });
 
         btnNo.setOnClickListener(view -> {
+            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(),false));
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
+                Log.e("Answer Point is", "____________" + new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
             }

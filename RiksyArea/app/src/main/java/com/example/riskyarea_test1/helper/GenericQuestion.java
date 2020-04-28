@@ -14,6 +14,11 @@ public  class GenericQuestion<T>  {
         this.questionAnswer = questionAnswer;
     }
 
+    public GenericQuestion(int id, T questionAnswer) {
+        this.id = id;
+        this.questionAnswer = questionAnswer;
+    }
+
     public int getId() {
         return id;
     }
