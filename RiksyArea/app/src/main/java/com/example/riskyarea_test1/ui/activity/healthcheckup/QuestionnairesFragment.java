@@ -69,6 +69,9 @@ public class QuestionnairesFragment extends Fragment {
             } else if (questionNo == questionsList.size() - 1) {
                 preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
+                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto(requireActivity());
+                Log.e(TAG, "setListener: "+feedbackDto.toString());
+                feedbackController.sendFeedback(feedbackDto);
                 getActivity().onBackPressed();
             }
 
@@ -82,7 +85,7 @@ public class QuestionnairesFragment extends Fragment {
             } else if (questionNo == questionsList.size() - 1) {
                 preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
-                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto();
+                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto(requireActivity());
                 Log.e(TAG, "setListener: "+feedbackDto.toString());
                 feedbackController.sendFeedback(feedbackDto);
                 getActivity().onBackPressed();

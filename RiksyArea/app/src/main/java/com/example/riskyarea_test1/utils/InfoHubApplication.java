@@ -1,5 +1,6 @@
 package com.example.riskyarea_test1.utils;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.example.riskyarea_test1.data.dto.FeedbackDto;
@@ -47,7 +48,7 @@ public class InfoHubApplication extends Application {
         answerList.add(genericQuestion);
     }
 
-    public FeedbackDto getDto() {
+    public FeedbackDto getDto(Activity activity) {
         List<GenericQuestion> answers = InfoHubApplication.getInstance().getAnswerList();
         FeedbackDto feedbackDto = new FeedbackDto();
         int age = (int) answers.get(0).getQuestionAnswer();
@@ -72,7 +73,7 @@ public class InfoHubApplication extends Application {
             result = 3;
         }
         feedbackDto.setResult(String.valueOf(result));
-        feedbackDto.setImei(new Utils().getDeviceUniqueID(InfoHubApplication.getInstance().getApplicationContext()));
+        feedbackDto.setImei(new Utils().getDeviceUniqueID(activity.getContentResolver()));
         return feedbackDto;
     }
 

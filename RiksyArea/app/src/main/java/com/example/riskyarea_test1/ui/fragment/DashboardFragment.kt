@@ -127,7 +127,7 @@ class DashboardFragment : Fragment(), Listener {
             tvTestToday.text = it.newTestCount.toString()
             tvTestTotal.text = it.totalTestCount.toString()
         })
-        Log.e("IDS", "UID : ${Utils().getDeviceUniqueID(requireContext())}")
+        Log.e("IDS", "UID : ${Utils().getDeviceUniqueID(requireActivity().contentResolver)}")
     }
 
     private fun getCurrentLocation() {
@@ -240,7 +240,7 @@ class DashboardFragment : Fragment(), Listener {
         Log.e("TAG Easy", "address ${location?.latitude} ${location?.longitude}")
         getMyCityName(location)
         var deviceDto = DeviceDto()
-        deviceDto.imei = Utils().getDeviceUniqueID(requireContext())
+        deviceDto.imei = Utils().getDeviceUniqueID(requireActivity().contentResolver)
         deviceDto.latitude = location!!.latitude
         deviceDto.longitude = location!!.longitude
         mViewModel.registerDevice(deviceDto)
