@@ -15,9 +15,13 @@ class DashboardViewModel : ViewModel() {
         _city.value = city
     }
 
+    public fun getCity(): LiveData<String> {
+        return _city
+    }
+
     public fun updates(): LiveData<UpdateResponse>? {
         return _city.switchMap {
-            updatesByLocationController.fetchUpdatesByLocation(it.toLowerCase())
+            updatesByLocationController.fetchUpdatesByLocation(it.trim().toLowerCase())
         }
     }
 }

@@ -8,9 +8,9 @@
     android:orientation="vertical"
     tools:context=".ui.fragment.DashboardFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,25 +19,34 @@
 
         <TextView
             android:id="@+id/tvLocation"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:paddingLeft="16dp"
+            android:layout_marginLeft="16dp"
             android:text="Your Location"
             android:textColor="#78464A"
-            android:textSize="20sp" />
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout2" />
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <Spinner
                 android:id="@+id/spinnerLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/transparent"
+                android:gravity="center"
                 android:padding="@dimen/txt_view_margin_15"
                 android:spinnerMode="dropdown"
                 tools:ignore="MissingConstraints" />
@@ -45,14 +54,14 @@
             <ImageButton
                 android:id="@+id/ivSpinnerArrowLocation"
                 android:layout_width="wrap_content"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@color/transparent"
                 android:src="@drawable/ic_expand_more_black_24dp"
                 tools:ignore="ContentDescription" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"

@@ -38,7 +38,7 @@
                     android:layout_gravity="left"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@string/risky_area"
+                    android:text="@string/dashboard_title"
                     android:textColor="@color/white"
                     android:textSize="@dimen/txtview_toolbar_title_22sp" />
 

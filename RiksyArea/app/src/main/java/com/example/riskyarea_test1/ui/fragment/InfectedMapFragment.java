@@ -40,7 +40,6 @@ import com.example.riskyarea_test1.data.model.SettingsValues;
 import com.example.riskyarea_test1.data.model.response.MarkedPlace;
 import com.example.riskyarea_test1.helper.MarkedPlaceType;
 import com.example.riskyarea_test1.helper.NearbyHelper;
-import com.example.riskyarea_test1.helper.NotificationService;
 import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.example.riskyarea_test1.ui.view_model.MapViewModel;
@@ -78,6 +77,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     String bestProvider;
     Uri notification;
     Ringtone ringtone;
+    DashboardViewModel dashboardViewModel;
     private GoogleMap mMap;
     private LatLng location;
     private double current_location_latitude = 0;
@@ -116,6 +116,8 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
         }).start();*/
 
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
+        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
+
         context = getContext();
         activity = getActivity();
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
@@ -128,7 +130,6 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             drawMarkedArea(markedPlaces);
         });
     }
-
 
 
     @Override
@@ -203,6 +204,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             } else {
                 Log.e(TAG, "getMyCityName: " + cityName);
             }
+//            dashboardViewModel.setCity(cityName);
         }
     }
 

@@ -2,8 +2,6 @@ package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +24,6 @@ import com.example.riskyarea_test1.ui.fragment.DashboardFragment;
 import com.example.riskyarea_test1.ui.fragment.DoctorListFragment;
 import com.example.riskyarea_test1.ui.fragment.InfectedMapFragment;
 import com.example.riskyarea_test1.ui.fragment.NotificationsListFragment;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -41,9 +36,7 @@ import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Mahadi Hasan Joy
@@ -113,7 +106,6 @@ public class HomeActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-//        navigation.ti
         navigation.setItemIconTintList(null);
 
 //        Dexter.withActivity(this)
@@ -172,7 +164,8 @@ public class HomeActivity extends AppCompatActivity {
                     .withPermissions(
                             Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.CALL_PHONE
+                            Manifest.permission.CALL_PHONE,
+                            Manifest.permission.READ_PHONE_STATE
                     ).withListener(new MultiplePermissionsListener() {
                 @Override
                 public void onPermissionsChecked(MultiplePermissionsReport report) {
@@ -199,7 +192,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-//    private void getMyCityName() {
+    //    private void getMyCityName() {
 //        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
 //        List<Address> addresses = null;
 //        try {
@@ -264,19 +257,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         finish();
-    }
-
-    public void searchArea(View view) {
-        int PLACE_PICKER_REQUEST = 1;
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
-        try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
     }
 
     public void stopAlarm(View view) {
