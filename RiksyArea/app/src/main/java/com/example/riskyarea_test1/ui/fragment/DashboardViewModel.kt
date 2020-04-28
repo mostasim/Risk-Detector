@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.example.riskyarea_test1.data.controller.UpdatesByLocationController
+import com.example.riskyarea_test1.data.dto.DeviceDto
 import com.example.riskyarea_test1.data.model.response.UpdateResponse
 
 class DashboardViewModel : ViewModel() {
@@ -24,4 +25,9 @@ class DashboardViewModel : ViewModel() {
             updatesByLocationController.fetchUpdatesByLocation(it.trim().toLowerCase())
         }
     }
+
+    public fun registerDevice(deviceDto: DeviceDto) {
+        updatesByLocationController.registerDevice(deviceDto)
+    }
+
 }

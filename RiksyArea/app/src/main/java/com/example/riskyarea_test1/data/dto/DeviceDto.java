@@ -8,7 +8,7 @@ public class DeviceDto{
 	private double latitude;
 
 	@SerializedName("imei")
-	private int imei;
+	private String imei;
 
 	@SerializedName("place")
 	private String place;
@@ -24,11 +24,11 @@ public class DeviceDto{
 		return latitude;
 	}
 
-	public void setImei(int imei){
+	public void setImei(String imei){
 		this.imei = imei;
 	}
 
-	public int getImei(){
+	public String getImei(){
 		return imei;
 	}
 

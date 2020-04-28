@@ -3,6 +3,7 @@ package com.example.riskyarea_test1.ui.fragment
 import android.content.IntentSender
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.easywaylocation.EasyWayLocation
+import com.example.easywaylocation.Listener
 import com.example.riskyarea_test1.R
+import com.example.riskyarea_test1.data.dto.DeviceDto
 import com.example.riskyarea_test1.utils.Utils
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -25,7 +29,7 @@ import java.io.IOException
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), Listener {
 
     private lateinit var ivSpinnerLocation: ImageView
     private lateinit var mViewModel: DashboardViewModel
@@ -41,6 +45,7 @@ class DashboardFragment : Fragment() {
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var locationArrayList: ArrayList<String>
     private lateinit var locationMutableLiveData: MutableLiveData<ArrayList<String>>
+    private lateinit var easyWayLocation: EasyWayLocation
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -98,8 +103,8 @@ class DashboardFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         mViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         fusedLocationProviderClient = FusedLocationProviderClient(this.requireActivity())
-
-        getCurrentLocation()
+        easyWayLocation = EasyWayLocation(this.requireContext(), true, this)
+//        getCurrentLocation()
         /* mViewModel.getCity().observe(this.viewLifecycleOwner, Observer {
              Log.e("getCity",": " +it)
              var city = it
@@ -122,7 +127,7 @@ class DashboardFragment : Fragment() {
             tvTestToday.text = it.newTestCount.toString()
             tvTestTotal.text = it.totalTestCount.toString()
         })
-        Log.e("IDS", "UID : ${Utils().getDeviceUniqueID(requireActivity())}")
+        Log.e("IDS", "UID : ${Utils().getDeviceUniqueID(requireContext())}")
     }
 
     private fun getCurrentLocation() {
@@ -187,6 +192,24 @@ class DashboardFragment : Fragment() {
                 }
     }
 
+    private fun getMyCityName(location: Location?) {
+        val geocoder = Geocoder(context, Locale.getDefault())
+        var addresses: List<Address>? = null
+        try {
+            addresses = geocoder.getFromLocation(location!!.latitude, location.longitude, 1)
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        var cityName = if (addresses != null && addresses.size > 0) addresses[0].subAdminArea else null
+        if (cityName != null) {
+            if (cityName.contains("District")) {
+                cityName = cityName.replace("District", "")
+//                Log.e(InfectedMapFragment.TAG, "getMyCityName: $cityName")
+            }
+            addMyCityToSpinner(cityName)
+        }
+    }
+
     private fun addMyCityToSpinner(cityName: String) {
         var city = cityName
         if (city.contains("District")) {
@@ -205,5 +228,33 @@ class DashboardFragment : Fragment() {
         fun newInstance(): DashboardFragment {
             return DashboardFragment()
         }
+    }
+
+    override fun locationCancelled() {
+    }
+
+    override fun locationOn() {
+    }
+
+    override fun currentLocation(location: Location?) {
+        Log.e("TAG Easy", "address ${location?.latitude} ${location?.longitude}")
+        getMyCityName(location)
+        var deviceDto = DeviceDto()
+        deviceDto.imei = Utils().getDeviceUniqueID(requireContext())
+        deviceDto.latitude = location!!.latitude
+        deviceDto.longitude = location!!.longitude
+        mViewModel.registerDevice(deviceDto)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        easyWayLocation.startLocation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        easyWayLocation.endUpdates()
     }
 }

@@ -14,7 +14,7 @@ public class Utils {
         return telephonyManager.getDeviceId();
     }*/
 
-    public String getDeviceUniqueID(Activity activity) {
+    public String getDeviceUniqueID(Context activity) {
         @SuppressLint("HardwareIds") String device_unique_id = Settings.Secure.getString(activity.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         return device_unique_id;

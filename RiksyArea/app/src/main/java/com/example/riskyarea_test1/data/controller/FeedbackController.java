@@ -31,11 +31,13 @@ public class FeedbackController extends BaseController {
     }
 
     public void sendFeedback(FeedbackDto feedbackDto) {
+        Log.e(TAG, "sendFeedback: Called" );
         apiConfig.dailyFeedback(feedbackDto).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     _response.postValue(response.body());
+                    Log.e(TAG, "onResponse: Success" + response.code());
                 } else {
                     Log.e(TAG, "onResponse: " + response.code());
                 }

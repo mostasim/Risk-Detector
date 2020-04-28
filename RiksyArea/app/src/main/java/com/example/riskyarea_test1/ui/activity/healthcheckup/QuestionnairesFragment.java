@@ -1,13 +1,20 @@
 package com.example.riskyarea_test1.ui.activity.healthcheckup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.data.controller.FeedbackController;
+import com.example.riskyarea_test1.data.dto.FeedbackDto;
 import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.helper.GenericQuestion;
 import com.example.riskyarea_test1.helper.RiskFactorCalculation;
@@ -15,11 +22,8 @@ import com.example.riskyarea_test1.utils.InfoHubApplication;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 public class QuestionnairesFragment extends Fragment {
+    private static final String TAG = "QuestionnairesFragment";
 
     private TextView txtViewQuestionNo;
     private TextView txtViewQuestion;
@@ -29,6 +33,7 @@ public class QuestionnairesFragment extends Fragment {
     private int questionNo = 1;
     private ArrayList<GenericQuestion> questionsList;
 
+    private FeedbackController feedbackController;
     private PreferenceUtil preferenceUtil;
 
     public static QuestionnairesFragment newInstance() {
@@ -40,6 +45,7 @@ public class QuestionnairesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.question_select_layout, container, false);
 
+        feedbackController = FeedbackController.getFeedbackController();
         questionsList = (ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getQuestionList();
 
         initViews(rootView);
@@ -56,7 +62,7 @@ public class QuestionnairesFragment extends Fragment {
 
     private void setListener() {
         btnYes.setOnClickListener(view -> {
-            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(),true));
+            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(), true));
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
@@ -69,13 +75,16 @@ public class QuestionnairesFragment extends Fragment {
         });
 
         btnNo.setOnClickListener(view -> {
-            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(),false));
+            InfoHubApplication.getInstance().setAnswerList(new GenericQuestion(questionsList.get(questionNo).getId(), false));
             if (questionNo < questionsList.size() - 1) {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
                 preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
+                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto();
+                Log.e(TAG, "setListener: "+feedbackDto.toString());
+                feedbackController.sendFeedback(feedbackDto);
                 getActivity().onBackPressed();
             }
         });

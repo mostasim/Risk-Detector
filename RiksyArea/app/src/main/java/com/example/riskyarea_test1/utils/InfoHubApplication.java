@@ -2,7 +2,9 @@ package com.example.riskyarea_test1.utils;
 
 import android.app.Application;
 
+import com.example.riskyarea_test1.data.dto.FeedbackDto;
 import com.example.riskyarea_test1.helper.GenericQuestion;
+import com.example.riskyarea_test1.helper.RiskFactorCalculation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,41 @@ public class InfoHubApplication extends Application {
         return questionSets;
     }
 
+    public List<GenericQuestion> getAnswerList() {
+        return answerList;
+    }
+
     public void setAnswerList(GenericQuestion genericQuestion) {
         answerList.add(genericQuestion);
     }
 
-    public List<GenericQuestion> getAnswerList() {
-        return answerList;
+    public FeedbackDto getDto() {
+        List<GenericQuestion> answers = InfoHubApplication.getInstance().getAnswerList();
+        FeedbackDto feedbackDto = new FeedbackDto();
+        int age = (int) answers.get(0).getQuestionAnswer();
+        feedbackDto.setAge(String.valueOf(age));
+        feedbackDto.setHasFever((Boolean) answers.get(1).getQuestionAnswer());
+        feedbackDto.setCoughThroatPain((Boolean) answers.get(2).getQuestionAnswer());
+        feedbackDto.setHasBreathingProblems((Boolean) answers.get(3).getQuestionAnswer());
+        feedbackDto.setRecentForeignReturn((Boolean) answers.get(4).getQuestionAnswer());
+        feedbackDto.setInContactWithCovid19PositivePeopleRecently((Boolean) answers.get(5).getQuestionAnswer());
+        feedbackDto.setInContactWithInfectedPeopleRecently((Boolean) answers.get(6).getQuestionAnswer());
+        feedbackDto.setTakingTreatmentForOtherDisease((Boolean) answers.get(7).getQuestionAnswer());
+        int result = 0;
+        int value = new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) answers);
+        if (value <= 3) {
+            result = 1;
+        }
+        if (value <= 6 && value >= 4) {
+            result = 2;
+
+        }
+        if (value >= 7) {
+            result = 3;
+        }
+        feedbackDto.setResult(String.valueOf(result));
+        feedbackDto.setImei(new Utils().getDeviceUniqueID(InfoHubApplication.getInstance().getApplicationContext()));
+        return feedbackDto;
     }
+
 }
