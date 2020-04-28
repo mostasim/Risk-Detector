@@ -16,6 +16,7 @@ public class SettingsValues {
     public static String radius = "50";
 
     public static String SUBMITTED_DATE = "SUBMITTED_DATE";
+    public static String RISK_POINT = "RISK_POINT";
 
     public static void setRing(boolean ring) {
         SettingsValues.ring = ring;

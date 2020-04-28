@@ -25,4 +25,14 @@ public class PreferenceUtil {
         spEditor.putString(SettingsValues.SUBMITTED_DATE, SettingsValues.currentDate());
         spEditor.apply();
     }
+
+    public int getRiskPoint() {
+        return sharedPreferences.getInt(SettingsValues.RISK_POINT, 0);
+    }
+
+    public void setRiskPoint(int riskPoint) {
+        spEditor = sharedPreferences.edit();
+        spEditor.putInt(SettingsValues.RISK_POINT, riskPoint);
+        spEditor.apply();
+    }
 }
