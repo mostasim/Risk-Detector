@@ -7,11 +7,13 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.example.riskyarea_test1.R;
+import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.ui.activity.HomeActivity;
 
 import static com.example.riskyarea_test1.MyApp.CHANNEL_ID;
@@ -62,7 +64,7 @@ public class NotificationService extends Service implements NearbyListener {
         nearbyHelper.setNearbyListener(this);
 
         new Thread(() -> {
-            nearbyHelper.publishMessage(8);
+            nearbyHelper.publishMessage(new PreferenceUtil(this).getRiskPoint());
         }).start();
 
 

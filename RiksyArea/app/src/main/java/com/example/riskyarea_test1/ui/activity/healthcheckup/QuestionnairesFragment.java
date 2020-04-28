@@ -1,7 +1,6 @@
 package com.example.riskyarea_test1.ui.activity.healthcheckup;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +61,7 @@ public class QuestionnairesFragment extends Fragment {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
-                Log.e("Answer Point is", "____________" + new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
+                preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
             }
@@ -75,7 +74,7 @@ public class QuestionnairesFragment extends Fragment {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
-                Log.e("Answer Point is", "____________" + new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
+                preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
                 preferenceUtil.setSubmittedDate();
                 getActivity().onBackPressed();
             }
