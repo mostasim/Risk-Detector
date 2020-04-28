@@ -2,6 +2,7 @@ package com.example.riskyarea_test1.utils;
 
 import com.example.riskyarea_test1.data.dto.DeviceDto;
 import com.example.riskyarea_test1.data.dto.DoctorDto;
+import com.example.riskyarea_test1.data.dto.FeedbackDto;
 import com.example.riskyarea_test1.data.model.UserList;
 import com.example.riskyarea_test1.data.model.UserLogIn;
 import com.example.riskyarea_test1.data.model.UserSignUp;
@@ -53,6 +54,9 @@ public interface APIConfig {
 
     @POST("device_register/")
     public Call<ResponseBody> registerDevice(@Body DeviceDto deviceDto);
+
+    @POST("daily_feedback/")
+    public Call<ResponseBody> dailyFeedback(@Body FeedbackDto feedbackDto);
 
 
 }
