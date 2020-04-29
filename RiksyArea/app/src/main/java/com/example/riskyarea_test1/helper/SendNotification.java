@@ -58,7 +58,7 @@ public class SendNotification extends AsyncTask<String, String, String> {
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx, CHANNEL_ID)
-                .setSmallIcon(R.drawable.spider)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(String.format("%s ", title))
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

@@ -321,8 +321,8 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 //                nearbyHelper.publishMessage(2);
                 if (IsInCircle()) {
                     if (state) {
-                        SendNotification sendNotification = new SendNotification(activity);
-                        sendNotification.execute("Infected Zone");
+//                        SendNotification sendNotification = new SendNotification(activity);
+//                        sendNotification.execute("Infected Zone");
                         Toast.makeText(context, "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
                             if (!InfoHubApplication.getInstance().isInHealthCheckUpActivityIsOn() && ringtone != null && !ringtone.isPlaying())
