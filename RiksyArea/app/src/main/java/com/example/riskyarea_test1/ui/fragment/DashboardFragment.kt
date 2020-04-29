@@ -75,15 +75,15 @@ class DashboardFragment : Fragment(), Listener {
         tvRecoverTotal = root.findViewById<View>(R.id.llRecover).findViewById<TextView>(R.id.tvTotal)
         tvTestTotal = root.findViewById<View>(R.id.llTest).findViewById<TextView>(R.id.tvTotal)
 
-        locationArrayList = ArrayList();
+        locationArrayList = ArrayList()
         locationArrayList.add("Bangladesh")
         adapter = ArrayAdapter<String>(this.requireContext(),
                 R.layout.spinner_item, locationArrayList) //setting the country_array to spinner
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerLocation.setAdapter(adapter)
+        spinnerLocation.adapter = adapter
         spinnerLocation.setSelection(0)
-        spinnerLocation.setOnItemSelectedListener(object : OnItemSelectedListener {
+        spinnerLocation.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(arg0: AdapterView<*>?, arg1: View,
                                         position: Int, id: Long) {
                 val selected = locationArrayList
@@ -92,7 +92,7 @@ class DashboardFragment : Fragment(), Listener {
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>?) {}
-        })
+        }
         ivSpinnerLocation.setOnClickListener {
             spinnerLocation.performClick()
         }
@@ -242,7 +242,7 @@ class DashboardFragment : Fragment(), Listener {
         var deviceDto = DeviceDto()
         deviceDto.imei = Utils().getDeviceUniqueID(requireActivity().contentResolver)
         deviceDto.latitude = location!!.latitude
-        deviceDto.longitude = location!!.longitude
+        deviceDto.longitude = location.longitude
         mViewModel.registerDevice(deviceDto)
 
 

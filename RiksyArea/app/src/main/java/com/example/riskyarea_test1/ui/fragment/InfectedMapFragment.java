@@ -43,6 +43,7 @@ import com.example.riskyarea_test1.helper.NearbyHelper;
 import com.example.riskyarea_test1.helper.SendNotification;
 import com.example.riskyarea_test1.ui.activity.LoadOverBridges;
 import com.example.riskyarea_test1.ui.view_model.MapViewModel;
+import com.example.riskyarea_test1.utils.InfoHubApplication;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -324,7 +325,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                         sendNotification.execute("Infected Zone");
                         Toast.makeText(context, "You are near to a infected zone", Toast.LENGTH_SHORT).show();
                         try {
-                            if (ringtone != null && !ringtone.isPlaying())
+                            if (!InfoHubApplication.getInstance().isInHealthCheckUpActivityIsOn() && ringtone != null && !ringtone.isPlaying())
                                 ringtone.play();
                         } catch (Exception e) {
                             e.printStackTrace();

@@ -5,17 +5,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.ui.activity.healthcheckup.HealthCheckUpFragment;
+import com.example.riskyarea_test1.utils.InfoHubApplication;
 
 public class HealthCheckUpActivity extends AppCompatActivity {
+    private static final String TAG = "HealthCheckUpActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.health_check_up_activity);
 
+        InfoHubApplication.getInstance().setInHealthCheckUpActivityIsOn(true);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, HealthCheckUpFragment.newInstance())
@@ -37,7 +41,21 @@ public class HealthCheckUpActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG, "onDestroy: ");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(TAG, "onStop: ");
+        InfoHubApplication.getInstance().setInHealthCheckUpActivityIsOn(false);
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 }

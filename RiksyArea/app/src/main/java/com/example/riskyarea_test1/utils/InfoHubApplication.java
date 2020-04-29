@@ -14,6 +14,8 @@ public class InfoHubApplication extends Application {
     private static InfoHubApplication INSTANCE = null;
     private List<GenericQuestion> answerList = new ArrayList<>();
 
+    private boolean isInHealthCheckUpActivityIsOn ;
+
     private InfoHubApplication() {
     }
 
@@ -77,4 +79,11 @@ public class InfoHubApplication extends Application {
         return feedbackDto;
     }
 
+    public boolean isInHealthCheckUpActivityIsOn() {
+        return isInHealthCheckUpActivityIsOn;
+    }
+
+    public void setInHealthCheckUpActivityIsOn(boolean inHealthCheckUpActivityIsOn) {
+        isInHealthCheckUpActivityIsOn = inHealthCheckUpActivityIsOn;
+    }
 }
