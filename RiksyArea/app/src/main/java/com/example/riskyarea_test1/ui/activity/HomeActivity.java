@@ -2,8 +2,10 @@ package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
@@ -29,11 +25,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
@@ -192,18 +186,22 @@ public class HomeActivity extends AppCompatActivity {
                         Log.e(TAG, "onPermissionsChecked: ");
                         loadAllFragments();
                     }
+
+                    // check for permanent denial of any permission
+                    if (report.isAnyPermissionPermanentlyDenied()) {
+                        // permission is denied permanently, navigate user to app settings
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
                 }
 
                 @Override
                 public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                     token.continuePermissionRequest();
                 }
-            }).withErrorListener(new PermissionRequestErrorListener() {
-                @Override
-                public void onError(DexterError dexterError) {
-                    Log.e(TAG, "onError: permission");
-                }
-            }).check();
+            }).withErrorListener(dexterError -> Log.e(TAG, "onError: permission")).check();
         } else {
             loadAllFragments();
         }
