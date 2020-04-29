@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvTestResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -40,8 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="16dp"
-            android:text="Your information will trnsimit throgh bluetooth to aleart nearby user."
-            android:textColor="@color/pastelgray"
+            android:text="Your information will transmit through bluetooth to alert nearby user."
+            android:textColor="@color/black"
+            android:alpha="0.5"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

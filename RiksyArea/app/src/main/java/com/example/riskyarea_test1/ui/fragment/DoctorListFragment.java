@@ -111,7 +111,15 @@ public class DoctorListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Log.e("MENU ITEM", "" + item.getTitle().toString());
-        sortDoctorList(item.getTitle().toString());
+        if (!item.getTitle().toString().equals(getString(R.string.all))) {
+            sortDoctorList(item.getTitle().toString());
+        } else {
+            if (doctorListAdapter != null && doctorListArray != null) {
+                doctorListAdapter.submitList(doctorListArray);
+                doctorListAdapter.notifyDataSetChanged();
+            }
+        }
+
         return super.onOptionsItemSelected(item);
 
     }

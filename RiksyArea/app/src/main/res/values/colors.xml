@@ -31,5 +31,8 @@
     <color name="test_bg">#00acde</color>
     <color name="deepcoffee">#78464a</color>
     <color name="orange">#FF8C43</color>
+    <color name="infected">#80FF0000</color>
+    <color name="community_transmission">#80FF8C00</color>
+    <color name="local_gathering">#800000ff</color>
 </resources>
 

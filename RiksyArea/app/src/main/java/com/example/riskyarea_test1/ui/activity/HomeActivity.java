@@ -1,7 +1,6 @@
 package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -11,9 +10,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.model.SettingsValues;
@@ -33,12 +37,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 /**
  * @author Mahadi Hasan Joy
@@ -287,12 +285,12 @@ public class HomeActivity extends AppCompatActivity {
         alertDialog.setTitle("Settings");*/
 
         layout.findViewById(R.id.done).setOnClickListener(view -> {
-            final EditText delay = layout.findViewById(R.id.refresh_rate);
-            final EditText radius = layout.findViewById(R.id.min_alert_meter);
-            String delayString = delay.getText().toString();
-            String radiusString = radius.getText().toString();
-            SettingsValues.radius = radiusString;
-            SettingsValues.refresh = delayString;
+//            final EditText delay = layout.findViewById(R.id.refresh_rate);
+//            final EditText radius = layout.findViewById(R.id.min_alert_meter);
+//            String delayString = delay.getText().toString();
+//            String radiusString = radius.getText().toString();
+//            SettingsValues.radius = radiusString;
+//            SettingsValues.refresh = delayString;
             alertDialog.dismiss();
 
             startActivity(new Intent(HomeActivity.this, HomeActivity.class));

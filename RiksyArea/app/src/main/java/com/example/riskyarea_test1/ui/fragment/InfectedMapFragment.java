@@ -153,7 +153,7 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                 location = new LatLng(current_location_latitude, current_location_longitude);
                 CameraPosition googlePlex = CameraPosition.builder()
                         .target(new LatLng(current_location_latitude, current_location_longitude))
-                        .zoom(18)
+                        .zoom(10)
                         .bearing(0)
                         .tilt(45)
                         .build();
@@ -269,13 +269,13 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
             createMarker(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude(), markedPlaces.get(i).getTitle(), markedPlaces.get(i).getMarkedAs());
         }
         for (int i = 0; i < markedPlaces.size(); i++) {
-            int color = Color.TRANSPARENT;
+            int color = getResources().getColor(R.color.infected);
             if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.COMMUNITY_TRANSMISSION.label)) {
-                color = Color.MAGENTA;
+                color = getResources().getColor(R.color.community_transmission);
             } else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.INFECTED.label)) {
-                color = Color.RED;
+                color = getResources().getColor(R.color.infected);
             } else if (markedPlaces.get(i).getMarkedAs().equals(MarkedPlaceType.LOCAL_GATHERING.label)) {
-                color = Color.LTGRAY;
+                color = getResources().getColor(R.color.local_gathering);
             }
 
             mMap.addCircle(new CircleOptions().center(new LatLng(markedPlaces.get(i).getLatitude(), markedPlaces.get(i).getLongitude())).radius(markedPlaces.get(i).getRadius()).strokeColor(Color.WHITE).fillColor(color));

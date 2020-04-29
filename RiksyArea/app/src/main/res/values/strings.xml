@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InfoHub</string>
+    <string name="app_name">Risk Detector</string>
 
     <string name="radio_male">Male</string>
     <string name="radio_female">Female</string>
@@ -38,6 +38,7 @@
     <string name="medicine">Medicine</string>
     <string name="welcome_message">Welcome. This tool allows you to evaluate for yourself whether you are infected with the Covid-19 or Novel Corona virus. You can even find out about your risk level and what to do. This software has been developed in accordance with the guidelines of the World Health Organization. However, in no case can the results obtained from this software be considered as health advice by an experienced doctor. The information you share in the software will be kept confidential.</string>
     <string name="loading_dot">...</string>
+    <string name="all">All</string>
     <string-array name="specialized_in">
         <item>Select</item>
         <item>Medicine</item>
