@@ -83,4 +83,18 @@ public class RiskFactorCalculation {
         }
         return point;
     }
+
+    public String getRiskMessage(int value) {
+        String message = "";
+        if (value <= 3) {
+            message = "You are at low risk of getting infected.\nPlease stay safe & stay at home";
+        }
+        if (value <= 6 && value >= 4) {
+            message = "You are at moderate risk of getting infected.\nPlease contact with IEDCR help line 10655\nas soon as possible";
+        }
+        if (value >= 7) {
+            message = "You are at high risk of getting infected.\nPlease contact with IEDCR help line 10655\nimmediately";
+        }
+        return message;
+    }
 }

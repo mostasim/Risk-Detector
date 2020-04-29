@@ -119,9 +119,9 @@ class DashboardFragment : Fragment(), Listener {
          })*/
         mViewModel.updates()?.observe(this.viewLifecycleOwner, Observer {
             tvInfectedToday.text = it.newInfectedCount.toString()
-            tvInfectedToday.text = it.totalInfectedCount.toString()
+            tvInfectedTotal.text = it.totalInfectedCount.toString()
             tvDeathToday.text = it.newDeathCount.toString()
-            tvDeathToday.text = it.totalDeathCount.toString()
+            tvDeathTotal.text = it.totalDeathCount.toString()
             tvRecoverToday.text = it.newRecoverCount.toString()
             tvRecoverTotal.text = it.totalRecoverCount.toString()
             tvTestToday.text = it.newTestCount.toString()

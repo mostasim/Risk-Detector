@@ -25,7 +25,7 @@
     <string name="degree">Degree</string>
     <string name="working_place">Working Place</string>
     <string name="specialized_in">Specialized In</string>
-    <string name="email">Email (Optional)</string>
+    <string name="email">Email</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="location_want_to_serve_in">Location want to serve in</string>
     <string name="add_volunteer_doctor">Add Volunteer Doctor</string>
@@ -37,6 +37,7 @@
     <string name="type_rate">Type Rate (In Second)</string>
     <string name="medicine">Medicine</string>
     <string name="welcome_message">Welcome. This tool allows you to evaluate for yourself whether you are infected with the Covid-19 or Novel Corona virus. You can even find out about your risk level and what to do. This software has been developed in accordance with the guidelines of the World Health Organization. However, in no case can the results obtained from this software be considered as health advice by an experienced doctor. The information you share in the software will be kept confidential.</string>
+    <string name="loading_dot">...</string>
     <string-array name="specialized_in">
         <item>Select</item>
         <item>Medicine</item>

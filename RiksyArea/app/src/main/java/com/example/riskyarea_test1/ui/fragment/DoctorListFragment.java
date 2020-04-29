@@ -33,7 +33,7 @@ public class DoctorListFragment extends Fragment {
     DoctorListViewModel mViewModel;
     private RecyclerView rvDoctorList;
     private LiveData<ArrayList<Doctor>> doctorList;
-    private ArrayList<Doctor> doctorListArray;
+    private ArrayList<Doctor> doctorListArray = new ArrayList<>();
 
     public static DoctorListFragment newInstance() {
         return new DoctorListFragment();
@@ -100,8 +100,11 @@ public class DoctorListFragment extends Fragment {
         super.onHiddenChanged(hidden);
         Log.e("Visible", "" + hidden);
         if (!hidden) {
-            doctorListAdapter.submitList(doctorListArray);
-            doctorListAdapter.notifyDataSetChanged();
+            if (doctorListAdapter != null && doctorListArray != null) {
+                doctorListAdapter.submitList(doctorListArray);
+                doctorListAdapter.notifyDataSetChanged();
+            }
+
         }
     }
 

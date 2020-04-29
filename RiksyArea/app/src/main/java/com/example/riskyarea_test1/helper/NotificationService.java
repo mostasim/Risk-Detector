@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -15,14 +16,22 @@ import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.ui.activity.HomeActivity;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import static com.example.riskyarea_test1.MyApp.CHANNEL_ID;
 
 public class NotificationService extends Service implements NearbyListener {
 
+    private Context context;
+    private Handler handler;
+    private Runnable runnable;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = this;
     }
 
 
@@ -62,14 +71,22 @@ public class NotificationService extends Service implements NearbyListener {
         nearbyHelper.setNearbyListener(this);
 
 
-        new Thread(() -> {
+        /*new Thread(() -> {
             nearbyHelper.publishMessage(new PreferenceUtil(this).getRiskPoint());
         }).start();
+        */
+        runnable = () -> nearbyHelper.publishMessage(new PreferenceUtil(context).getRiskPoint());
+//        handler = new Handler();
+//        handler.postDelayed(runnable, 2000);
 
 
         startForeground(1, notification);
-
         //do heavy work on a background thread
+        int cores = Runtime.getRuntime().availableProcessors();
+        ScheduledExecutorService scheduleTaskExecutor = Executors.newScheduledThreadPool(cores);
+
+        // This schedule a runnable task every 2 minutes
+        scheduleTaskExecutor.scheduleAtFixedRate(runnable, 0, 10, TimeUnit.SECONDS);
         //stopSelf();
 
         return START_NOT_STICKY;
@@ -88,7 +105,7 @@ public class NotificationService extends Service implements NearbyListener {
 
     public void getMessageByRiskValue(int value, boolean b) {
 
-        String title = b ? "User Discovered Near You" : "User Lost Near You";
+        String title = b ? "Corona prospect discovered near you" : "Corona prospect lost near you";
         String message = "";
         if (value <= 3) {
 

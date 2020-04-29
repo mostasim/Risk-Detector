@@ -105,16 +105,6 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        /*nearbyHelper = new NearbyHelper(this.getActivity());
-        nearbyHelper.initBluetoothOnly();
-        nearbyHelper.getMessageLiveData().observe(getViewLifecycleOwner(), s -> Toast.makeText(getContext(), "Message : " + s, Toast.LENGTH_SHORT).show());
-        nearbyHelper.getSenderInRange().observe(getViewLifecycleOwner(), integer -> Log.e(TAG, "onChanged: " + integer));
-        nearbyHelper.getSenderWentOutsideOfRange().observe(getViewLifecycleOwner(), integer -> Log.e(TAG, "onChanged: " + integer));
-
-        new Thread(() -> {
-            nearbyHelper.publishMessage(8);
-        }).start();*/
-
         MapViewModel mViewModel = ViewModelProviders.of(this).get(MapViewModel.class);
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
 
@@ -168,9 +158,9 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
                         .tilt(45)
                         .build();
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(googlePlex), 10000, null);
-                mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(current_location_latitude, current_location_longitude))
-                        .title("Your Location"));
+//                mMap.addMarker(new MarkerOptions()
+//                        .position(new LatLng(current_location_latitude, current_location_longitude))
+//                        .title("Your Location"));
 //                addAlaram1();
             }
         });
@@ -256,11 +246,22 @@ public class InfectedMapFragment extends Fragment implements LocationListener {
 
     private void createMarker(double latitude, double longitude, String title, String snippet) {
 
+        int resource_id;
+        if (snippet.equals(MarkedPlaceType.COMMUNITY_TRANSMISSION.label)) {
+            resource_id = R.drawable.ic_map_community_transmission;
+        } else if (snippet.equals(MarkedPlaceType.INFECTED.label)) {
+            resource_id = R.drawable.ic_map_infected;
+        } else {
+            resource_id = R.drawable.ic_map_local_gathering;
+        }
+        BitmapDescriptor ic_map_marker = bitmapDescriptorFromVector(requireContext(), resource_id);
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .title(title)
+                .icon(ic_map_marker)
                 .snippet("Type : " + snippet));
     }
+
 
     public void drawMarkedArea(ArrayList<MarkedPlace> markedPlaces) {
 
