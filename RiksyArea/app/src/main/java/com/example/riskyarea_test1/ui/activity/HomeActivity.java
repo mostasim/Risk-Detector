@@ -1,6 +1,7 @@
 package com.example.riskyarea_test1.ui.activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -190,10 +191,7 @@ public class HomeActivity extends AppCompatActivity {
                     // check for permanent denial of any permission
                     if (report.isAnyPermissionPermanentlyDenied()) {
                         // permission is denied permanently, navigate user to app settings
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
+                        alertDialogPermission();
                     }
                 }
 
@@ -303,6 +301,24 @@ public class HomeActivity extends AppCompatActivity {
                 alertDialog.dismiss();
         });
 
+        alertDialog.show();
+    }
+
+    public void alertDialogPermission() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Need to grant permission to access this app");
+        alertDialogBuilder.setPositiveButton("yes",
+                (arg0, arg1) -> {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                    finish();
+                });
+
+        alertDialogBuilder.setNegativeButton("No", (dialog, which) -> finish());
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
 }
