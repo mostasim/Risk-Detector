@@ -102,6 +102,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_nav);
 
+        checkPermission();
+
         preferenceUtil = new PreferenceUtil(this);
         if (preferenceUtil.getSubmittedDate() != null && !preferenceUtil.getSubmittedDate().isEmpty()) {
             if (!preferenceUtil.getSubmittedDate().equalsIgnoreCase(SettingsValues.currentDate()))
@@ -138,7 +140,7 @@ public class HomeActivity extends AppCompatActivity {
 //
 //            }
 //        }).check();
-        checkPermission();
+//        checkPermission();
     }
 
     //above android Q
@@ -225,8 +227,8 @@ public class HomeActivity extends AppCompatActivity {
 //        }
 //    }
     private void loadAllFragments() {
-        fm.beginTransaction().add(R.id.main_container, notificationsListFragment, "3").hide(notificationsListFragment).commit();
-        fm.beginTransaction().add(R.id.main_container, doctorListFragment, "2").hide(doctorListFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, notificationsListFragment, "4").hide(notificationsListFragment).commit();
+        fm.beginTransaction().add(R.id.main_container, doctorListFragment, "3").hide(doctorListFragment).commit();
         fm.beginTransaction().add(R.id.main_container, infectedMapFragment, "2").hide(infectedMapFragment).commit();
         fm.beginTransaction().add(R.id.main_container, dashboardFragment, "1").commit();
     }
