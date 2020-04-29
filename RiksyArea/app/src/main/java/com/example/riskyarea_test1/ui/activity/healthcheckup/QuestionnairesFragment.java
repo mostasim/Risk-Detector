@@ -1,26 +1,24 @@
 package com.example.riskyarea_test1.ui.activity.healthcheckup;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.example.riskyarea_test1.R;
 import com.example.riskyarea_test1.data.controller.FeedbackController;
-import com.example.riskyarea_test1.data.dto.FeedbackDto;
 import com.example.riskyarea_test1.database.PreferenceUtil;
 import com.example.riskyarea_test1.helper.GenericQuestion;
-import com.example.riskyarea_test1.helper.RiskFactorCalculation;
+import com.example.riskyarea_test1.ui.activity.HealthCheckUpActivity;
 import com.example.riskyarea_test1.utils.InfoHubApplication;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class QuestionnairesFragment extends Fragment {
     private static final String TAG = "QuestionnairesFragment";
@@ -67,14 +65,8 @@ public class QuestionnairesFragment extends Fragment {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
-                preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
-                preferenceUtil.setSubmittedDate();
-                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto(requireActivity());
-                Log.e(TAG, "setListener: "+feedbackDto.toString());
-                feedbackController.sendFeedback(feedbackDto);
-                getActivity().onBackPressed();
+                ((HealthCheckUpActivity) getActivity()).replaceFragments(QuestionnairesSubmissionFragment.class);
             }
-
         });
 
         btnNo.setOnClickListener(view -> {
@@ -83,12 +75,7 @@ public class QuestionnairesFragment extends Fragment {
                 questionNo++;
                 loadData(questionNo);
             } else if (questionNo == questionsList.size() - 1) {
-                preferenceUtil.setRiskPoint(new RiskFactorCalculation().getMatrixPoint((ArrayList<GenericQuestion>) InfoHubApplication.getInstance().getAnswerList()));
-                preferenceUtil.setSubmittedDate();
-                FeedbackDto feedbackDto = InfoHubApplication.getInstance().getDto(requireActivity());
-                Log.e(TAG, "setListener: "+feedbackDto.toString());
-                feedbackController.sendFeedback(feedbackDto);
-                getActivity().onBackPressed();
+                ((HealthCheckUpActivity) getActivity()).replaceFragments(QuestionnairesSubmissionFragment.class);
             }
         });
     }
