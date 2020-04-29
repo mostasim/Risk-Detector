@@ -186,6 +186,8 @@ public class HomeActivity extends AppCompatActivity {
                     if (report.areAllPermissionsGranted()) {
                         Log.e(TAG, "onPermissionsChecked: ");
                         loadAllFragments();
+                    } else {
+                        alertDialogPermission();
                     }
 
                     // check for permanent denial of any permission
@@ -306,6 +308,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void alertDialogPermission() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setCancelable(false);
         alertDialogBuilder.setMessage("Need to grant permission to access this app");
         alertDialogBuilder.setPositiveButton("yes",
                 (arg0, arg1) -> {
